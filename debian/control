@@ -1,0 +1,12 @@
+Source: ros-crystal-camera-calibration-parsers
+Section: misc
+Priority: extra
+Maintainer: Michael Carroll <michael@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-crystal-ament-cmake-gtest, ros-crystal-ament-cmake-ros, ros-crystal-ament-lint-auto, ros-crystal-ament-lint-common, ros-crystal-rclcpp, ros-crystal-sensor-msgs, ros-crystal-yaml-cpp-vendor, ros-crystal-ros-workspace
+Homepage: http://ros.org/wiki/camera_calibration_parsers
+Standards-Version: 3.9.2
+
+Package: ros-crystal-camera-calibration-parsers
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-crystal-rclcpp, ros-crystal-sensor-msgs, ros-crystal-yaml-cpp-vendor, ros-crystal-ros-workspace
+Description: camera_calibration_parsers contains routines for reading and writing camera calibration parameters.
