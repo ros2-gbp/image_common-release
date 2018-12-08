@@ -1,0 +1,13 @@
+Source: ros-crystal-camera-info-manager
+Section: misc
+Priority: extra
+Maintainer: Michael Carroll <michael@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-crystal-ament-cmake-gtest, ros-crystal-ament-cmake-ros, ros-crystal-ament-lint-auto, ros-crystal-ament-lint-common, ros-crystal-camera-calibration-parsers, ros-crystal-image-transport, ros-crystal-rclcpp, ros-crystal-sensor-msgs, ros-crystal-ros-workspace
+Homepage: http://ros.org/wiki/camera_info_manager
+Standards-Version: 3.9.2
+
+Package: ros-crystal-camera-info-manager
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-crystal-camera-calibration-parsers, ros-crystal-image-transport, ros-crystal-rclcpp, ros-crystal-sensor-msgs, ros-crystal-ros-workspace
+Description: This package provides a C++ interface for camera calibration information.
+ It provides CameraInfo, and handles SetCameraInfo service requests, saving and restoring the camera calibration data.
