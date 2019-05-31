@@ -1,0 +1,12 @@
+Source: ros-dashing-camera-calibration-parsers
+Section: misc
+Priority: extra
+Maintainer: Michael Carroll <michael@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-dashing-ament-cmake-gtest, ros-dashing-ament-cmake-ros, ros-dashing-ament-lint-auto, ros-dashing-ament-lint-common, ros-dashing-rclcpp, ros-dashing-sensor-msgs, ros-dashing-yaml-cpp-vendor, ros-dashing-ros-workspace
+Homepage: http://ros.org/wiki/camera_calibration_parsers
+Standards-Version: 3.9.2
+
+Package: ros-dashing-camera-calibration-parsers
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-dashing-rclcpp, ros-dashing-sensor-msgs, ros-dashing-yaml-cpp-vendor, ros-dashing-ros-workspace
+Description: camera_calibration_parsers contains routines for reading and writing camera calibration parameters.
