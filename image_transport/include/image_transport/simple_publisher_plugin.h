@@ -72,9 +72,8 @@ public:
 
   virtual uint32_t getNumSubscribers() const
   {
-    // TODO(mjcarroll) replace with publisher-specific call.
     if (simple_impl_) {
-      return static_cast<uint32_t>(simple_impl_->node_->count_subscribers(getTopic()));
+      return simple_impl_->pub_->get_subscription_count();
     }
     return 0;
   }
@@ -110,7 +109,8 @@ protected:
     simple_impl_ = std::make_unique<SimplePublisherPluginImpl>(node);
 
     RCLCPP_DEBUG(simple_impl_->logger_, "getTopicToAdvertise: %s", transport_topic.c_str());
-    simple_impl_->pub_ = node->create_publisher<M>(transport_topic, custom_qos);
+    auto qos = rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos));
+    simple_impl_->pub_ = node->create_publisher<M>(transport_topic, qos);
   }
 
   //! Generic function for publishing the internal message type.
