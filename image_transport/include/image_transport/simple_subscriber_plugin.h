@@ -77,9 +77,10 @@ public:
 
   virtual uint32_t getNumPublishers() const
   {
-    //TODO(ros2) Enable count_publisher when rcl/rmw supports it.
-    //if (simple_impl_) return simple_impl_->node_->count_publishers(getTopic());
-    return 1;
+    if (impl_) {
+      return impl_->sub_->get_publisher_count();
+    }
+    return 0;
   }
 
   virtual void shutdown()
@@ -95,7 +96,7 @@ protected:
    * @param message A message from the PublisherPlugin.
    * @param user_cb The user Image callback to invoke, if appropriate.
    */
- 
+
   virtual void internalCallback(
     const typename std::shared_ptr<const M>& message,
     const Callback & user_cb) = 0;
@@ -120,11 +121,11 @@ protected:
     // Push each group of transport-specific parameters into a separate sub-namespace
     //ros::NodeHandle param_nh(transport_hints.getParameterNH(), getTransportName());
     //
-    impl_->sub_ = node->create_subscription<M>(getTopicToSubscribe(base_topic),
+    auto qos = rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos));
+    impl_->sub_ = node->create_subscription<M>(getTopicToSubscribe(base_topic), qos,
         [this, callback](const typename std::shared_ptr<const M> msg){
           internalCallback(msg, callback);
-        },
-        custom_qos);
+        });
   }
 
 private:
