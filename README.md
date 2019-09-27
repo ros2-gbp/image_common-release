@@ -1,3 +1,29 @@
+## image_common (eloquent) - 2.2.0-1
+
+The packages in the `image_common` repository were released into the `eloquent` distro by running `/usr/bin/bloom-release -r eloquent image_common` on `Fri, 27 Sep 2019 14:39:29 -0000`
+
+These packages were released:
+- `camera_calibration_parsers`
+- `camera_info_manager`
+- `image_transport`
+
+Version of package(s) in repository `image_common`:
+
+- upstream repository: https://github.com/ros-perception/image_common
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `2.2.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.8.0`
+- catkin_pkg version: `0.4.13`
+- rosdep version: `0.16.1`
+- rosdistro version: `0.7.4`
+- vcstools version: `0.1.42`
+
+
 ## image_common (dashing) - 2.1.1-1
 
 The packages in the `image_common` repository were released into the `dashing` distro by running `/usr/bin/bloom-release --rosdistro dashing --track dashing image_common` on `Fri, 31 May 2019 00:24:39 -0000`
