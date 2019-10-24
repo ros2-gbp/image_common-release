@@ -1,0 +1,13 @@
+Source: ros-eloquent-image-transport
+Section: misc
+Priority: optional
+Maintainer: Michael Carroll <michael@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-eloquent-ament-cmake-gtest, ros-eloquent-ament-cmake-ros, ros-eloquent-ament-lint-auto, ros-eloquent-ament-lint-common, ros-eloquent-message-filters, ros-eloquent-pluginlib, ros-eloquent-rclcpp, ros-eloquent-sensor-msgs, ros-eloquent-ros-workspace
+Homepage: http://ros.org/wiki/image_transport
+Standards-Version: 3.9.2
+
+Package: ros-eloquent-image-transport
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-eloquent-message-filters, ros-eloquent-pluginlib, ros-eloquent-rclcpp, ros-eloquent-sensor-msgs, ros-eloquent-ros-workspace
+Description: image_transport should always be used to subscribe to and publish images.
+ It provides transparent support for transporting images in low-bandwidth compressed formats. Examples (provided by separate plugin packages) include JPEG/PNG compression and Theora streaming video.
