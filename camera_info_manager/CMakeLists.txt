@@ -11,12 +11,16 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+if(MSVC)
+  add_compile_definitions(_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING)
+endif()
+
 find_package(ament_cmake_ros REQUIRED)
 
 find_package(ament_index_cpp REQUIRED)
-find_package(rclcpp REQUIRED)
 find_package(camera_calibration_parsers REQUIRED)
-find_package(image_transport REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(rcpputils REQUIRED)
 find_package(sensor_msgs REQUIRED)
 
 include_directories(include)
@@ -24,12 +28,14 @@ include_directories(include)
 # add a library
 add_library(${PROJECT_NAME} src/camera_info_manager.cpp)
 
+target_compile_definitions(${PROJECT_NAME} PRIVATE "CAMERA_INFO_MANAGER_BUILDING_DLL")
+
 ament_target_dependencies(
   ${PROJECT_NAME}
   ament_index_cpp
-  rclcpp
   camera_calibration_parsers
-  image_transport
+  rclcpp
+  rcpputils
   sensor_msgs
 )
 
@@ -46,6 +52,7 @@ install(
 )
 
 ament_export_include_directories(include)
+ament_export_dependencies(ament_index_cpp camera_calibration_parsers rclcpp rcpputils sensor_msgs)
 ament_export_libraries(${PROJECT_NAME})
 
 if(BUILD_TESTING)
@@ -53,7 +60,7 @@ if(BUILD_TESTING)
   #find_package(ament_lint_auto REQUIRED)
   #ament_lint_auto_find_test_dependencies()
 
-  find_package(ament_cmake_cppcheck REQUIRED)
+  #find_package(ament_cmake_cppcheck REQUIRED)
   find_package(ament_cmake_cpplint REQUIRED)
   find_package(ament_cmake_lint_cmake REQUIRED)
   find_package(ament_cmake_uncrustify REQUIRED)
