@@ -1,3 +1,30 @@
+## image_common (foxy) - 2.3.0-1
+
+The packages in the `image_common` repository were released into the `foxy` distro by running `/usr/bin/bloom-release -r foxy image_common` on `Wed, 27 May 2020 21:14:05 -0000`
+
+These packages were released:
+- `camera_calibration_parsers`
+- `camera_info_manager`
+- `image_common`
+- `image_transport`
+
+Version of package(s) in repository `image_common`:
+
+- upstream repository: https://github.com/ros-perception/image_common
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `2.3.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.9.7`
+- catkin_pkg version: `0.4.20`
+- rosdep version: `0.19.0`
+- rosdistro version: `0.8.2`
+- vcstools version: `0.1.42`
+
+
 ## image_common (eloquent) - 2.2.1-1
 
 The packages in the `image_common` repository were released into the `eloquent` distro by running `/usr/bin/bloom-release --rosdistro eloquent image_common` on `Thu, 24 Oct 2019 00:55:53 -0000`
