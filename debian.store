@@ -1,1 +1,1 @@
-{"trim": "", "base": "aeb2faa", "trimbase": "", "parent": "debian/foxy/camera_info_manager", "previous": "952b672"}
+{"base": "0c40c26", "parent": "debian/rolling/camera_info_manager", "previous": "8347de6", "trim": "", "trimbase": ""}
