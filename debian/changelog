@@ -1,0 +1,278 @@
+ros-rolling-image-common (2.3.0-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Wed, 27 May 2020 04:00:00 -0000
+
+ros-rolling-image-common (2.2.1-2focal) focal; urgency=high
+
+  * [ros2] image_common metapackage (#129 <https://github.com/ros-perception/image_common/issues/129>)
+  * Contributors: chapulina
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Wed, 23 Oct 2019 04:00:00 -0000
+
+ros-rolling-image-common (1.11.13-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Sun, 05 Nov 2017 04:00:00 -0000
+
+ros-rolling-image-common (1.11.12-2focal) focal; urgency=high
+
+  * 1.11.11
+  * update changelogs
+  * Contributors: Vincent Rabaud
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Sun, 29 Jan 2017 05:00:00 -0000
+
+ros-rolling-image-common (1.11.11-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Sat, 24 Sep 2016 04:00:00 -0000
+
+ros-rolling-image-common (1.11.10-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Tue, 19 Jan 2016 05:00:00 -0000
+
+ros-rolling-image-common (1.11.9-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Sun, 17 Jan 2016 05:00:00 -0000
+
+ros-rolling-image-common (1.11.8-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Sun, 29 Nov 2015 05:00:00 -0000
+
+ros-rolling-image-common (1.11.7-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Tue, 28 Jul 2015 04:00:00 -0000
+
+ros-rolling-image-common (1.11.6-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Thu, 16 Jul 2015 04:00:00 -0000
+
+ros-rolling-image-common (1.11.5-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Thu, 14 May 2015 04:00:00 -0000
+
+ros-rolling-image-common (1.11.4-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Sun, 21 Sep 2014 04:00:00 -0000
+
+ros-rolling-image-common (1.11.3-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Mon, 19 May 2014 04:00:00 -0000
+
+ros-rolling-image-common (1.11.2-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Thu, 13 Feb 2014 05:00:00 -0000
+
+ros-rolling-image-common (1.11.1-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Sun, 26 Jan 2014 07:33:00 -0000
+
+ros-rolling-image-common (1.11.0-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Sat, 20 Jul 2013 16:23:00 -0000
+
+ros-rolling-image-common (1.10.5-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Sun, 26 Jan 2014 07:34:00 -0000
+
+ros-rolling-image-common (1.10.4-2focal) focal; urgency=high
+
+  * add Jack as maintainer
+  * comply to REP 0127
+  * Contributors: Vincent Rabaud
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Sat, 20 Jul 2013 15:42:00 -0000
+
+ros-rolling-image-common (1.10.3-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Thu, 21 Feb 2013 10:33:00 -0000
+
+ros-rolling-image-common (1.10.2-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Thu, 21 Feb 2013 09:48:00 -0000
+
+ros-rolling-image-common (1.10.1-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Thu, 21 Feb 2013 09:16:00 -0000
+
+ros-rolling-image-common (1.10.0-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Sun, 13 Jan 2013 05:00:00 -0000
+
+ros-rolling-image-common (1.9.22-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Sun, 16 Dec 2012 05:00:00 -0000
+
+ros-rolling-image-common (1.9.21-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Fri, 14 Dec 2012 05:00:00 -0000
+
+ros-rolling-image-common (1.9.20-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Tue, 04 Dec 2012 05:00:00 -0000
+
+ros-rolling-image-common (1.9.19-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Thu, 08 Nov 2012 05:00:00 -0000
+
+ros-rolling-image-common (1.9.18-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Tue, 06 Nov 2012 05:00:00 -0000
+
+ros-rolling-image-common (1.9.17-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Tue, 30 Oct 2012 23:32:00 -0000
+
+ros-rolling-image-common (1.9.16-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Tue, 30 Oct 2012 13:10:00 -0000
+
+ros-rolling-image-common (1.9.15-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Sat, 13 Oct 2012 12:43:00 -0000
+
+ros-rolling-image-common (1.9.14-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Sat, 13 Oct 2012 05:07:00 -0000
+
+ros-rolling-image-common (1.9.13-2focal) focal; urgency=high
+
+  * add missing description
+  * Contributors: Vincent Rabaud
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Sat, 06 Oct 2012 04:00:00 -0000
+
+ros-rolling-image-common (1.9.12-2focal) focal; urgency=high
+
+  * define metapackage
+  * Contributors: Vincent Rabaud
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Thu, 04 Oct 2012 04:00:00 -0000
+
+ros-rolling-image-common (1.9.11-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Tue, 02 Oct 2012 06:56:00 -0000
+
+ros-rolling-image-common (1.9.10-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Tue, 02 Oct 2012 06:42:00 -0000
+
+ros-rolling-image-common (1.9.9-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Mon, 01 Oct 2012 04:00:00 -0000
+
+ros-rolling-image-common (1.9.8-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Sun, 30 Sep 2012 04:00:00 -0000
+
+ros-rolling-image-common (1.9.7-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Tue, 18 Sep 2012 15:39:00 -0000
+
+ros-rolling-image-common (1.9.6-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Tue, 18 Sep 2012 15:07:00 -0000
+
+ros-rolling-image-common (1.9.5-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Thu, 13 Sep 2012 04:00:00 -0000
+
+ros-rolling-image-common (1.9.4-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Thu, 13 Sep 2012 03:37:00 -0000
+
+ros-rolling-image-common (1.9.3-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Thu, 13 Sep 2012 00:44:00 -0000
+
+ros-rolling-image-common (1.9.2-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Mon, 10 Sep 2012 04:00:00 -0000
+
+ros-rolling-image-common (1.9.1-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Fri, 07 Sep 2012 19:33:00 -0000
+
+ros-rolling-image-common (1.9.0-2focal) focal; urgency=high
+
+
+
+ -- Jack O'Quin <jack.oquin@gmail.com>  Fri, 07 Sep 2012 17:03:00 -0000
+
+
