@@ -1,3 +1,30 @@
+## image_common (rolling) - 3.0.0-1
+
+The packages in the `image_common` repository were released into the `rolling` distro by running `/usr/bin/bloom-release -r rolling image_common` on `Wed, 26 May 2021 14:05:40 -0000`
+
+These packages were released:
+- `camera_calibration_parsers`
+- `camera_info_manager`
+- `image_common`
+- `image_transport`
+
+Version of package(s) in repository `image_common`:
+
+- upstream repository: https://github.com/ros-perception/image_common
+- release repository: https://github.com/ros2-gbp/image_common-release.git
+- rosdistro version: `2.3.0-2`
+- old version: `2.3.0-2`
+- new version: `3.0.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.10.7`
+- catkin_pkg version: `0.4.23`
+- rosdep version: `0.20.1`
+- rosdistro version: `0.8.3`
+- vcstools version: `0.1.42`
+
+
 ## image_common (foxy) - 2.3.0-1
 
 The packages in the `image_common` repository were released into the `foxy` distro by running `/usr/bin/bloom-release -r foxy image_common` on `Wed, 27 May 2020 21:14:05 -0000`
