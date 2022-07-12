@@ -2,11 +2,15 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.4.0 (2022-07-12)
+2.5.0 (2022-07-12)
 ------------------
-* getNumSubscribers working method to foxy (`#220 <https://github.com/ros-perception/image_common/issues/220>`_)
-* Simple IT plugins shutdown (`#225 <https://github.com/ros-perception/image_common/issues/225>`_) (`#230 <https://github.com/ros-perception/image_common/issues/230>`_)
-* Contributors: Michael Ferguson, Alejandro Hernández Cordero, vladimirilin, Matej Vargovcik, RoboTech Vision
+
+2.3.1 (2022-04-28)
+------------------
+* Simple IT plugins shutdown (`#225 <https://github.com/ros-perception/image_common/issues/225>`_) (`#228 <https://github.com/ros-perception/image_common/issues/228>`_)
+* Update maintainers (`#173 <https://github.com/ros-perception/image_common/issues/173>`_)
+* make CameraPublisher::getNumSubscribers() work (`#163 <https://github.com/ros-perception/image_common/issues/163>`_)
+* Contributors: Alejandro Hernández Cordero, Geoffrey Biggs, Michael Ferguson
 
 2.3.0 (2020-05-27)
 ------------------

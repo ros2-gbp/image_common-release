@@ -2,8 +2,13 @@
 Changelog for package camera_info_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.4.0 (2022-07-12)
+2.5.0 (2022-07-12)
 ------------------
+
+2.3.1 (2022-04-28)
+------------------
+* Update maintainers (`#173 <https://github.com/ros-perception/image_common/issues/173>`_)
+* Contributors: Alejandro Hernández Cordero
 
 2.3.0 (2020-05-27)
 ------------------
