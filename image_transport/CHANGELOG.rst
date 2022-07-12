@@ -2,6 +2,9 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.5.0 (2022-07-12)
+------------------
+
 2.3.1 (2022-04-28)
 ------------------
 * Simple IT plugins shutdown (`#225 <https://github.com/ros-perception/image_common/issues/225>`_) (`#228 <https://github.com/ros-perception/image_common/issues/228>`_)
