@@ -2,6 +2,9 @@
 Changelog for package camera_calibration_parsers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.4.0 (2022-07-12)
+------------------
+
 2.3.0 (2020-05-27)
 ------------------
 * Fix formatting and include paths for linters (`#157 <https://github.com/ros-perception/image_common/issues/157>`_)
