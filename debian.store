@@ -1,1 +1,1 @@
-{"trim": "", "base": "4881b14", "trimbase": "", "parent": "debian/foxy/camera_calibration_parsers", "previous": "54e9e1e"}
+{"base": "9fe535e", "parent": "debian/foxy/camera_calibration_parsers", "previous": "6204971", "trim": "", "trimbase": ""}
