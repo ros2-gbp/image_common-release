@@ -2,6 +2,11 @@
 Changelog for package camera_calibration_parsers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.1.5 (2022-11-16)
+------------------
+* Add alias library targets for all libraries (`#260 <https://github.com/ros-perception/image_common/issues/260>`_)
+* Contributors: Geoffrey Biggs
+
 3.1.4 (2022-03-25)
 ------------------
 * Tests depend on rcpputils (`#236 <https://github.com/ros-perception/image_common/issues/236>`_)
