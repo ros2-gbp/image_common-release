@@ -2,29 +2,10 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.1.1 (2022-11-16)
+3.1.5 (2022-11-16)
 ------------------
-* Add alias library targets for all libraries (`#259 <https://github.com/ros-perception/image_common/issues/259>`_)
-* Contributors: RFRIEDM-Trimble
-
-4.1.0 (2022-11-02)
-------------------
-
-4.0.0 (2022-08-11)
-------------------
-* Remove subscriber and publisher impl methods without options (`#252 <https://github.com/ros-perception/image_common/issues/252>`_)
-* Deprecate impl without options (`#249 <https://github.com/ros-perception/image_common/issues/249>`_)
-* Contributors: Kenji Brameld
-
-3.2.1 (2022-07-12)
-------------------
-* opt-in to qos overriding for publisher (`#246 <https://github.com/ros-perception/image_common/issues/246>`_)
-* Contributors: Brian
-
-3.2.0 (2022-05-10)
-------------------
-* Add qos option to override qos (`#208 <https://github.com/ros-perception/image_common/issues/208>`_)
-* Contributors: Daisuke Nishimatsu
+* Add alias library targets for all libraries (`#260 <https://github.com/ros-perception/image_common/issues/260>`_)
+* Contributors: Geoffrey Biggs
 
 3.1.4 (2022-03-25)
 ------------------
