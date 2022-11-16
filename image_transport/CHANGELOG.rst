@@ -2,42 +2,20 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.1.5 (2022-11-16)
+2.5.1 (2022-11-16)
 ------------------
-* Add alias library targets for all libraries (`#260 <https://github.com/ros-perception/image_common/issues/260>`_)
+* Add alias library targets for all libraries (`#261 <https://github.com/ros-perception/image_common/issues/261>`_)
 * Contributors: Geoffrey Biggs
 
-3.1.4 (2022-03-25)
+2.5.0 (2022-07-12)
 ------------------
-* Image transport publisher crash fixes (`#235 <https://github.com/ros-perception/image_common/issues/235>`_)
-* Contributors: RoboTech Vision
 
-3.1.3 (2022-03-01)
+2.3.1 (2022-04-28)
 ------------------
-* Simple IT plugins shutdown (`#225 <https://github.com/ros-perception/image_common/issues/225>`_)
-* Remove PLUGINLIB__DISABLE_BOOST_FUNCTIONS definition. (`#226 <https://github.com/ros-perception/image_common/issues/226>`_)
-* Contributors: Chris Lalancette, RoboTech Vision
-
-3.1.2 (2022-01-14)
-------------------
-* Fix include order for cpplint (`#221 <https://github.com/ros-perception/image_common/issues/221>`_)
-  Relates to https://github.com/ament/ament_lint/pull/324
-* Export a modern CMake target instead of variables and install includes to include/${PROJECT_NAME} (`#218 <https://github.com/ros-perception/image_common/issues/218>`_)
-* Contributors: Jacob Perron, Shane Loretz
-
-3.1.0 (2021-06-29)
-------------------
-* Fix SimpleSubscriberPlugin (`#195 <https://github.com/ros-perception/image_common/issues/195>`_)
-* Contributors: Ivan Santiago Paunovic
-
-3.0.0 (2021-05-26)
-------------------
-* Make sure to mark overridden methods as 'override'. (`#192 <https://github.com/ros-perception/image_common/issues/192>`_)
-* Expose subscription options (`#186 <https://github.com/ros-perception/image_common/issues/186>`_)
-* fix mistyping 'cammera_publisher.hpp -> camera_publisher.hpp' (`#177 <https://github.com/ros-perception/image_common/issues/177>`_)
+* Simple IT plugins shutdown (`#225 <https://github.com/ros-perception/image_common/issues/225>`_) (`#228 <https://github.com/ros-perception/image_common/issues/228>`_)
 * Update maintainers (`#173 <https://github.com/ros-perception/image_common/issues/173>`_)
 * make CameraPublisher::getNumSubscribers() work (`#163 <https://github.com/ros-perception/image_common/issues/163>`_)
-* Contributors: Alejandro Hernández Cordero, Audrow Nash, Chris Lalancette, Hye-Jong KIM, Michael Ferguson
+* Contributors: Alejandro Hernández Cordero, Geoffrey Biggs, Michael Ferguson
 
 2.3.0 (2020-05-27)
 ------------------
