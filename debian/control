@@ -1,0 +1,13 @@
+Source: ros-iron-camera-info-manager
+Section: misc
+Priority: optional
+Maintainer: Alejandro Hernandez Cordero <alejandro@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-iron-ament-cmake-gtest <!nocheck>, ros-iron-ament-cmake-ros, ros-iron-ament-index-cpp, ros-iron-ament-lint-auto <!nocheck>, ros-iron-ament-lint-common <!nocheck>, ros-iron-camera-calibration-parsers, ros-iron-rclcpp, ros-iron-rclcpp-lifecycle, ros-iron-rcpputils, ros-iron-sensor-msgs, ros-iron-ros-workspace
+Homepage: http://ros.org/wiki/camera_info_manager
+Standards-Version: 3.9.2
+
+Package: ros-iron-camera-info-manager
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-iron-ament-index-cpp, ros-iron-camera-calibration-parsers, ros-iron-rclcpp, ros-iron-rclcpp-lifecycle, ros-iron-rcpputils, ros-iron-sensor-msgs, ros-iron-ros-workspace
+Description: This package provides a C++ interface for camera calibration information.
+ It provides CameraInfo, and handles SetCameraInfo service requests, saving and restoring the camera calibration data.
