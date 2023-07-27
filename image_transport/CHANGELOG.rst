@@ -2,8 +2,10 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4.3.0 (2023-04-28)
+4.2.1 (2023-07-27)
 ------------------
+* Expose callback groups - backport to iron (`#276 <https://github.com/ros-perception/image_common/issues/276>`_)
+* Contributors: Aditya Pande
 
 4.2.0 (2023-02-14)
 ------------------
