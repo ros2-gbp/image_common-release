@@ -2,20 +2,44 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.1.7 (2023-08-14)
+4.2.2 (2023-08-14)
 ------------------
-* Fix downstream regressions due to subscribe overloads (`#284 <https://github.com/ros-perception/image_common/issues/284>`_)
+* Removed default arguments from new overloads (`#283 <https://github.com/ros-perception/image_common/issues/283>`_)
 * Contributors: Aditya Pande
 
-3.1.6 (2023-07-27)
+4.2.1 (2023-07-27)
 ------------------
-* Expose callback groups - backport to humble (`#277 <https://github.com/ros-perception/image_common/issues/277>`_)
+* Expose callback groups - backport to iron (`#276 <https://github.com/ros-perception/image_common/issues/276>`_)
 * Contributors: Aditya Pande
 
-3.1.5 (2022-11-16)
+4.2.0 (2023-02-14)
 ------------------
-* Add alias library targets for all libraries (`#260 <https://github.com/ros-perception/image_common/issues/260>`_)
-* Contributors: Geoffrey Biggs
+* Update image_common to C++17. (`#267 <https://github.com/ros-perception/image_common/issues/267>`_)
+* Contributors: Chris Lalancette
+
+4.1.1 (2022-11-16)
+------------------
+* Add alias library targets for all libraries (`#259 <https://github.com/ros-perception/image_common/issues/259>`_)
+* Contributors: RFRIEDM-Trimble
+
+4.1.0 (2022-11-02)
+------------------
+
+4.0.0 (2022-08-11)
+------------------
+* Remove subscriber and publisher impl methods without options (`#252 <https://github.com/ros-perception/image_common/issues/252>`_)
+* Deprecate impl without options (`#249 <https://github.com/ros-perception/image_common/issues/249>`_)
+* Contributors: Kenji Brameld
+
+3.2.1 (2022-07-12)
+------------------
+* opt-in to qos overriding for publisher (`#246 <https://github.com/ros-perception/image_common/issues/246>`_)
+* Contributors: Brian
+
+3.2.0 (2022-05-10)
+------------------
+* Add qos option to override qos (`#208 <https://github.com/ros-perception/image_common/issues/208>`_)
+* Contributors: Daisuke Nishimatsu
 
 3.1.4 (2022-03-25)
 ------------------
