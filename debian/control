@@ -1,0 +1,13 @@
+Source: ros-humble-camera-info-manager
+Section: misc
+Priority: optional
+Maintainer: Alejandro Hernandez Cordero <alejandro@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-humble-ament-cmake-gtest <!nocheck>, ros-humble-ament-cmake-ros, ros-humble-ament-index-cpp, ros-humble-ament-lint-auto <!nocheck>, ros-humble-ament-lint-common <!nocheck>, ros-humble-camera-calibration-parsers, ros-humble-rclcpp, ros-humble-rcpputils, ros-humble-sensor-msgs, ros-humble-ros-workspace
+Homepage: http://ros.org/wiki/camera_info_manager
+Standards-Version: 3.9.2
+
+Package: ros-humble-camera-info-manager
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-humble-ament-index-cpp, ros-humble-camera-calibration-parsers, ros-humble-rclcpp, ros-humble-rcpputils, ros-humble-sensor-msgs, ros-humble-ros-workspace
+Description: This package provides a C++ interface for camera calibration information.
+ It provides CameraInfo, and handles SetCameraInfo service requests, saving and restoring the camera calibration data.
