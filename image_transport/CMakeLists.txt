@@ -2,9 +2,10 @@ cmake_minimum_required(VERSION 3.5)
 
 project(image_transport)
 
-# Default to C++14
+# Default to C++17
 if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 14)
+  set(CMAKE_CXX_STANDARD 17)
+  set(CMAKE_CXX_STANDARD_REQUIRED ON)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -123,6 +124,11 @@ if(BUILD_TESTING)
   ament_add_gtest(${PROJECT_NAME}-remapping test/test_remapping.cpp)
   if(TARGET ${PROJECT_NAME}-remapping)
     target_link_libraries(${PROJECT_NAME}-remapping ${PROJECT_NAME})
+  endif()
+
+  ament_add_gtest(${PROJECT_NAME}-qos_override test/test_qos_override.cpp)
+  if(TARGET ${PROJECT_NAME}-qos_override)
+    target_link_libraries(${PROJECT_NAME}-qos_override ${PROJECT_NAME})
   endif()
 
   ament_add_gtest(${PROJECT_NAME}-single_subscriber_publisher test/test_single_subscriber_publisher.cpp)

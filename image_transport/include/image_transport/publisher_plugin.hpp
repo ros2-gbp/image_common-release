@@ -65,9 +65,10 @@ public:
   void advertise(
     rclcpp::Node * nh,
     const std::string & base_topic,
-    rmw_qos_profile_t custom_qos = rmw_qos_profile_default)
+    rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
+    rclcpp::PublisherOptions options = rclcpp::PublisherOptions())
   {
-    advertiseImpl(nh, base_topic, custom_qos);
+    advertiseImpl(nh, base_topic, custom_qos, options);
   }
 
   /**
@@ -134,8 +135,10 @@ protected:
    * \brief Advertise a topic. Must be implemented by the subclass.
    */
   virtual void advertiseImpl(
-    rclcpp::Node * nh, const std::string & base_topic,
-    rmw_qos_profile_t custom_qos) = 0;
+    rclcpp::Node * node,
+    const std::string & base_topic,
+    rmw_qos_profile_t custom_qos,
+    rclcpp::PublisherOptions options) = 0;
 };
 
 }  // namespace image_transport

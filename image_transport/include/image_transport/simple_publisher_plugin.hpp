@@ -65,7 +65,7 @@ class SimplePublisherPlugin : public PublisherPlugin
 public:
   virtual ~SimplePublisherPlugin() {}
 
-  virtual size_t getNumSubscribers() const
+  size_t getNumSubscribers() const override
   {
     if (simple_impl_) {
       return simple_impl_->pub_->get_subscription_count();
@@ -73,13 +73,13 @@ public:
     return 0;
   }
 
-  virtual std::string getTopic() const
+  std::string getTopic() const override
   {
     if (simple_impl_) {return simple_impl_->pub_->get_topic_name();}
     return std::string();
   }
 
-  virtual void publish(const sensor_msgs::msg::Image & message) const
+  void publish(const sensor_msgs::msg::Image & message) const override
   {
     if (!simple_impl_ || !simple_impl_->pub_) {
       auto logger = simple_impl_ ? simple_impl_->logger_ : rclcpp::get_logger("image_transport");
@@ -92,22 +92,24 @@ public:
     publish(message, bindInternalPublisher(simple_impl_->pub_.get()));
   }
 
-  virtual void shutdown()
+  void shutdown() override
   {
     simple_impl_.reset();
   }
 
 protected:
-  virtual void advertiseImpl(
-    rclcpp::Node * node, const std::string & base_topic,
-    rmw_qos_profile_t custom_qos)
+  void advertiseImpl(
+    rclcpp::Node * node,
+    const std::string & base_topic,
+    rmw_qos_profile_t custom_qos,
+    rclcpp::PublisherOptions options) override
   {
     std::string transport_topic = getTopicToAdvertise(base_topic);
     simple_impl_ = std::make_unique<SimplePublisherPluginImpl>(node);
 
     RCLCPP_DEBUG(simple_impl_->logger_, "getTopicToAdvertise: %s", transport_topic.c_str());
     auto qos = rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos), custom_qos);
-    simple_impl_->pub_ = node->create_publisher<M>(transport_topic, qos);
+    simple_impl_->pub_ = node->create_publisher<M>(transport_topic, qos, options);
   }
 
   //! Generic function for publishing the internal message type.
