@@ -1,3 +1,30 @@
+## image_common (iron) - 4.2.3-1
+
+The packages in the `image_common` repository were released into the `iron` distro by running `/usr/bin/bloom-release --rosdistro iron image_common` on `Wed, 07 Feb 2024 07:59:28 -0000`
+
+These packages were released:
+- `camera_calibration_parsers`
+- `camera_info_manager`
+- `image_common`
+- `image_transport`
+
+Version of package(s) in repository `image_common`:
+
+- upstream repository: https://github.com/ros-perception/image_common
+- release repository: https://github.com/ros2-gbp/image_common-release.git
+- rosdistro version: `4.2.2-1`
+- old version: `4.2.2-1`
+- new version: `4.2.3-1`
+
+Versions of tools used:
+
+- bloom version: `0.11.2`
+- catkin_pkg version: `0.5.2`
+- rosdep version: `0.22.2`
+- rosdistro version: `0.9.0`
+- vcstools version: `0.1.42`
+
+
 ## image_common (rolling) - 5.1.0-1
 
 The packages in the `image_common` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --track rolling --rosdistro rolling image_common` on `Wed, 24 Jan 2024 14:45:48 -0000`
