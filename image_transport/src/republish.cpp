@@ -67,7 +67,6 @@ int main(int argc, char ** argv)
       rclcpp::QosPolicyKind::Depth,
       rclcpp::QosPolicyKind::Durability,
       rclcpp::QosPolicyKind::History,
-      rclcpp::QosPolicyKind::Reliability,
     });
 
     pub_options.qos_overriding_options = qos_override_options;

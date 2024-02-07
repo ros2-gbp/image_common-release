@@ -65,7 +65,7 @@ class SimplePublisherPlugin : public PublisherPlugin
 public:
   virtual ~SimplePublisherPlugin() {}
 
-  size_t getNumSubscribers() const override
+  virtual size_t getNumSubscribers() const
   {
     if (simple_impl_) {
       return simple_impl_->pub_->get_subscription_count();
@@ -73,13 +73,13 @@ public:
     return 0;
   }
 
-  std::string getTopic() const override
+  virtual std::string getTopic() const
   {
     if (simple_impl_) {return simple_impl_->pub_->get_topic_name();}
     return std::string();
   }
 
-  void publish(const sensor_msgs::msg::Image & message) const override
+  virtual void publish(const sensor_msgs::msg::Image & message) const
   {
     if (!simple_impl_ || !simple_impl_->pub_) {
       auto logger = simple_impl_ ? simple_impl_->logger_ : rclcpp::get_logger("image_transport");
@@ -92,7 +92,7 @@ public:
     publish(message, bindInternalPublisher(simple_impl_->pub_.get()));
   }
 
-  void shutdown() override
+  virtual void shutdown()
   {
     simple_impl_.reset();
   }
