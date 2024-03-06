@@ -1,0 +1,487 @@
+ros-rolling-image-transport (5.1.0-2noble) noble; urgency=high
+
+  * Add QoS option reliability to republisher qos params (#296 <https://github.com/ros-perception/image_common/issues/296>)
+  * implement CameraSubscriber::getNumPublishers (#297 <https://github.com/ros-perception/image_common/issues/297>)
+  * Add missing definition for CameraPublisher::publish overload (#278 <https://github.com/ros-perception/image_common/issues/278>)
+  * Contributors: Carlos Andrés Álvarez Restrepo, Michael Ferguson, s-hall
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 24 Jan 2024 00:00:00 -0000
+
+ros-rolling-image-transport (5.0.0-2noble) noble; urgency=high
+
+  * Advertize and subscribe with custom qos (#288 <https://github.com/ros-perception/image_common/issues/288>)
+  * Removed C headers (#289 <https://github.com/ros-perception/image_common/issues/289>)
+  * Contributors: Alejandro Hernández Cordero
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 06 Nov 2023 00:00:00 -0000
+
+ros-rolling-image-transport (4.5.1-2noble) noble; urgency=high
+
+  * Switch to using the override keyword for simple_publisher_plugin. (#285 <https://github.com/ros-perception/image_common/issues/285>)
+  * Contributors: Chris Lalancette
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 07 Sep 2023 00:00:00 -0000
+
+ros-rolling-image-transport (4.5.0-2noble) noble; urgency=high
+
+  * feat: enable plugin allowlist (#264 <https://github.com/ros-perception/image_common/issues/264>)
+  * Expose option to set callback groups (#274 <https://github.com/ros-perception/image_common/issues/274>)
+  * add support for lazy subscribers (#272 <https://github.com/ros-perception/image_common/issues/272>)
+  * Contributors: Aditya Pande, Daisuke Nishimatsu, Michael Ferguson
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 21 Aug 2023 00:00:00 -0000
+
+ros-rolling-image-transport (4.3.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 28 Apr 2023 00:00:00 -0000
+
+ros-rolling-image-transport (4.2.0-2noble) noble; urgency=high
+
+  * Update image_common to C++17. (#267 <https://github.com/ros-perception/image_common/issues/267>)
+  * Contributors: Chris Lalancette
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 14 Feb 2023 00:00:00 -0000
+
+ros-rolling-image-transport (4.1.1-2noble) noble; urgency=high
+
+  * Add alias library targets for all libraries (#259 <https://github.com/ros-perception/image_common/issues/259>)
+  * Contributors: RFRIEDM-Trimble
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 16 Nov 2022 00:00:00 -0000
+
+ros-rolling-image-transport (4.1.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 02 Nov 2022 00:00:00 -0000
+
+ros-rolling-image-transport (4.0.0-2noble) noble; urgency=high
+
+  * Remove subscriber and publisher impl methods without options (#252 <https://github.com/ros-perception/image_common/issues/252>)
+  * Deprecate impl without options (#249 <https://github.com/ros-perception/image_common/issues/249>)
+  * Contributors: Kenji Brameld
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 11 Aug 2022 00:00:00 -0000
+
+ros-rolling-image-transport (3.2.1-2noble) noble; urgency=high
+
+  * opt-in to qos overriding for publisher (#246 <https://github.com/ros-perception/image_common/issues/246>)
+  * Contributors: Brian
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 12 Jul 2022 00:00:00 -0000
+
+ros-rolling-image-transport (3.2.0-2noble) noble; urgency=high
+
+  * Add qos option to override qos (#208 <https://github.com/ros-perception/image_common/issues/208>)
+  * Contributors: Daisuke Nishimatsu
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 10 May 2022 00:00:00 -0000
+
+ros-rolling-image-transport (3.1.4-2noble) noble; urgency=high
+
+  * Image transport publisher crash fixes (#235 <https://github.com/ros-perception/image_common/issues/235>)
+  * Contributors: RoboTech Vision
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 25 Mar 2022 00:00:00 -0000
+
+ros-rolling-image-transport (3.1.3-2noble) noble; urgency=high
+
+  * Simple IT plugins shutdown (#225 <https://github.com/ros-perception/image_common/issues/225>)
+  * Remove PLUGINLIB__DISABLE_BOOST_FUNCTIONS definition. (#226 <https://github.com/ros-perception/image_common/issues/226>)
+  * Contributors: Chris Lalancette, RoboTech Vision
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 01 Mar 2022 00:00:00 -0000
+
+ros-rolling-image-transport (3.1.2-2noble) noble; urgency=high
+
+  * Fix include order for cpplint (#221 <https://github.com/ros-perception/image_common/issues/221>)
+    Relates to https://github.com/ament/ament_lint/pull/324
+  * Export a modern CMake target instead of variables and install includes to include/${PROJECT_NAME} (#218 <https://github.com/ros-perception/image_common/issues/218>)
+  * Contributors: Jacob Perron, Shane Loretz
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 14 Jan 2022 00:00:00 -0000
+
+ros-rolling-image-transport (3.1.0-2noble) noble; urgency=high
+
+  * Fix SimpleSubscriberPlugin (#195 <https://github.com/ros-perception/image_common/issues/195>)
+  * Contributors: Ivan Santiago Paunovic
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 29 Jun 2021 00:00:00 -0000
+
+ros-rolling-image-transport (3.0.0-2noble) noble; urgency=high
+
+  * Make sure to mark overridden methods as 'override'. (#192 <https://github.com/ros-perception/image_common/issues/192>)
+  * Expose subscription options (#186 <https://github.com/ros-perception/image_common/issues/186>)
+  * fix mistyping 'cammera_publisher.hpp -> camera_publisher.hpp' (#177 <https://github.com/ros-perception/image_common/issues/177>)
+  * Update maintainers (#173 <https://github.com/ros-perception/image_common/issues/173>)
+  * make CameraPublisher::getNumSubscribers() work (#163 <https://github.com/ros-perception/image_common/issues/163>)
+  * Contributors: Alejandro Hernández Cordero, Audrow Nash, Chris Lalancette, Hye-Jong KIM, Michael Ferguson
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 26 May 2021 00:00:00 -0000
+
+ros-rolling-image-transport (2.3.0-2noble) noble; urgency=high
+
+  * Fix formatting and include paths for linters (#157 <https://github.com/ros-perception/image_common/issues/157>)
+  * Fix QoS initialization from RMW QoS profile (#158 <https://github.com/ros-perception/image_common/issues/158>)
+  * Contributors: Jacob Perron, Martin Idel
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 27 May 2020 00:00:00 -0000
+
+ros-rolling-image-transport (2.2.1-2noble) noble; urgency=high
+
+  * add missing set header (#140 <https://github.com/ros-perception/image_common/issues/140>)
+  * Contributors: Mikael Arguedas
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 23 Oct 2019 00:00:00 -0000
+
+ros-rolling-image-transport (2.2.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 27 Sep 2019 00:00:00 -0000
+
+ros-rolling-image-transport (2.1.1-2noble) noble; urgency=high
+
+  * Update to use new count APIs (#128 <https://github.com/ros-perception/image_common/issues/128>)
+  * use latest ros2 API (#127 <https://github.com/ros-perception/image_common/issues/127>)
+  * Contributors: Karsten Knese, Michael Carroll
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 30 May 2019 00:00:00 -0000
+
+ros-rolling-image-transport (2.1.0-2noble) noble; urgency=high
+
+  * Update ROS2 branch to account for new NodeOptions interface (#120 <https://github.com/ros-perception/image_common/issues/120>)
+  * Contributors: Carl Delsey
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 09 May 2019 00:00:00 -0000
+
+ros-rolling-image-transport (2.0.0-2noble) noble; urgency=high
+
+  * camera_info_manager ROS2 port (#94 <https://github.com/ros-perception/image_common/issues/94>)
+  * Pointer api updates (#104 <https://github.com/ros-perception/image_common/issues/104>)
+  * Fix rcutils API change by just removing it. (#103 <https://github.com/ros-perception/image_common/issues/103>)
+  * [ROS2] corrections to remapping for raw images (#97 <https://github.com/ros-perception/image_common/issues/97>)
+  * Make ROS2 ImageTransport conform to old api (#88 <https://github.com/ros-perception/image_common/issues/88>)
+  * Image Transport ROS2 Port (#84 <https://github.com/ros-perception/image_common/issues/84>)
+  * Contributors: Michael Carroll
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 05 Dec 2018 00:00:00 -0000
+
+ros-rolling-image-transport (1.11.13-2noble) noble; urgency=high
+
+  * Disable image publisher plugins by name (#60 <https://github.com/ros-perception/image_common/issues/60>)
+    * Disable publisher plugins by name
+    * Now have per publisher blacklist instead of image_transport wide.
+  * update to use non deprecated pluginlib macro
+  * Extend documentation of getCameraInfoTopic
+    Document the fact that the base_topic argument must be resolved in order to build the correct camera info topic.
+  * Added cv::waitkey(10) for blank popup
+    Without the cv::waitkey(10), it results in a blank popup which crashes/ leads to a black popup. This change corrects that problem.
+    ROS Kinetic, Ubuntu 16.04.3
+  * Contributors: Aaditya Saraiya, Lucas Walter, Mikael Arguedas, Thibaud Chupin, Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 05 Nov 2017 00:00:00 -0000
+
+ros-rolling-image-transport (1.11.12-2noble) noble; urgency=high
+
+  * Fix CMake of image_transport/tutorial and polled_camera
+    Fix loads of problems with the CMakeLists.
+  * image_transport/tutorial: Add dependency on generated msg
+    Without this, build fails on Kinetic because ResizedImage.h has not been
+    generated yet.
+  * image_transport/tutorial: Add missing catkin_INCLUDE_DIRS
+    Without this, compilation files on Kinetic because ros.h cannot be found.
+  * 1.11.11
+  * update changelogs
+  * Contributors: Martin Guenther, Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 29 Jan 2017 00:00:00 -0000
+
+ros-rolling-image-transport (1.11.11-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 24 Sep 2016 00:00:00 -0000
+
+ros-rolling-image-transport (1.11.10-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 19 Jan 2016 00:00:00 -0000
+
+ros-rolling-image-transport (1.11.9-2noble) noble; urgency=high
+
+  * fix linkage in tutorials
+  * Use $catkin_EXPORTED_TARGETS
+  * Contributors: Jochen Sprickerhof, Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 17 Jan 2016 00:00:00 -0000
+
+ros-rolling-image-transport (1.11.8-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 29 Nov 2015 00:00:00 -0000
+
+ros-rolling-image-transport (1.11.7-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 28 Jul 2015 00:00:00 -0000
+
+ros-rolling-image-transport (1.11.6-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 16 Jul 2015 00:00:00 -0000
+
+ros-rolling-image-transport (1.11.5-2noble) noble; urgency=high
+
+  * image_transport: fix CameraSubscriber shutdown (circular shared_ptr ref)
+    CameraSubscriber uses a private boost::shared_ptr to share an impl object
+    between copied instances. In CameraSubscriber::CameraSubscriber(), it
+    handed this shared_ptr to boost::bind() and saved the created wall timer
+    in the impl object, thus creating a circular reference. The impl object
+    was therefore never freed.
+    Fix that by passing a plain pointer to boost::bind().
+  * avoid a memory copy for the raw publisher
+  * add a way to publish an image with only the data pointer
+  * Make function inline to avoid duplicated names when linking statically
+  * add plugin examples for the tutorial
+  * update instructions for catkin
+  * remove uselessly linked library
+    fixes #28 <https://github.com/ros-perception/image_common/issues/28>
+  * add a tutorial for image_transport
+  * Contributors: Gary Servin, Max Schwarz, Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 14 May 2015 00:00:00 -0000
+
+ros-rolling-image-transport (1.11.4-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 21 Sep 2014 00:00:00 -0000
+
+ros-rolling-image-transport (1.11.3-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 19 May 2014 00:00:00 -0000
+
+ros-rolling-image-transport (1.11.2-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 13 Feb 2014 00:00:00 -0000
+
+ros-rolling-image-transport (1.11.1-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 26 Jan 2014 02:33:00 -0000
+
+ros-rolling-image-transport (1.11.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 20 Jul 2013 12:23:00 -0000
+
+ros-rolling-image-transport (1.10.5-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 26 Jan 2014 02:34:00 -0000
+
+ros-rolling-image-transport (1.10.4-2noble) noble; urgency=high
+
+  * add Jack as maintainer
+  * update my email address
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 20 Jul 2013 11:42:00 -0000
+
+ros-rolling-image-transport (1.10.3-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 21 Feb 2013 05:33:00 -0000
+
+ros-rolling-image-transport (1.10.2-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 21 Feb 2013 04:48:00 -0000
+
+ros-rolling-image-transport (1.10.1-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 21 Feb 2013 04:16:00 -0000
+
+ros-rolling-image-transport (1.10.0-2noble) noble; urgency=high
+
+  * fix the urls
+  * use the pluginlib script to remove some warnings
+  * added license headers to various cpp and h files
+  * Contributors: Aaron Blasdel, Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 13 Jan 2013 00:00:00 -0000
+
+ros-rolling-image-transport (1.9.22-2noble) noble; urgency=high
+
+  * get rid of the deprecated class_loader interface
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 16 Dec 2012 00:00:00 -0000
+
+ros-rolling-image-transport (1.9.21-2noble) noble; urgency=high
+
+  * CMakeLists.txt clean up
+  * Updated package.xml file(s) to handle new catkin buildtool_depend
+    requirement
+  * Contributors: William Woodall, mirzashah
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 14 Dec 2012 00:00:00 -0000
+
+ros-rolling-image-transport (1.9.20-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 04 Dec 2012 00:00:00 -0000
+
+ros-rolling-image-transport (1.9.19-2noble) noble; urgency=high
+
+  * add the right link libraries
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 08 Nov 2012 00:00:00 -0000
+
+ros-rolling-image-transport (1.9.18-2noble) noble; urgency=high
+
+  * Isolated plugins into their own library to follow new
+    class_loader/pluginlib guidelines.
+  * remove the brief attribute
+  * Contributors: Mirza Shah, Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 06 Nov 2012 00:00:00 -0000
+
+ros-rolling-image-transport (1.9.17-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 30 Oct 2012 19:32:00 -0000
+
+ros-rolling-image-transport (1.9.16-2noble) noble; urgency=high
+
+  * add xml file
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 30 Oct 2012 09:10:00 -0000
+
+ros-rolling-image-transport (1.9.15-2noble) noble; urgency=high
+
+  * fix bad folder/libraries
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 13 Oct 2012 08:43:00 -0000
+
+ros-rolling-image-transport (1.9.14-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 13 Oct 2012 01:07:00 -0000
+
+ros-rolling-image-transport (1.9.13-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 06 Oct 2012 00:00:00 -0000
+
+ros-rolling-image-transport (1.9.12-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 04 Oct 2012 00:00:00 -0000
+
+ros-rolling-image-transport (1.9.11-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 02 Oct 2012 02:56:00 -0000
+
+ros-rolling-image-transport (1.9.10-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 02 Oct 2012 02:42:00 -0000
+
+ros-rolling-image-transport (1.9.9-2noble) noble; urgency=high
+
+  * fix dependencies
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 01 Oct 2012 00:00:00 -0000
+
+ros-rolling-image-transport (1.9.8-2noble) noble; urgency=high
+
+  * add catkin as a dependency
+  * comply to the catkin API
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 30 Sep 2012 00:00:00 -0000
+
+ros-rolling-image-transport (1.9.7-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 18 Sep 2012 11:39:00 -0000
+
+ros-rolling-image-transport (1.9.6-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 18 Sep 2012 11:07:00 -0000
+
+ros-rolling-image-transport (1.9.5-2noble) noble; urgency=high
+
+  * install the include directories
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 13 Sep 2012 00:00:00 -0000
+
+ros-rolling-image-transport (1.9.4-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 12 Sep 2012 23:37:00 -0000
+
+ros-rolling-image-transport (1.9.3-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 12 Sep 2012 20:44:00 -0000
+
+ros-rolling-image-transport (1.9.2-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 10 Sep 2012 00:00:00 -0000
+
+ros-rolling-image-transport (1.9.1-2noble) noble; urgency=high
+
+  * make the libraries public
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 07 Sep 2012 15:33:00 -0000
+
+ros-rolling-image-transport (1.9.0-2noble) noble; urgency=high
+
+  * catkinize for Groovy
+  * Initial image_common stack check-in, containing image_transport.
+  * Contributors: Vincent Rabaud, gerkey, kwc, mihelich, pmihelich, straszheim, vrabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 07 Sep 2012 13:03:00 -0000
+
+
