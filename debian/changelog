@@ -1,0 +1,380 @@
+ros-rolling-image-common (5.1.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 24 Jan 2024 00:00:00 -0000
+
+ros-rolling-image-common (5.0.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 06 Nov 2023 00:00:00 -0000
+
+ros-rolling-image-common (4.5.1-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 07 Sep 2023 00:00:00 -0000
+
+ros-rolling-image-common (4.5.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 21 Aug 2023 00:00:00 -0000
+
+ros-rolling-image-common (4.3.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 28 Apr 2023 00:00:00 -0000
+
+ros-rolling-image-common (4.2.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 14 Feb 2023 00:00:00 -0000
+
+ros-rolling-image-common (4.1.1-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 16 Nov 2022 00:00:00 -0000
+
+ros-rolling-image-common (4.1.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 02 Nov 2022 00:00:00 -0000
+
+ros-rolling-image-common (4.0.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 11 Aug 2022 00:00:00 -0000
+
+ros-rolling-image-common (3.2.1-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 12 Jul 2022 00:00:00 -0000
+
+ros-rolling-image-common (3.2.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 10 May 2022 00:00:00 -0000
+
+ros-rolling-image-common (3.1.4-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 25 Mar 2022 00:00:00 -0000
+
+ros-rolling-image-common (3.1.3-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 01 Mar 2022 00:00:00 -0000
+
+ros-rolling-image-common (3.1.2-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 14 Jan 2022 00:00:00 -0000
+
+ros-rolling-image-common (3.1.1-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 14 Jan 2022 00:00:00 -0000
+
+ros-rolling-image-common (3.1.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 29 Jun 2021 00:00:00 -0000
+
+ros-rolling-image-common (3.0.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 26 May 2021 00:00:00 -0000
+
+ros-rolling-image-common (2.3.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 27 May 2020 00:00:00 -0000
+
+ros-rolling-image-common (2.2.1-2noble) noble; urgency=high
+
+  * [ros2] image_common metapackage (#129 <https://github.com/ros-perception/image_common/issues/129>)
+  * Contributors: chapulina
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 23 Oct 2019 00:00:00 -0000
+
+ros-rolling-image-common (1.11.13-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 05 Nov 2017 00:00:00 -0000
+
+ros-rolling-image-common (1.11.12-2noble) noble; urgency=high
+
+  * 1.11.11
+  * update changelogs
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 29 Jan 2017 00:00:00 -0000
+
+ros-rolling-image-common (1.11.11-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 24 Sep 2016 00:00:00 -0000
+
+ros-rolling-image-common (1.11.10-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 19 Jan 2016 00:00:00 -0000
+
+ros-rolling-image-common (1.11.9-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 17 Jan 2016 00:00:00 -0000
+
+ros-rolling-image-common (1.11.8-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 29 Nov 2015 00:00:00 -0000
+
+ros-rolling-image-common (1.11.7-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 28 Jul 2015 00:00:00 -0000
+
+ros-rolling-image-common (1.11.6-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 16 Jul 2015 00:00:00 -0000
+
+ros-rolling-image-common (1.11.5-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 14 May 2015 00:00:00 -0000
+
+ros-rolling-image-common (1.11.4-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 21 Sep 2014 00:00:00 -0000
+
+ros-rolling-image-common (1.11.3-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 19 May 2014 00:00:00 -0000
+
+ros-rolling-image-common (1.11.2-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 13 Feb 2014 00:00:00 -0000
+
+ros-rolling-image-common (1.11.1-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 26 Jan 2014 02:33:00 -0000
+
+ros-rolling-image-common (1.11.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 20 Jul 2013 12:23:00 -0000
+
+ros-rolling-image-common (1.10.5-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 26 Jan 2014 02:34:00 -0000
+
+ros-rolling-image-common (1.10.4-2noble) noble; urgency=high
+
+  * add Jack as maintainer
+  * comply to REP 0127
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 20 Jul 2013 11:42:00 -0000
+
+ros-rolling-image-common (1.10.3-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 21 Feb 2013 05:33:00 -0000
+
+ros-rolling-image-common (1.10.2-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 21 Feb 2013 04:48:00 -0000
+
+ros-rolling-image-common (1.10.1-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 21 Feb 2013 04:16:00 -0000
+
+ros-rolling-image-common (1.10.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 13 Jan 2013 00:00:00 -0000
+
+ros-rolling-image-common (1.9.22-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 16 Dec 2012 00:00:00 -0000
+
+ros-rolling-image-common (1.9.21-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 14 Dec 2012 00:00:00 -0000
+
+ros-rolling-image-common (1.9.20-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 04 Dec 2012 00:00:00 -0000
+
+ros-rolling-image-common (1.9.19-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 08 Nov 2012 00:00:00 -0000
+
+ros-rolling-image-common (1.9.18-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 06 Nov 2012 00:00:00 -0000
+
+ros-rolling-image-common (1.9.17-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 30 Oct 2012 19:32:00 -0000
+
+ros-rolling-image-common (1.9.16-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 30 Oct 2012 09:10:00 -0000
+
+ros-rolling-image-common (1.9.15-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 13 Oct 2012 08:43:00 -0000
+
+ros-rolling-image-common (1.9.14-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 13 Oct 2012 01:07:00 -0000
+
+ros-rolling-image-common (1.9.13-2noble) noble; urgency=high
+
+  * add missing description
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 06 Oct 2012 00:00:00 -0000
+
+ros-rolling-image-common (1.9.12-2noble) noble; urgency=high
+
+  * define metapackage
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 04 Oct 2012 00:00:00 -0000
+
+ros-rolling-image-common (1.9.11-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 02 Oct 2012 02:56:00 -0000
+
+ros-rolling-image-common (1.9.10-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 02 Oct 2012 02:42:00 -0000
+
+ros-rolling-image-common (1.9.9-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 01 Oct 2012 00:00:00 -0000
+
+ros-rolling-image-common (1.9.8-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 30 Sep 2012 00:00:00 -0000
+
+ros-rolling-image-common (1.9.7-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 18 Sep 2012 11:39:00 -0000
+
+ros-rolling-image-common (1.9.6-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 18 Sep 2012 11:07:00 -0000
+
+ros-rolling-image-common (1.9.5-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 13 Sep 2012 00:00:00 -0000
+
+ros-rolling-image-common (1.9.4-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 12 Sep 2012 23:37:00 -0000
+
+ros-rolling-image-common (1.9.3-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 12 Sep 2012 20:44:00 -0000
+
+ros-rolling-image-common (1.9.2-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 10 Sep 2012 00:00:00 -0000
+
+ros-rolling-image-common (1.9.1-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 07 Sep 2012 15:33:00 -0000
+
+ros-rolling-image-common (1.9.0-2noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 07 Sep 2012 13:03:00 -0000
+
+
