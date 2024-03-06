@@ -200,4 +200,5 @@ tracks:
     ros_distro: rolling
     vcs_type: git
     vcs_uri: https://github.com/ros-perception/image_common
-    version: :{auto}
+    version: 5.1.0
+    version_saved: :{auto}
