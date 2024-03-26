@@ -59,10 +59,9 @@ static Impl * kImpl = new Impl();
 Publisher create_publisher(
   rclcpp::Node * node,
   const std::string & base_topic,
-  rmw_qos_profile_t custom_qos,
-  rclcpp::PublisherOptions options)
+  rmw_qos_profile_t custom_qos)
 {
-  return Publisher(node, base_topic, kImpl->pub_loader_, custom_qos, options);
+  return Publisher(node, base_topic, kImpl->pub_loader_, custom_qos);
 }
 
 Subscriber create_subscription(
