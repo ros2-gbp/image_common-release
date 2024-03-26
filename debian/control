@@ -1,0 +1,12 @@
+Source: ros-iron-image-common
+Section: misc
+Priority: optional
+Maintainer: Alejandro Hernandez Cordero <alejandro@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-iron-ament-cmake, ros-iron-ament-lint-auto <!nocheck>, ros-iron-ament-lint-common <!nocheck>, ros-iron-ros-workspace
+Homepage: http://www.ros.org/wiki/image_common
+Standards-Version: 3.9.2
+
+Package: ros-iron-image-common
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-iron-camera-calibration-parsers, ros-iron-camera-info-manager, ros-iron-image-transport, ros-iron-ros-workspace
+Description: Common code for working with images in ROS.

@@ -1,0 +1,374 @@
+ros-iron-image-common (4.2.4-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 25 Mar 2024 23:00:00 -0000
+
+ros-iron-image-common (4.2.3-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 06 Feb 2024 23:00:00 -0000
+
+ros-iron-image-common (4.2.2-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 13 Aug 2023 22:00:00 -0000
+
+ros-iron-image-common (4.2.1-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 26 Jul 2023 22:00:00 -0000
+
+ros-iron-image-common (4.2.0-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 13 Feb 2023 23:00:00 -0000
+
+ros-iron-image-common (4.1.1-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 15 Nov 2022 23:00:00 -0000
+
+ros-iron-image-common (4.1.0-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 01 Nov 2022 23:00:00 -0000
+
+ros-iron-image-common (4.0.0-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 10 Aug 2022 22:00:00 -0000
+
+ros-iron-image-common (3.2.1-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 11 Jul 2022 22:00:00 -0000
+
+ros-iron-image-common (3.2.0-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 09 May 2022 22:00:00 -0000
+
+ros-iron-image-common (3.1.4-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 24 Mar 2022 23:00:00 -0000
+
+ros-iron-image-common (3.1.3-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 28 Feb 2022 23:00:00 -0000
+
+ros-iron-image-common (3.1.2-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 13 Jan 2022 23:00:00 -0000
+
+ros-iron-image-common (3.1.1-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 13 Jan 2022 23:00:00 -0000
+
+ros-iron-image-common (3.1.0-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 28 Jun 2021 22:00:00 -0000
+
+ros-iron-image-common (3.0.0-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 25 May 2021 22:00:00 -0000
+
+ros-iron-image-common (2.3.0-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 26 May 2020 22:00:00 -0000
+
+ros-iron-image-common (2.2.1-1jammy) jammy; urgency=high
+
+  * [ros2] image_common metapackage (#129 <https://github.com/ros-perception/image_common/issues/129>)
+  * Contributors: chapulina
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 22 Oct 2019 22:00:00 -0000
+
+ros-iron-image-common (1.11.13-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 04 Nov 2017 23:00:00 -0000
+
+ros-iron-image-common (1.11.12-1jammy) jammy; urgency=high
+
+  * 1.11.11
+  * update changelogs
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 28 Jan 2017 23:00:00 -0000
+
+ros-iron-image-common (1.11.11-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 23 Sep 2016 22:00:00 -0000
+
+ros-iron-image-common (1.11.10-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 18 Jan 2016 23:00:00 -0000
+
+ros-iron-image-common (1.11.9-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 16 Jan 2016 23:00:00 -0000
+
+ros-iron-image-common (1.11.8-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 28 Nov 2015 23:00:00 -0000
+
+ros-iron-image-common (1.11.7-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 27 Jul 2015 22:00:00 -0000
+
+ros-iron-image-common (1.11.6-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 15 Jul 2015 22:00:00 -0000
+
+ros-iron-image-common (1.11.5-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 13 May 2015 22:00:00 -0000
+
+ros-iron-image-common (1.11.4-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 20 Sep 2014 22:00:00 -0000
+
+ros-iron-image-common (1.11.3-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 18 May 2014 22:00:00 -0000
+
+ros-iron-image-common (1.11.2-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 12 Feb 2014 23:00:00 -0000
+
+ros-iron-image-common (1.11.1-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 26 Jan 2014 01:33:00 -0000
+
+ros-iron-image-common (1.11.0-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 20 Jul 2013 10:23:00 -0000
+
+ros-iron-image-common (1.10.5-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 26 Jan 2014 01:34:00 -0000
+
+ros-iron-image-common (1.10.4-1jammy) jammy; urgency=high
+
+  * add Jack as maintainer
+  * comply to REP 0127
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 20 Jul 2013 09:42:00 -0000
+
+ros-iron-image-common (1.10.3-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 21 Feb 2013 04:33:00 -0000
+
+ros-iron-image-common (1.10.2-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 21 Feb 2013 03:48:00 -0000
+
+ros-iron-image-common (1.10.1-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 21 Feb 2013 03:16:00 -0000
+
+ros-iron-image-common (1.10.0-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 12 Jan 2013 23:00:00 -0000
+
+ros-iron-image-common (1.9.22-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 15 Dec 2012 23:00:00 -0000
+
+ros-iron-image-common (1.9.21-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Thu, 13 Dec 2012 23:00:00 -0000
+
+ros-iron-image-common (1.9.20-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 03 Dec 2012 23:00:00 -0000
+
+ros-iron-image-common (1.9.19-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 07 Nov 2012 23:00:00 -0000
+
+ros-iron-image-common (1.9.18-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Mon, 05 Nov 2012 23:00:00 -0000
+
+ros-iron-image-common (1.9.17-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 30 Oct 2012 18:32:00 -0000
+
+ros-iron-image-common (1.9.16-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 30 Oct 2012 08:10:00 -0000
+
+ros-iron-image-common (1.9.15-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 13 Oct 2012 06:43:00 -0000
+
+ros-iron-image-common (1.9.14-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 12 Oct 2012 23:07:00 -0000
+
+ros-iron-image-common (1.9.13-1jammy) jammy; urgency=high
+
+  * add missing description
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 05 Oct 2012 22:00:00 -0000
+
+ros-iron-image-common (1.9.12-1jammy) jammy; urgency=high
+
+  * define metapackage
+  * Contributors: Vincent Rabaud
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 03 Oct 2012 22:00:00 -0000
+
+ros-iron-image-common (1.9.11-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 02 Oct 2012 00:56:00 -0000
+
+ros-iron-image-common (1.9.10-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 02 Oct 2012 00:42:00 -0000
+
+ros-iron-image-common (1.9.9-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 30 Sep 2012 22:00:00 -0000
+
+ros-iron-image-common (1.9.8-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sat, 29 Sep 2012 22:00:00 -0000
+
+ros-iron-image-common (1.9.7-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 18 Sep 2012 09:39:00 -0000
+
+ros-iron-image-common (1.9.6-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Tue, 18 Sep 2012 09:07:00 -0000
+
+ros-iron-image-common (1.9.5-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 12 Sep 2012 22:00:00 -0000
+
+ros-iron-image-common (1.9.4-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 12 Sep 2012 21:37:00 -0000
+
+ros-iron-image-common (1.9.3-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Wed, 12 Sep 2012 18:44:00 -0000
+
+ros-iron-image-common (1.9.2-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Sun, 09 Sep 2012 22:00:00 -0000
+
+ros-iron-image-common (1.9.1-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 07 Sep 2012 13:33:00 -0000
+
+ros-iron-image-common (1.9.0-1jammy) jammy; urgency=high
+
+
+
+ -- Alejandro Hernandez Cordero <alejandro@openrobotics.org>  Fri, 07 Sep 2012 11:03:00 -0000
+
+
