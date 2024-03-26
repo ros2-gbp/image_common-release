@@ -2,26 +2,16 @@
 Changelog for package camera_info_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-5.1.1 (2024-03-26)
-------------------
-* Switch from rcpputils::fs to std::filesystem (`#300 <https://github.com/ros-perception/image_common/issues/300>`_)
-* Contributors: Christophe Bedard
-
-5.1.0 (2024-01-24)
+4.2.4 (2024-03-26)
 ------------------
 
-5.0.0 (2023-11-06)
-------------------
-* Removed C headers: camera_info_manager camera_calibration_parsers (`#290 <https://github.com/ros-perception/image_common/issues/290>`_)
-* Contributors: Alejandro Hernández Cordero
-
-4.5.1 (2023-09-07)
+4.2.3 (2024-02-07)
 ------------------
 
-4.5.0 (2023-08-21)
+4.2.2 (2023-08-14)
 ------------------
 
-4.3.0 (2023-04-28)
+4.2.1 (2023-07-27)
 ------------------
 
 4.2.0 (2023-02-14)

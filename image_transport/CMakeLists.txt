@@ -17,7 +17,6 @@ find_package(ament_cmake_ros REQUIRED)
 find_package(message_filters REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(rclcpp_components REQUIRED)
 find_package(sensor_msgs REQUIRED)
 
 # Build image_transport library
@@ -59,24 +58,11 @@ target_link_libraries(list_transports
   ${PROJECT_NAME}
   pluginlib::pluginlib)
 
-# # Build republish
-add_library(republish_node SHARED
-  src/republish.cpp
-)
-target_link_libraries(republish_node
+# Build republish
+add_executable(republish src/republish.cpp)
+target_link_libraries(republish
   ${PROJECT_NAME}
-)
-ament_target_dependencies(republish_node
-  pluginlib
-  rclcpp_components
-  rclcpp
-)
-rclcpp_components_register_node(republish_node
-  PLUGIN "image_transport::Republisher"
-  EXECUTABLE republish
-)
-
-target_compile_definitions(republish_node PRIVATE "IMAGE_TRANSPORT_BUILDING_DLL")
+  pluginlib::pluginlib)
 
 # Install plugin descriptions
 pluginlib_export_plugin_description_file(image_transport default_plugins.xml)
@@ -92,15 +78,9 @@ install(TARGETS ${PROJECT_NAME} EXPORT export_${PROJECT_NAME})
 
 # Install executables
 install(
-  TARGETS list_transports
+  TARGETS list_transports republish
   RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
-
-install(TARGETS
-  republish_node
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin)
 
 # Install include directories
 install(DIRECTORY include/ DESTINATION include/${PROJECT_NAME})
