@@ -1,0 +1,13 @@
+Source: ros-rolling-camera-info-manager
+Section: misc
+Priority: optional
+Maintainer: Alejandro Hernandez Cordero <alejandro@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-rolling-ament-cmake-gtest <!nocheck>, ros-rolling-ament-cmake-ros, ros-rolling-ament-index-cpp, ros-rolling-ament-lint-auto <!nocheck>, ros-rolling-ament-lint-common <!nocheck>, ros-rolling-camera-calibration-parsers, ros-rolling-rclcpp, ros-rolling-rclcpp-lifecycle, ros-rolling-rcpputils, ros-rolling-sensor-msgs, ros-rolling-ros-workspace
+Homepage: http://ros.org/wiki/camera_info_manager
+Standards-Version: 3.9.2
+
+Package: ros-rolling-camera-info-manager
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-rolling-ament-index-cpp, ros-rolling-camera-calibration-parsers, ros-rolling-rclcpp, ros-rolling-rclcpp-lifecycle, ros-rolling-rcpputils, ros-rolling-sensor-msgs, ros-rolling-ros-workspace
+Description: This package provides a C++ interface for camera calibration information.
+ It provides CameraInfo, and handles SetCameraInfo service requests, saving and restoring the camera calibration data.
