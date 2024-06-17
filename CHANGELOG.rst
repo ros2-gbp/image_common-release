@@ -2,6 +2,11 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+5.3.0 (2024-06-17)
+------------------
+* Preparing for qos deprecation (`#315 <https://github.com/ros-perception/image_common/issues/315>`_)
+* Contributors: Lucas Wendland
+
 5.2.1 (2024-05-24)
 ------------------
 * Removed warning (`#312 <https://github.com/ros-perception/image_common/issues/312>`_)
