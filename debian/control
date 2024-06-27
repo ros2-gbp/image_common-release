@@ -1,0 +1,13 @@
+Source: ros-jazzy-image-transport
+Section: misc
+Priority: optional
+Maintainer: Alejandro Hernandez Cordero <alejandro@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ament-cmake-copyright <!nocheck>, ament-cmake-cppcheck <!nocheck>, ament-cmake-cpplint <!nocheck>, ament-cmake-flake8 <!nocheck>, ament-cmake-googletest <!nocheck>, ament-cmake-lint-cmake <!nocheck>, ament-cmake-pep257 <!nocheck>, ament-cmake-ros, ament-cmake-uncrustify <!nocheck>, ament-cmake-xmllint <!nocheck>, ament-lint <!nocheck>, libmessage-filters-dev, libsensor-msgs-dev, pluginlib-dev, python3-message-filters, python3-sensor-msgs, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-sensor-msgs, ros-jazzy-ros-workspace
+Homepage: http://ros.org/wiki/image_transport
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-image-transport
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libmessage-filters-dev, libsensor-msgs-dev, pluginlib-dev, python3-message-filters, python3-sensor-msgs, ros-jazzy-rclcpp, ros-jazzy-rclcpp-components, ros-sensor-msgs, ros-jazzy-ros-workspace
+Description: image_transport should always be used to subscribe to and publish images.
+ It provides transparent support for transporting images in low-bandwidth compressed formats. Examples (provided by separate plugin packages) include JPEG/PNG compression and Theora streaming video.
