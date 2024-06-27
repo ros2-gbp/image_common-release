@@ -2,21 +2,22 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-5.3.0 (2024-06-17)
+5.1.4 (2024-06-27)
 ------------------
-* Preparing for qos deprecation (`#315 <https://github.com/ros-perception/image_common/issues/315>`_)
-* Contributors: Lucas Wendland
+* Removed warning (`#312 <https://github.com/ros-perception/image_common/issues/312>`_) (`#313 <https://github.com/ros-perception/image_common/issues/313>`_)
+  Co-authored-by: Alejandro Hernández Cordero <ahcorde@gmail.com>
+* Contributors: mergify[bot]
 
-5.2.1 (2024-05-24)
+5.1.3 (2024-05-24)
 ------------------
-* Removed warning (`#312 <https://github.com/ros-perception/image_common/issues/312>`_)
-* Support zero-copy intra-process publishing (`#306 <https://github.com/ros-perception/image_common/issues/306>`_)
-* Add missing sub and pub options (`#308 <https://github.com/ros-perception/image_common/issues/308>`_)
+* Add missing sub and pub options (`#308 <https://github.com/ros-perception/image_common/issues/308>`_) (`#309 <https://github.com/ros-perception/image_common/issues/309>`_)
   Co-authored-by: Angsa Deployment Team <team@angsa-robotics.com>
-* Contributors: Alejandro Hernández Cordero, Błażej Sowa, Tony Najjar
-
-5.2.0 (2024-04-26)
-------------------
+  (cherry picked from commit 74d9e8edb02eaf13771ee4d12a558d68279cbf44)
+  Co-authored-by: Tony Najjar <tony.najjar.1997@gmail.com>
+* Support zero-copy intra-process publishing (`#306 <https://github.com/ros-perception/image_common/issues/306>`_) (`#310 <https://github.com/ros-perception/image_common/issues/310>`_)
+  (cherry picked from commit fd51363e2b8f8cd99e9a77970c1d49eb86c1480f)
+  Co-authored-by: Błażej Sowa <bsowa123@gmail.com>
+* Contributors: mergify[bot]
 
 5.1.2 (2024-04-16)
 ------------------
