@@ -1,0 +1,22 @@
+ros-rolling-image-transport-py (6.0.3-1noble) noble; urgency=high
+
+
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Sun, 24 Nov 2024 23:00:00 -0000
+
+ros-rolling-image-transport-py (6.0.2-1noble) noble; urgency=high
+
+  * Add in python3-dev build dependency (#334 <https://github.com/ros-perception/image_common/issues/334>)
+  * Contributors: Chris Lalancette
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Sun, 24 Nov 2024 23:00:00 -0000
+
+ros-rolling-image-transport-py (6.0.1-1noble) noble; urgency=high
+
+  * feat: python bindings for image_transport and publish (#323 <https://github.com/ros-perception/image_common/issues/323>)
+    Co-authored-by: Alejandro Hernández Cordero <mailto:ahcorde@gmail.com>
+  * Contributors: Földi Tamás
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Wed, 09 Oct 2024 22:00:00 -0000
+
+
