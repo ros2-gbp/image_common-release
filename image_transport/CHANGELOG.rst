@@ -2,49 +2,32 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-6.0.3 (2024-11-25)
+5.1.5 (2024-11-26)
 ------------------
+* Add lazy subscription to republisher (backport `#325 <https://github.com/ros-perception/image_common/issues/325>`_) (`#327 <https://github.com/ros-perception/image_common/issues/327>`_)
+  Co-authored-by: Błażej Sowa <bsowa123@gmail.com>
+* Fix node name (`#321 <https://github.com/ros-perception/image_common/issues/321>`_) (`#322 <https://github.com/ros-perception/image_common/issues/322>`_)
+  Node name appears in logs and confuses readers.
+  (cherry picked from commit ea6a9e47c259cc875b7a4545e07359b63bd27f60)
+  Co-authored-by: Michal Sojka <michal.sojka@cvut.cz>
+* Contributors: mergify[bot]
 
-6.0.2 (2024-11-25)
+5.1.4 (2024-06-27)
 ------------------
-
-6.0.1 (2024-10-10)
-------------------
-* feat: python bindings for image_transport and publish (`#323 <https://github.com/ros-perception/image_common/issues/323>`_)
+* Removed warning (`#312 <https://github.com/ros-perception/image_common/issues/312>`_) (`#313 <https://github.com/ros-perception/image_common/issues/313>`_)
   Co-authored-by: Alejandro Hernández Cordero <ahcorde@gmail.com>
-* Contributors: Földi Tamás
+* Contributors: mergify[bot]
 
-6.0.0 (2024-10-03)
+5.1.3 (2024-05-24)
 ------------------
-* Apply remappings to base topic before creating transport-specific topics (`#326 <https://github.com/ros-perception/image_common/issues/326>`_)
-* Add lazy subscription to republisher (`#325 <https://github.com/ros-perception/image_common/issues/325>`_)
-* Fix node name (`#321 <https://github.com/ros-perception/image_common/issues/321>`_)
-* Contributors: Błażej Sowa, Michal Sojka
-
-5.3.2 (2024-07-29)
-------------------
-
-5.3.1 (2024-07-19)
-------------------
-* Updated deprecated message filter headers (`#320 <https://github.com/ros-perception/image_common/issues/320>`_)
-* Removed outdated comment (`#319 <https://github.com/ros-perception/image_common/issues/319>`_)
-* Contributors: Alejandro Hernández Cordero
-
-5.3.0 (2024-06-17)
-------------------
-* Preparing for qos deprecation (`#315 <https://github.com/ros-perception/image_common/issues/315>`_)
-* Contributors: Lucas Wendland
-
-5.2.1 (2024-05-24)
-------------------
-* Removed warning (`#312 <https://github.com/ros-perception/image_common/issues/312>`_)
-* Support zero-copy intra-process publishing (`#306 <https://github.com/ros-perception/image_common/issues/306>`_)
-* Add missing sub and pub options (`#308 <https://github.com/ros-perception/image_common/issues/308>`_)
+* Add missing sub and pub options (`#308 <https://github.com/ros-perception/image_common/issues/308>`_) (`#309 <https://github.com/ros-perception/image_common/issues/309>`_)
   Co-authored-by: Angsa Deployment Team <team@angsa-robotics.com>
-* Contributors: Alejandro Hernández Cordero, Błażej Sowa, Tony Najjar
-
-5.2.0 (2024-04-26)
-------------------
+  (cherry picked from commit 74d9e8edb02eaf13771ee4d12a558d68279cbf44)
+  Co-authored-by: Tony Najjar <tony.najjar.1997@gmail.com>
+* Support zero-copy intra-process publishing (`#306 <https://github.com/ros-perception/image_common/issues/306>`_) (`#310 <https://github.com/ros-perception/image_common/issues/310>`_)
+  (cherry picked from commit fd51363e2b8f8cd99e9a77970c1d49eb86c1480f)
+  Co-authored-by: Błażej Sowa <bsowa123@gmail.com>
+* Contributors: mergify[bot]
 
 5.1.2 (2024-04-16)
 ------------------
