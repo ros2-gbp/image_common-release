@@ -2,6 +2,16 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+5.1.5 (2024-11-26)
+------------------
+* Add lazy subscription to republisher (backport `#325 <https://github.com/ros-perception/image_common/issues/325>`_) (`#327 <https://github.com/ros-perception/image_common/issues/327>`_)
+  Co-authored-by: Błażej Sowa <bsowa123@gmail.com>
+* Fix node name (`#321 <https://github.com/ros-perception/image_common/issues/321>`_) (`#322 <https://github.com/ros-perception/image_common/issues/322>`_)
+  Node name appears in logs and confuses readers.
+  (cherry picked from commit ea6a9e47c259cc875b7a4545e07359b63bd27f60)
+  Co-authored-by: Michal Sojka <michal.sojka@cvut.cz>
+* Contributors: mergify[bot]
+
 5.1.4 (2024-06-27)
 ------------------
 * Removed warning (`#312 <https://github.com/ros-perception/image_common/issues/312>`_) (`#313 <https://github.com/ros-perception/image_common/issues/313>`_)
