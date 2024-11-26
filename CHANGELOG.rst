@@ -2,6 +2,9 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.1.10 (2024-11-26)
+-------------------
+
 3.1.9 (2024-03-26)
 ------------------
 * backport whitelist feature to humble (`#302 <https://github.com/ros-perception/image_common/issues/302>`_)
