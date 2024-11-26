@@ -2,10 +2,10 @@
 Changelog for package camera_info_manager_py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-5.1.5 (2024-11-26)
-------------------
-* Add `camera_info_manager_py` (`#335 <https://github.com/ros-perception/image_common/issues/335>`_) (`#336 <https://github.com/ros-perception/image_common/issues/336>`_)
-  (cherry picked from commit d09c82cfb5558d253de99317a4d7d5fb61867b03)
+3.1.10 (2024-11-26)
+-------------------
+* Add `camera_info_manager_py` (backport `#335 <https://github.com/ros-perception/image_common/issues/335>`_) (`#337 <https://github.com/ros-perception/image_common/issues/337>`_)
+  * Add `camera_info_manager_py` (`#335 <https://github.com/ros-perception/image_common/issues/335>`_)
   Co-authored-by: Alejandro Hernández Cordero <ahcorde@gmail.com>
 * Contributors: mergify[bot]
 

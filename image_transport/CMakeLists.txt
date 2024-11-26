@@ -2,10 +2,9 @@ cmake_minimum_required(VERSION 3.5)
 
 project(image_transport)
 
-# Default to C++17
+# Default to C++14
 if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 17)
-  set(CMAKE_CXX_STANDARD_REQUIRED ON)
+  set(CMAKE_CXX_STANDARD 14)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -17,7 +16,6 @@ find_package(ament_cmake_ros REQUIRED)
 find_package(message_filters REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(rclcpp_components REQUIRED)
 find_package(sensor_msgs REQUIRED)
 
 # Build image_transport library
@@ -59,24 +57,11 @@ target_link_libraries(list_transports
   ${PROJECT_NAME}
   pluginlib::pluginlib)
 
-# # Build republish
-add_library(republish_node SHARED
-  src/republish.cpp
-)
-target_link_libraries(republish_node
+# Build republish
+add_executable(republish src/republish.cpp)
+target_link_libraries(republish
   ${PROJECT_NAME}
-)
-ament_target_dependencies(republish_node
-  pluginlib
-  rclcpp_components
-  rclcpp
-)
-rclcpp_components_register_node(republish_node
-  PLUGIN "image_transport::Republisher"
-  EXECUTABLE republish
-)
-
-target_compile_definitions(republish_node PRIVATE "IMAGE_TRANSPORT_BUILDING_DLL")
+  pluginlib::pluginlib)
 
 # Install plugin descriptions
 pluginlib_export_plugin_description_file(image_transport default_plugins.xml)
@@ -92,15 +77,9 @@ install(TARGETS ${PROJECT_NAME} EXPORT export_${PROJECT_NAME})
 
 # Install executables
 install(
-  TARGETS list_transports
+  TARGETS list_transports republish
   RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
-
-install(TARGETS
-  republish_node
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION bin)
 
 # Install include directories
 install(DIRECTORY include/ DESTINATION include/${PROJECT_NAME})
@@ -144,11 +123,6 @@ if(BUILD_TESTING)
   ament_add_gtest(${PROJECT_NAME}-remapping test/test_remapping.cpp)
   if(TARGET ${PROJECT_NAME}-remapping)
     target_link_libraries(${PROJECT_NAME}-remapping ${PROJECT_NAME})
-  endif()
-
-  ament_add_gtest(${PROJECT_NAME}-qos_override test/test_qos_override.cpp)
-  if(TARGET ${PROJECT_NAME}-qos_override)
-    target_link_libraries(${PROJECT_NAME}-qos_override ${PROJECT_NAME})
   endif()
 
   ament_add_gtest(${PROJECT_NAME}-single_subscriber_publisher test/test_single_subscriber_publisher.cpp)

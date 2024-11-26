@@ -46,7 +46,7 @@ protected:
   rclcpp::Node::SharedPtr node_;
 };
 
-TEST_F(TestPublisher, publisher) {
+TEST_F(TestPublisher, Publisher) {
   auto pub = image_transport::create_publisher(node_.get(), "camera/image");
   EXPECT_EQ(node_->get_node_graph_interface()->count_publishers("camera/image"), 1u);
   pub.shutdown();
@@ -56,12 +56,12 @@ TEST_F(TestPublisher, publisher) {
   pub.publish(sensor_msgs::msg::Image::ConstSharedPtr());
 }
 
-TEST_F(TestPublisher, image_transport_publisher) {
+TEST_F(TestPublisher, ImageTransportPublisher) {
   image_transport::ImageTransport it(node_);
   auto pub = it.advertise("camera/image", 1);
 }
 
-TEST_F(TestPublisher, camera_publisher) {
+TEST_F(TestPublisher, CameraPublisher) {
   auto camera_pub = image_transport::create_camera_publisher(node_.get(), "camera/image");
   EXPECT_EQ(node_->get_node_graph_interface()->count_publishers("camera/image"), 1u);
   EXPECT_EQ(node_->get_node_graph_interface()->count_publishers("camera/camera_info"), 1u);
@@ -78,14 +78,9 @@ TEST_F(TestPublisher, camera_publisher) {
   camera_pub.publish(image, info, rclcpp::Time());
 }
 
-TEST_F(TestPublisher, image_transport_camera_publisher) {
+TEST_F(TestPublisher, ImageTransportCameraPublisher) {
   image_transport::ImageTransport it(node_);
   auto pub = it.advertiseCamera("camera/image", 1);
-}
-
-TEST_F(TestPublisher, image_transport_camera_publisher_qos) {
-  image_transport::ImageTransport it(node_);
-  auto pub = it.advertise("camera/image", rmw_qos_profile_sensor_data);
 }
 
 int main(int argc, char ** argv)

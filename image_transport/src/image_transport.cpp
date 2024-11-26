@@ -59,10 +59,9 @@ static Impl * kImpl = new Impl();
 Publisher create_publisher(
   rclcpp::Node * node,
   const std::string & base_topic,
-  rmw_qos_profile_t custom_qos,
-  rclcpp::PublisherOptions options)
+  rmw_qos_profile_t custom_qos)
 {
-  return Publisher(node, base_topic, kImpl->pub_loader_, custom_qos, options);
+  return Publisher(node, base_topic, kImpl->pub_loader_, custom_qos);
 }
 
 Subscriber create_subscription(
@@ -79,10 +78,9 @@ Subscriber create_subscription(
 CameraPublisher create_camera_publisher(
   rclcpp::Node * node,
   const std::string & base_topic,
-  rmw_qos_profile_t custom_qos,
-  rclcpp::PublisherOptions pub_options)
+  rmw_qos_profile_t custom_qos)
 {
-  return CameraPublisher(node, base_topic, custom_qos, pub_options);
+  return CameraPublisher(node, base_topic, custom_qos);
 }
 
 CameraSubscriber create_camera_subscription(
@@ -150,27 +148,18 @@ Publisher ImageTransport::advertise(const std::string & base_topic, uint32_t que
   return create_publisher(impl_->node_.get(), base_topic, custom_qos);
 }
 
-Publisher ImageTransport::advertise(
-  const std::string & base_topic, rmw_qos_profile_t custom_qos,
-  bool latch)
-{
-  // TODO(ros2) implement when resolved: https://github.com/ros2/ros2/issues/464
-  (void) latch;
-  return create_publisher(impl_->node_.get(), base_topic, custom_qos);
-}
-
 Subscriber ImageTransport::subscribe(
-  const std::string & base_topic, rmw_qos_profile_t custom_qos,
+  const std::string & base_topic, uint32_t queue_size,
   const Subscriber::Callback & callback,
   const VoidPtr & tracked_object,
-  const TransportHints * transport_hints,
-  const rclcpp::SubscriptionOptions options)
+  const TransportHints * transport_hints)
 {
   (void) tracked_object;
+  rmw_qos_profile_t custom_qos = rmw_qos_profile_default;
+  custom_qos.depth = queue_size;
   return create_subscription(
     impl_->node_.get(), base_topic, callback,
-    getTransportOrDefault(transport_hints), custom_qos,
-    options);
+    getTransportOrDefault(transport_hints), custom_qos);
 }
 
 Subscriber ImageTransport::subscribe(
