@@ -1,0 +1,12 @@
+Source: ros-humble-camera-calibration-parsers
+Section: misc
+Priority: optional
+Maintainer: Alejandro Hernandez Cordero <alejandro@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-humble-ament-cmake-gtest <!nocheck>, ros-humble-ament-cmake-ros, ros-humble-ament-lint-auto <!nocheck>, ros-humble-ament-lint-common <!nocheck>, ros-humble-rclcpp, ros-humble-rcpputils, ros-humble-sensor-msgs, ros-humble-yaml-cpp-vendor, ros-humble-ros-workspace
+Homepage: http://ros.org/wiki/camera_calibration_parsers
+Standards-Version: 3.9.2
+
+Package: ros-humble-camera-calibration-parsers
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-humble-rclcpp, ros-humble-rcpputils, ros-humble-sensor-msgs, ros-humble-yaml-cpp-vendor, ros-humble-ros-workspace
+Description: camera_calibration_parsers contains routines for reading and writing camera calibration parameters.
