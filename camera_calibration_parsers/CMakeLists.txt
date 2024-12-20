@@ -2,9 +2,10 @@ cmake_minimum_required(VERSION 3.5)
 
 project(camera_calibration_parsers)
 
-# Default to C++14
+# Default to C++17
 if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 14)
+  set(CMAKE_CXX_STANDARD 17)
+  set(CMAKE_CXX_STANDARD_REQUIRED ON)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -14,9 +15,9 @@ endif()
 find_package(ament_cmake_ros REQUIRED)
 
 find_package(rclcpp REQUIRED)
-find_package(rcpputils REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(yaml_cpp_vendor REQUIRED)
+find_package(yaml-cpp REQUIRED)
 
 # define the library
 add_library(${PROJECT_NAME}
@@ -28,11 +29,10 @@ add_library(${PROJECT_NAME}
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
-  ${sensor_msgs_TARGETS}
-  ${yaml_cpp_vendor_TARGETS})
+  ${sensor_msgs_TARGETS})
 target_link_libraries(${PROJECT_NAME} PRIVATE
   rclcpp::rclcpp
-  rcpputils::rcpputils)
+  yaml-cpp::yaml-cpp)
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
@@ -64,7 +64,7 @@ ament_export_targets(export_${PROJECT_NAME})
 
 # define the exe to convert
 add_executable(convert src/convert.cpp)
-target_link_libraries(convert
+target_link_libraries(convert PRIVATE
   ${PROJECT_NAME}
   rclcpp::rclcpp)
 
@@ -85,32 +85,22 @@ install(
   DESTINATION include/${PROJECT_NAME}
 )
 
-ament_export_dependencies(rclcpp rcpputils sensor_msgs yaml_cpp_vendor)
+ament_export_dependencies(rclcpp sensor_msgs yaml_cpp_vendor)
 
 if(BUILD_TESTING)
-  #TODO(mjcarroll) switch back to this once I can fix copyright check
-  #find_package(ament_lint_auto REQUIRED)
-  #ament_lint_auto_find_test_dependencies()
+  find_package(ament_lint_auto REQUIRED)
+  ament_lint_auto_find_test_dependencies()
 
-  find_package(ament_cmake_cppcheck REQUIRED)
-  find_package(ament_cmake_cpplint REQUIRED)
-  find_package(ament_cmake_lint_cmake REQUIRED)
-  find_package(ament_cmake_uncrustify REQUIRED)
-  #TODO(mjcarroll) Headers need to be .hpp for this to work properly.
-  #ament_cppcheck()
-  ament_cpplint()
-  ament_lint_cmake()
-  ament_uncrustify()
   find_package(ament_cmake_gtest)
 
   ament_add_gtest(${PROJECT_NAME}-parse_ini test/test_parse_ini.cpp)
   if(TARGET ${PROJECT_NAME}-parse_ini)
-    target_link_libraries(${PROJECT_NAME}-parse_ini ${PROJECT_NAME} rcpputils::rcpputils)
+    target_link_libraries(${PROJECT_NAME}-parse_ini ${PROJECT_NAME})
   endif()
 
   ament_add_gtest(${PROJECT_NAME}-parse_yml test/test_parse_yml.cpp)
   if(TARGET ${PROJECT_NAME}-parse_yml)
-    target_link_libraries(${PROJECT_NAME}-parse_yml ${PROJECT_NAME} rcpputils::rcpputils)
+    target_link_libraries(${PROJECT_NAME}-parse_yml ${PROJECT_NAME})
   endif()
 endif()
 

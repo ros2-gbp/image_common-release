@@ -53,7 +53,8 @@ IMAGE_TRANSPORT_PUBLIC
 Publisher create_publisher(
   rclcpp::Node * node,
   const std::string & base_topic,
-  rmw_qos_profile_t custom_qos = rmw_qos_profile_default);
+  rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
+  rclcpp::PublisherOptions options = rclcpp::PublisherOptions());
 
 /**
  * \brief Subscribe to an image topic, free function version.
@@ -74,7 +75,8 @@ IMAGE_TRANSPORT_PUBLIC
 CameraPublisher create_camera_publisher(
   rclcpp::Node * node,
   const std::string & base_topic,
-  rmw_qos_profile_t custom_qos = rmw_qos_profile_default);
+  rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
+  rclcpp::PublisherOptions pub_options = rclcpp::PublisherOptions());
 
 /*!
  * \brief Subscribe to a camera, free function version.
@@ -111,6 +113,12 @@ public:
   explicit ImageTransport(rclcpp::Node::SharedPtr node);
 
   IMAGE_TRANSPORT_PUBLIC
+  ImageTransport(const ImageTransport & other);
+
+  IMAGE_TRANSPORT_PUBLIC
+  ImageTransport & operator=(const ImageTransport & other);
+
+  IMAGE_TRANSPORT_PUBLIC
   ~ImageTransport();
 
   /*!
@@ -118,6 +126,14 @@ public:
    */
   IMAGE_TRANSPORT_PUBLIC
   Publisher advertise(const std::string & base_topic, uint32_t queue_size, bool latch = false);
+
+  /*!
+   * \brief Advertise an image topic, simple version.
+   */
+  IMAGE_TRANSPORT_PUBLIC
+  Publisher advertise(
+    const std::string & base_topic, rmw_qos_profile_t custom_qos,
+    bool latch = false);
 
   /*!
    * \brief Advertise an image topic with subcriber status callbacks.
@@ -137,14 +153,62 @@ public:
     const std::string & base_topic, uint32_t queue_size,
     const Subscriber::Callback & callback,
     const VoidPtr & tracked_object = VoidPtr(),
-    const TransportHints * transport_hints = nullptr);
+    const TransportHints * transport_hints = nullptr,
+    const rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions());
 
   /**
-   * \brief Subscribe to an image topic, version for arbitrary std::function object.
+   * \brief Subscribe to an image topic, version for bare function.
    */
   IMAGE_TRANSPORT_PUBLIC
   Subscriber subscribe(
     const std::string & base_topic, uint32_t queue_size,
+    void (* fp)(const ImageConstPtr &),
+    const TransportHints * transport_hints = nullptr,
+    const rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions())
+  {
+    return subscribe(
+      base_topic, queue_size,
+      std::function<void(const ImageConstPtr &)>(fp),
+      VoidPtr(), transport_hints, options);
+  }
+
+  /**
+   * \brief Subscribe to an image topic, version for class member function with bare pointer.
+   */
+  template<class T>
+  Subscriber subscribe(
+    const std::string & base_topic, uint32_t queue_size,
+    void (T::* fp)(const ImageConstPtr &), T * obj,
+    const TransportHints * transport_hints = nullptr,
+    const rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions())
+  {
+    return subscribe(
+      base_topic, queue_size, std::bind(fp, obj, std::placeholders::_1),
+      VoidPtr(), transport_hints, options);
+  }
+
+  /**
+   * \brief Subscribe to an image topic, version for class member function with shared_ptr.
+   */
+  template<class T>
+  Subscriber subscribe(
+    const std::string & base_topic, uint32_t queue_size,
+    void (T::* fp)(const ImageConstPtr &),
+    const std::shared_ptr<T> & obj,
+    const TransportHints * transport_hints = nullptr,
+    const rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions())
+  {
+    return subscribe(
+      base_topic, queue_size, std::bind(fp, obj.get(), std::placeholders::_1),
+      obj, transport_hints, options);
+  }
+
+  /**
+   * \brief Subscribe to an image topic, version for arbitrary std::function object and QoS.
+   */
+  IMAGE_TRANSPORT_PUBLIC
+  Subscriber subscribe(
+    const std::string & base_topic, rmw_qos_profile_t custom_qos,
     const Subscriber::Callback & callback,
     const VoidPtr & tracked_object,
     const TransportHints * transport_hints,
@@ -155,28 +219,13 @@ public:
    */
   IMAGE_TRANSPORT_PUBLIC
   Subscriber subscribe(
-    const std::string & base_topic, uint32_t queue_size,
+    const std::string & base_topic, rmw_qos_profile_t custom_qos,
     void (* fp)(const ImageConstPtr &),
-    const TransportHints * transport_hints = nullptr)
+    const TransportHints * transport_hints = nullptr,
+    const rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions())
   {
     return subscribe(
-      base_topic, queue_size,
-      std::function<void(const ImageConstPtr &)>(fp),
-      VoidPtr(), transport_hints, rclcpp::SubscriptionOptions());
-  }
-
-  /**
-   * \brief Subscribe to an image topic, version for bare function.
-   */
-  IMAGE_TRANSPORT_PUBLIC
-  Subscriber subscribe(
-    const std::string & base_topic, uint32_t queue_size,
-    void (* fp)(const ImageConstPtr &),
-    const TransportHints * transport_hints,
-    const rclcpp::SubscriptionOptions options)
-  {
-    return subscribe(
-      base_topic, queue_size,
+      base_topic, custom_qos,
       std::function<void(const ImageConstPtr &)>(fp),
       VoidPtr(), transport_hints, options);
   }
@@ -186,27 +235,13 @@ public:
    */
   template<class T>
   Subscriber subscribe(
-    const std::string & base_topic, uint32_t queue_size,
+    const std::string & base_topic, rmw_qos_profile_t custom_qos,
     void (T::* fp)(const ImageConstPtr &), T * obj,
-    const TransportHints * transport_hints = nullptr)
+    const TransportHints * transport_hints = nullptr,
+    const rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions())
   {
     return subscribe(
-      base_topic, queue_size, std::bind(fp, obj, std::placeholders::_1),
-      VoidPtr(), transport_hints);
-  }
-
-  /**
-   * \brief Subscribe to an image topic, version for class member function with bare pointer.
-   */
-  template<class T>
-  Subscriber subscribe(
-    const std::string & base_topic, uint32_t queue_size,
-    void (T::* fp)(const ImageConstPtr &), T * obj,
-    const TransportHints * transport_hints,
-    const rclcpp::SubscriptionOptions options)
-  {
-    return subscribe(
-      base_topic, queue_size, std::bind(fp, obj, std::placeholders::_1),
+      base_topic, custom_qos, std::bind(fp, obj, std::placeholders::_1),
       VoidPtr(), transport_hints, options);
   }
 
@@ -215,29 +250,14 @@ public:
    */
   template<class T>
   Subscriber subscribe(
-    const std::string & base_topic, uint32_t queue_size,
+    const std::string & base_topic, rmw_qos_profile_t custom_qos,
     void (T::* fp)(const ImageConstPtr &),
     const std::shared_ptr<T> & obj,
-    const TransportHints * transport_hints = nullptr)
+    const TransportHints * transport_hints = nullptr,
+    const rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions())
   {
     return subscribe(
-      base_topic, queue_size, std::bind(fp, obj.get(), std::placeholders::_1),
-      obj, transport_hints);
-  }
-
-  /**
-   * \brief Subscribe to an image topic, version for class member function with shared_ptr.
-   */
-  template<class T>
-  Subscriber subscribe(
-    const std::string & base_topic, uint32_t queue_size,
-    void (T::* fp)(const ImageConstPtr &),
-    const std::shared_ptr<T> & obj,
-    const TransportHints * transport_hints,
-    const rclcpp::SubscriptionOptions options)
-  {
-    return subscribe(
-      base_topic, queue_size, std::bind(fp, obj.get(), std::placeholders::_1),
+      base_topic, custom_qos, std::bind(fp, obj.get(), std::placeholders::_1),
       obj, transport_hints, options);
   }
 
@@ -348,6 +368,11 @@ private:
 
   struct Impl;
   std::unique_ptr<Impl> impl_;
+};
+
+struct ImageTransport::Impl
+{
+  rclcpp::Node::SharedPtr node_;
 };
 
 }  // namespace image_transport

@@ -73,7 +73,8 @@ public:
     rclcpp::Node * nh,
     const std::string & base_topic,
     PubLoaderPtr loader,
-    rmw_qos_profile_t custom_qos);
+    rmw_qos_profile_t custom_qos,
+    rclcpp::PublisherOptions options = rclcpp::PublisherOptions());
 
   /*!
    * \brief Returns the number of subscribers that are currently connected to
@@ -101,6 +102,12 @@ public:
    */
   IMAGE_TRANSPORT_PUBLIC
   void publish(const sensor_msgs::msg::Image::ConstSharedPtr & message) const;
+
+  /*!
+   * \brief Publish an image on the topics associated with this Publisher.
+   */
+  IMAGE_TRANSPORT_PUBLIC
+  void publish(sensor_msgs::msg::Image::UniquePtr message) const;
 
   /*!
    * \brief Shutdown the advertisements associated with this Publisher.
