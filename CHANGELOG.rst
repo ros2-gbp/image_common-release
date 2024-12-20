@@ -2,6 +2,11 @@
 Changelog for package camera_info_manager_py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.1.0 (2024-12-20)
+------------------
+* Cleanup of camera_info_manager_py. (`#340 <https://github.com/ros-perception/image_common/issues/340>`_)
+* Contributors: Chris Lalancette
+
 6.0.3 (2024-11-25)
 ------------------
 * Add `camera_info_manager_py` (`#335 <https://github.com/ros-perception/image_common/issues/335>`_)
