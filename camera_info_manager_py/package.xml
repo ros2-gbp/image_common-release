@@ -4,7 +4,7 @@
   schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>camera_info_manager_py</name>
-  <version>6.1.0</version>
+  <version>3.1.11</version>
   <description>
     Python interface for camera calibration information.
 
@@ -21,17 +21,18 @@
   <author>Jack O'Quin</author>
 
   <exec_depend>ament_index_python</exec_depend>
-  <exec_depend>python3-yaml</exec_depend>
-  <exec_depend>rclpy</exec_depend>
-  <exec_depend>sensor_msgs</exec_depend>
+
+  <depend>rclpy</depend>
+  <depend>sensor_msgs</depend>
+  <depend>python3-rospkg</depend>
+  <depend>python3-yaml</depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
-  <test_depend>ament_pep257</test_depend>
-  <test_depend>ament_xmllint</test_depend>
   <test_depend>python3-pytest</test_depend>
 
   <export>
+    <rosdoc config="rosdoc.yaml"/>
     <build_type>ament_python</build_type>
   </export>
 

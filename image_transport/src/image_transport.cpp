@@ -59,10 +59,9 @@ static Impl * kImpl = new Impl();
 Publisher create_publisher(
   rclcpp::Node * node,
   const std::string & base_topic,
-  rmw_qos_profile_t custom_qos,
-  rclcpp::PublisherOptions options)
+  rmw_qos_profile_t custom_qos)
 {
-  return Publisher(node, base_topic, kImpl->pub_loader_, custom_qos, options);
+  return Publisher(node, base_topic, kImpl->pub_loader_, custom_qos);
 }
 
 Subscriber create_subscription(
@@ -79,10 +78,9 @@ Subscriber create_subscription(
 CameraPublisher create_camera_publisher(
   rclcpp::Node * node,
   const std::string & base_topic,
-  rmw_qos_profile_t custom_qos,
-  rclcpp::PublisherOptions pub_options)
+  rmw_qos_profile_t custom_qos)
 {
-  return CameraPublisher(node, base_topic, custom_qos, pub_options);
+  return CameraPublisher(node, base_topic, custom_qos);
 }
 
 CameraSubscriber create_camera_subscription(
@@ -128,8 +126,10 @@ std::vector<std::string> getLoadableTransports()
   return loadableTransports;
 }
 
-ImageTransport::ImageTransport(const ImageTransport & other)
-: impl_(std::make_unique<Impl>(*other.impl_)) {}
+struct ImageTransport::Impl
+{
+  rclcpp::Node::SharedPtr node_;
+};
 
 ImageTransport::ImageTransport(rclcpp::Node::SharedPtr node)
 : impl_(std::make_unique<ImageTransport::Impl>())
@@ -169,6 +169,20 @@ Subscriber ImageTransport::subscribe(
     impl_->node_.get(), base_topic, callback,
     getTransportOrDefault(transport_hints), custom_qos,
     options);
+}
+
+Subscriber ImageTransport::subscribe(
+  const std::string & base_topic, uint32_t queue_size,
+  const Subscriber::Callback & callback,
+  const VoidPtr & tracked_object,
+  const TransportHints * transport_hints)
+{
+  (void) tracked_object;
+  rmw_qos_profile_t custom_qos = rmw_qos_profile_default;
+  custom_qos.depth = queue_size;
+  return create_subscription(
+    impl_->node_.get(), base_topic, callback,
+    getTransportOrDefault(transport_hints), custom_qos);
 }
 
 Subscriber ImageTransport::subscribe(

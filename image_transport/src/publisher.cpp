@@ -29,12 +29,12 @@
 #include "image_transport/publisher.hpp"
 
 #include <memory>
-#include <optional>
 #include <set>
 #include <string>
 #include <utility>
 #include <vector>
 
+#include "rclcpp/expand_topic_or_service_name.hpp"
 #include "rclcpp/logging.hpp"
 #include "rclcpp/node.hpp"
 
@@ -98,13 +98,14 @@ struct Publisher::Impl
 
 Publisher::Publisher(
   rclcpp::Node * node, const std::string & base_topic,
-  PubLoaderPtr loader, rmw_qos_profile_t custom_qos,
-  rclcpp::PublisherOptions options)
+  PubLoaderPtr loader, rmw_qos_profile_t custom_qos)
 : impl_(std::make_shared<Impl>(node))
 {
   // Resolve the name explicitly because otherwise the compressed topics don't remap
   // properly (#3652).
-  std::string image_topic = node->get_node_topics_interface()->resolve_topic_name(base_topic);
+  std::string image_topic = rclcpp::expand_topic_or_service_name(
+    base_topic,
+    node->get_name(), node->get_namespace());
   impl_->base_topic_ = image_topic;
   impl_->loader_ = loader;
 
@@ -140,7 +141,7 @@ Publisher::Publisher(
     const auto & lookup_name = transport_name + "_pub";
     try {
       auto pub = loader->createUniqueInstance(lookup_name);
-      pub->advertise(node, image_topic, custom_qos, options);
+      pub->advertise(node, image_topic, custom_qos);
       impl_->publishers_.push_back(std::move(pub));
     } catch (const std::runtime_error & e) {
       RCLCPP_ERROR(
@@ -171,6 +172,7 @@ std::string Publisher::getTopic() const
 void Publisher::publish(const sensor_msgs::msg::Image & message) const
 {
   if (!impl_ || !impl_->isValid()) {
+    // TODO(ros2) Switch to RCUTILS_ASSERT when ros2/rcutils#112 is merged
     auto logger = impl_ ? impl_->logger_ : rclcpp::get_logger("image_transport");
     RCLCPP_FATAL(logger, "Call to publish() on an invalid image_transport::Publisher");
     return;
@@ -186,6 +188,7 @@ void Publisher::publish(const sensor_msgs::msg::Image & message) const
 void Publisher::publish(const sensor_msgs::msg::Image::ConstSharedPtr & message) const
 {
   if (!impl_ || !impl_->isValid()) {
+    // TODO(ros2) Switch to RCUTILS_ASSERT when ros2/rcutils#112 is merged
     auto logger = impl_ ? impl_->logger_ : rclcpp::get_logger("image_transport");
     RCLCPP_FATAL(logger, "Call to publish() on an invalid image_transport::Publisher");
     return;
@@ -195,36 +198,6 @@ void Publisher::publish(const sensor_msgs::msg::Image::ConstSharedPtr & message)
     if (pub->getNumSubscribers() > 0) {
       pub->publishPtr(message);
     }
-  }
-}
-
-void Publisher::publish(sensor_msgs::msg::Image::UniquePtr message) const
-{
-  if (!impl_ || !impl_->isValid()) {
-    auto logger = impl_ ? impl_->logger_ : rclcpp::get_logger("image_transport");
-    RCLCPP_FATAL(logger, "Call to publish() on an invalid image_transport::Publisher");
-    return;
-  }
-
-  std::vector<std::shared_ptr<PublisherPlugin>> pubs_take_reference;
-  std::optional<std::shared_ptr<PublisherPlugin>> pub_takes_ownership{std::nullopt};
-
-  for (const auto & pub : impl_->publishers_) {
-    if (pub->getNumSubscribers() > 0) {
-      if (pub->supportsUniquePtrPub() && !pub_takes_ownership.has_value()) {
-        pub_takes_ownership = pub;
-      } else {
-        pubs_take_reference.push_back(pub);
-      }
-    }
-  }
-
-  for (const auto & pub : pubs_take_reference) {
-    pub->publish(*message);
-  }
-
-  if (pub_takes_ownership.has_value()) {
-    pub_takes_ownership.value()->publishUniquePtr(std::move(message));
   }
 }
 

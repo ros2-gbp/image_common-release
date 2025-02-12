@@ -2,88 +2,28 @@
 Changelog for package camera_info_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-6.1.0 (2024-12-20)
+3.1.11 (2025-02-12)
+-------------------
+
+3.1.10 (2024-11-26)
+-------------------
+
+3.1.9 (2024-03-26)
 ------------------
 
-6.0.3 (2024-11-25)
+3.1.8 (2024-01-24)
 ------------------
 
-6.0.2 (2024-11-25)
+3.1.7 (2023-08-14)
 ------------------
 
-6.0.1 (2024-10-10)
+3.1.6 (2023-07-27)
 ------------------
 
-6.0.0 (2024-10-03)
+3.1.5 (2022-11-16)
 ------------------
-* Add optional namespace to /set_camera_info service in CameraInfoManager (`#324 <https://github.com/ros-perception/image_common/issues/324>`_)
-* Contributors: Jan Hernas
-
-5.3.2 (2024-07-29)
-------------------
-
-5.3.1 (2024-07-19)
-------------------
-* Added common test to camera info manager (`#318 <https://github.com/ros-perception/image_common/issues/318>`_)
-* Contributors: Alejandro Hernández Cordero
-
-5.3.0 (2024-06-17)
-------------------
-
-5.2.1 (2024-05-24)
-------------------
-
-5.2.0 (2024-04-26)
-------------------
-
-5.1.2 (2024-04-16)
-------------------
-
-5.1.1 (2024-03-26)
-------------------
-* Switch from rcpputils::fs to std::filesystem (`#300 <https://github.com/ros-perception/image_common/issues/300>`_)
-* Contributors: Christophe Bedard
-
-5.1.0 (2024-01-24)
-------------------
-
-5.0.0 (2023-11-06)
-------------------
-* Removed C headers: camera_info_manager camera_calibration_parsers (`#290 <https://github.com/ros-perception/image_common/issues/290>`_)
-* Contributors: Alejandro Hernández Cordero
-
-4.5.1 (2023-09-07)
-------------------
-
-4.5.0 (2023-08-21)
-------------------
-
-4.3.0 (2023-04-28)
-------------------
-
-4.2.0 (2023-02-14)
-------------------
-* Update image_common to C++17. (`#267 <https://github.com/ros-perception/image_common/issues/267>`_)
-* Contributors: Chris Lalancette
-
-4.1.1 (2022-11-16)
-------------------
-* Add alias library targets for all libraries (`#259 <https://github.com/ros-perception/image_common/issues/259>`_)
-* Contributors: RFRIEDM-Trimble
-
-4.1.0 (2022-11-02)
-------------------
-* Add lifecycle node compatibility to camera_info_manager (`#190 <https://github.com/ros-perception/image_common/issues/190>`_)
-* Contributors: Ramon Wijnands
-
-4.0.0 (2022-08-11)
-------------------
-
-3.2.1 (2022-07-12)
-------------------
-
-3.2.0 (2022-05-10)
-------------------
+* Add alias library targets for all libraries (`#260 <https://github.com/ros-perception/image_common/issues/260>`_)
+* Contributors: Geoffrey Biggs
 
 3.1.4 (2022-03-25)
 ------------------
