@@ -2,6 +2,9 @@
 Changelog for package camera_info_manager_py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.1.11 (2025-02-12)
+-------------------
+
 3.1.10 (2024-11-26)
 -------------------
 * Add `camera_info_manager_py` (backport `#335 <https://github.com/ros-perception/image_common/issues/335>`_) (`#337 <https://github.com/ros-perception/image_common/issues/337>`_)
