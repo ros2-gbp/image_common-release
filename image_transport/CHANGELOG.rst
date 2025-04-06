@@ -2,40 +2,105 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.1.11 (2025-02-12)
--------------------
-* Advertize and subscribe with custom qos (`#288 <https://github.com/ros-perception/image_common/issues/288>`_) (`#344 <https://github.com/ros-perception/image_common/issues/344>`_)
+5.1.6 (2025-04-02)
+------------------
+* fix: add `rclcpp::shutdown` (`#347 <https://github.com/ros-perception/image_common/issues/347>`_) (`#348 <https://github.com/ros-perception/image_common/issues/348>`_)
   Co-authored-by: Alejandro Hernández Cordero <ahcorde@gmail.com>
-* Contributors: Lorenzo
+  (cherry picked from commit 0cc6ab2de0b1a600d2d6a69108cf2131d778ec56)
+  Co-authored-by: Yuyuan Yuan <az6980522@gmail.com>
+* Contributors: mergify[bot]
 
-3.1.10 (2024-11-26)
--------------------
-
-3.1.9 (2024-03-26)
+5.1.5 (2024-11-26)
 ------------------
-* backport whitelist feature to humble (`#302 <https://github.com/ros-perception/image_common/issues/302>`_)
-* Contributors: Kenji Brameld
+* Add lazy subscription to republisher (backport `#325 <https://github.com/ros-perception/image_common/issues/325>`_) (`#327 <https://github.com/ros-perception/image_common/issues/327>`_)
+  Co-authored-by: Błażej Sowa <bsowa123@gmail.com>
+* Fix node name (`#321 <https://github.com/ros-perception/image_common/issues/321>`_) (`#322 <https://github.com/ros-perception/image_common/issues/322>`_)
+  Node name appears in logs and confuses readers.
+  (cherry picked from commit ea6a9e47c259cc875b7a4545e07359b63bd27f60)
+  Co-authored-by: Michal Sojka <michal.sojka@cvut.cz>
+* Contributors: mergify[bot]
 
-3.1.8 (2024-01-24)
+5.1.4 (2024-06-27)
 ------------------
-* implement CameraSubscriber::getNumPublishers (`#297 <https://github.com/ros-perception/image_common/issues/297>`_) (`#298 <https://github.com/ros-perception/image_common/issues/298>`_)
-* Add missing definition for CameraPublisher::publish overload (`#278 <https://github.com/ros-perception/image_common/issues/278>`_) (`#294 <https://github.com/ros-perception/image_common/issues/294>`_)
+* Removed warning (`#312 <https://github.com/ros-perception/image_common/issues/312>`_) (`#313 <https://github.com/ros-perception/image_common/issues/313>`_)
+  Co-authored-by: Alejandro Hernández Cordero <ahcorde@gmail.com>
+* Contributors: mergify[bot]
+
+5.1.3 (2024-05-24)
+------------------
+* Add missing sub and pub options (`#308 <https://github.com/ros-perception/image_common/issues/308>`_) (`#309 <https://github.com/ros-perception/image_common/issues/309>`_)
+  Co-authored-by: Angsa Deployment Team <team@angsa-robotics.com>
+  (cherry picked from commit 74d9e8edb02eaf13771ee4d12a558d68279cbf44)
+  Co-authored-by: Tony Najjar <tony.najjar.1997@gmail.com>
+* Support zero-copy intra-process publishing (`#306 <https://github.com/ros-perception/image_common/issues/306>`_) (`#310 <https://github.com/ros-perception/image_common/issues/310>`_)
+  (cherry picked from commit fd51363e2b8f8cd99e9a77970c1d49eb86c1480f)
+  Co-authored-by: Błażej Sowa <bsowa123@gmail.com>
+* Contributors: mergify[bot]
+
+5.1.2 (2024-04-16)
+------------------
+
+5.1.1 (2024-03-26)
+------------------
+* Added rclcpp component to Republish (`#275 <https://github.com/ros-perception/image_common/issues/275>`_)
 * Contributors: Alejandro Hernández Cordero
 
-3.1.7 (2023-08-14)
+5.1.0 (2024-01-24)
 ------------------
-* Fix downstream regressions due to subscribe overloads (`#284 <https://github.com/ros-perception/image_common/issues/284>`_)
-* Contributors: Aditya Pande
+* Add QoS option reliability to republisher qos params (`#296 <https://github.com/ros-perception/image_common/issues/296>`_)
+* implement CameraSubscriber::getNumPublishers (`#297 <https://github.com/ros-perception/image_common/issues/297>`_)
+* Add missing definition for CameraPublisher::publish overload (`#278 <https://github.com/ros-perception/image_common/issues/278>`_)
+* Contributors: Carlos Andrés Álvarez Restrepo, Michael Ferguson, s-hall
 
-3.1.6 (2023-07-27)
+5.0.0 (2023-11-06)
 ------------------
-* Expose callback groups - backport to humble (`#277 <https://github.com/ros-perception/image_common/issues/277>`_)
-* Contributors: Aditya Pande
+* Advertize and subscribe with custom qos (`#288 <https://github.com/ros-perception/image_common/issues/288>`_)
+* Removed C headers (`#289 <https://github.com/ros-perception/image_common/issues/289>`_)
+* Contributors: Alejandro Hernández Cordero
 
-3.1.5 (2022-11-16)
+4.5.1 (2023-09-07)
 ------------------
-* Add alias library targets for all libraries (`#260 <https://github.com/ros-perception/image_common/issues/260>`_)
-* Contributors: Geoffrey Biggs
+* Switch to using the override keyword for simple_publisher_plugin. (`#285 <https://github.com/ros-perception/image_common/issues/285>`_)
+* Contributors: Chris Lalancette
+
+4.5.0 (2023-08-21)
+------------------
+* feat: enable plugin allowlist (`#264 <https://github.com/ros-perception/image_common/issues/264>`_)
+* Expose option to set callback groups (`#274 <https://github.com/ros-perception/image_common/issues/274>`_)
+* add support for lazy subscribers (`#272 <https://github.com/ros-perception/image_common/issues/272>`_)
+* Contributors: Aditya Pande, Daisuke Nishimatsu, Michael Ferguson
+
+4.3.0 (2023-04-28)
+------------------
+
+4.2.0 (2023-02-14)
+------------------
+* Update image_common to C++17. (`#267 <https://github.com/ros-perception/image_common/issues/267>`_)
+* Contributors: Chris Lalancette
+
+4.1.1 (2022-11-16)
+------------------
+* Add alias library targets for all libraries (`#259 <https://github.com/ros-perception/image_common/issues/259>`_)
+* Contributors: RFRIEDM-Trimble
+
+4.1.0 (2022-11-02)
+------------------
+
+4.0.0 (2022-08-11)
+------------------
+* Remove subscriber and publisher impl methods without options (`#252 <https://github.com/ros-perception/image_common/issues/252>`_)
+* Deprecate impl without options (`#249 <https://github.com/ros-perception/image_common/issues/249>`_)
+* Contributors: Kenji Brameld
+
+3.2.1 (2022-07-12)
+------------------
+* opt-in to qos overriding for publisher (`#246 <https://github.com/ros-perception/image_common/issues/246>`_)
+* Contributors: Brian
+
+3.2.0 (2022-05-10)
+------------------
+* Add qos option to override qos (`#208 <https://github.com/ros-perception/image_common/issues/208>`_)
+* Contributors: Daisuke Nishimatsu
 
 3.1.4 (2022-03-25)
 ------------------

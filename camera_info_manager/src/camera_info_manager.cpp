@@ -38,11 +38,11 @@
 
 #include <algorithm>
 #include <cstdlib>
+#include <filesystem>
 #include <locale>
 #include <memory>
 #include <string>
 
-#include "rcpputils/filesystem_helper.hpp"
 #include "rcpputils/env.hpp"
 #include "camera_calibration_parsers/parse.hpp"
 #include "ament_index_cpp/get_package_share_directory.hpp"
@@ -78,20 +78,37 @@ const std::string
  * @param url default Uniform Resource Locator for loading and saving data.
  */
 CameraInfoManager::CameraInfoManager(
-  rclcpp::Node * node,
-  const std::string & cname,
+  rclcpp::Node * node, const std::string & cname,
   const std::string & url)
-: logger_(node->get_logger()),
+: CameraInfoManager(node->get_node_base_interface(),
+    node->get_node_services_interface(), node->get_node_logging_interface(), cname, url)
+{
+}
+
+CameraInfoManager::CameraInfoManager(
+  rclcpp_lifecycle::LifecycleNode * node,
+  const std::string & cname, const std::string & url)
+: CameraInfoManager(node->get_node_base_interface(),
+    node->get_node_services_interface(), node->get_node_logging_interface(), cname, url)
+{
+}
+
+CameraInfoManager::CameraInfoManager(
+  rclcpp::node_interfaces::NodeBaseInterface::SharedPtr node_base_interface,
+  rclcpp::node_interfaces::NodeServicesInterface::SharedPtr node_services_interface,
+  rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr node_logger_interface,
+  const std::string & cname, const std::string & url, rmw_qos_profile_t custom_qos)
+: logger_(node_logger_interface->get_logger()),
   camera_name_(cname),
   url_(url),
   loaded_cam_info_(false)
 {
+  using namespace std::placeholders;
+
   // register callback for camera calibration service request
-  info_service_ = node->create_service<SetCameraInfo>(
-    "set_camera_info",
-    std::bind(
-      &CameraInfoManager::setCameraInfoService, this, std::placeholders::_1,
-      std::placeholders::_2));
+  info_service_ = rclcpp::create_service<SetCameraInfo>(
+    node_base_interface, node_services_interface, "~/set_camera_info",
+    std::bind(&CameraInfoManager::setCameraInfoService, this, _1, _2), custom_qos, nullptr);
 }
 
 /** Get the current CameraInfo data.
@@ -491,11 +508,11 @@ CameraInfoManager::saveCalibrationFile(
 {
   RCLCPP_INFO(logger_, "writing calibration data to %s", filename.c_str());
 
-  rcpputils::fs::path filepath(filename);
-  rcpputils::fs::path parent = filepath.parent_path();
+  std::filesystem::path filepath(filename);
+  std::filesystem::path parent = filepath.parent_path();
 
-  if (!rcpputils::fs::exists(parent)) {
-    if (!rcpputils::fs::create_directories(parent)) {
+  if (!std::filesystem::exists(parent)) {
+    if (!std::filesystem::create_directories(parent)) {
       RCLCPP_ERROR(logger_, "unable to create path directory [%s]", parent.string().c_str());
       return false;
     }
