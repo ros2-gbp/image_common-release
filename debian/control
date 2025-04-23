@@ -1,0 +1,13 @@
+Source: ros-kilted-camera-info-manager-py
+Section: misc
+Priority: optional
+Maintainer: Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>
+Build-Depends: debhelper (>= 9.0.0), python3-pytest <!nocheck>, ros-kilted-ament-copyright <!nocheck>, ros-kilted-ament-flake8 <!nocheck>, ros-kilted-ament-pep257 <!nocheck>, ros-kilted-ament-xmllint <!nocheck>, ros-kilted-ros-workspace, python3-all, python3-setuptools, dh-python
+Homepage: http://ros.org/wiki/camera_info_manager_py
+Standards-Version: 3.9.2
+
+Package: ros-kilted-camera-info-manager-py
+Architecture: any
+Depends: ${python3:Depends}, ${misc:Depends}, python3-yaml, ros-kilted-ament-index-python, ros-kilted-rclpy, ros-kilted-sensor-msgs, ros-kilted-ros-workspace
+Description: Python interface for camera calibration information.
+ This ROS package provides a CameraInfo interface for Python camera drivers similar to the C++ camera_info_manager package.
