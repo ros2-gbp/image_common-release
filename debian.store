@@ -1,1 +1,1 @@
-{"base": "9aa42ee2", "parent": "debian/rolling/camera_info_manager", "previous": "e252c997", "trim": "", "trimbase": ""}
+{"base": "c069bfcfbb97", "parent": "debian/kilted/camera_info_manager", "previous": "50f9da7e0466", "trim": "", "trimbase": ""}
