@@ -2,16 +2,38 @@
 Changelog for package camera_info_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-5.1.6 (2025-04-02)
+6.1.0 (2024-12-20)
 ------------------
 
-5.1.5 (2024-11-26)
+6.0.3 (2024-11-25)
 ------------------
 
-5.1.4 (2024-06-27)
+6.0.2 (2024-11-25)
 ------------------
 
-5.1.3 (2024-05-24)
+6.0.1 (2024-10-10)
+------------------
+
+6.0.0 (2024-10-03)
+------------------
+* Add optional namespace to /set_camera_info service in CameraInfoManager (`#324 <https://github.com/ros-perception/image_common/issues/324>`_)
+* Contributors: Jan Hernas
+
+5.3.2 (2024-07-29)
+------------------
+
+5.3.1 (2024-07-19)
+------------------
+* Added common test to camera info manager (`#318 <https://github.com/ros-perception/image_common/issues/318>`_)
+* Contributors: Alejandro Hernández Cordero
+
+5.3.0 (2024-06-17)
+------------------
+
+5.2.1 (2024-05-24)
+------------------
+
+5.2.0 (2024-04-26)
 ------------------
 
 5.1.2 (2024-04-16)

@@ -31,8 +31,8 @@
 #include <memory>
 #include <string>
 
-#include "message_filters/subscriber.h"
-#include "message_filters/time_synchronizer.h"
+#include "message_filters/subscriber.hpp"
+#include "message_filters/time_synchronizer.hpp"
 
 #include "image_transport/camera_common.hpp"
 #include "image_transport/subscriber_filter.hpp"
@@ -116,13 +116,12 @@ CameraSubscriber::CameraSubscriber(
 {
   // Must explicitly remap the image topic since we then do some string manipulation on it
   // to figure out the sibling camera_info topic.
-  std::string image_topic = rclcpp::expand_topic_or_service_name(
-    base_topic,
-    node->get_name(), node->get_namespace());
+  std::string image_topic = node->get_node_topics_interface()->resolve_topic_name(base_topic);
   std::string info_topic = getCameraInfoTopic(image_topic);
 
   impl_->image_sub_.subscribe(node, image_topic, transport, custom_qos);
-  impl_->info_sub_.subscribe(node, info_topic, custom_qos);
+  impl_->info_sub_.subscribe(node, info_topic,
+    rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos)));
 
   impl_->sync_.connectInput(impl_->image_sub_, impl_->info_sub_);
   impl_->sync_.registerCallback(std::bind(callback, std::placeholders::_1, std::placeholders::_2));
