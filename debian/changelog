@@ -1,0 +1,28 @@
+ros-kilted-image-transport-py (6.1.0-2bookworm) bookworm; urgency=high
+
+
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Fri, 20 Dec 2024 06:00:00 -0000
+
+ros-kilted-image-transport-py (6.0.3-2bookworm) bookworm; urgency=high
+
+
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Mon, 25 Nov 2024 06:00:00 -0000
+
+ros-kilted-image-transport-py (6.0.2-2bookworm) bookworm; urgency=high
+
+  * Add in python3-dev build dependency (#334 <https://github.com/ros-perception/image_common/issues/334>)
+  * Contributors: Chris Lalancette
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Mon, 25 Nov 2024 06:00:00 -0000
+
+ros-kilted-image-transport-py (6.0.1-2bookworm) bookworm; urgency=high
+
+  * feat: python bindings for image_transport and publish (#323 <https://github.com/ros-perception/image_common/issues/323>)
+    Co-authored-by: Alejandro Hernández Cordero <mailto:ahcorde@gmail.com>
+  * Contributors: Földi Tamás
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Thu, 10 Oct 2024 05:00:00 -0000
+
+
