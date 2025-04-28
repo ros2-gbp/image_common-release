@@ -2,6 +2,9 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.2.0 (2025-04-28)
+------------------
+
 6.1.1 (2025-04-28)
 ------------------
 * Remove windows warnings (`#350 <https://github.com/ros-perception/image_common/issues/350>`_)
