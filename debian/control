@@ -1,0 +1,12 @@
+Source: ros-kilted-image-common
+Section: misc
+Priority: optional
+Maintainer: Alejandro Hernandez Cordero <alejandro@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-kilted-ament-cmake, ros-kilted-ament-lint-auto <!nocheck>, ros-kilted-ament-lint-common <!nocheck>, ros-kilted-ros-workspace
+Homepage: http://www.ros.org/wiki/image_common
+Standards-Version: 3.9.2
+
+Package: ros-kilted-image-common
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-kilted-camera-calibration-parsers, ros-kilted-camera-info-manager, ros-kilted-image-transport, ros-kilted-ros-workspace
+Description: Common code for working with images in ROS.
