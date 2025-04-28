@@ -1,0 +1,13 @@
+Source: ros-kilted-image-transport
+Section: misc
+Priority: optional
+Maintainer: Alejandro Hernandez Cordero <alejandro@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-kilted-ament-cmake-gtest <!nocheck>, ros-kilted-ament-cmake-ros, ros-kilted-ament-lint-auto <!nocheck>, ros-kilted-ament-lint-common <!nocheck>, ros-kilted-message-filters, ros-kilted-pluginlib, ros-kilted-rclcpp, ros-kilted-rclcpp-components, ros-kilted-sensor-msgs, ros-kilted-ros-workspace
+Homepage: http://ros.org/wiki/image_transport
+Standards-Version: 3.9.2
+
+Package: ros-kilted-image-transport
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-kilted-message-filters, ros-kilted-pluginlib, ros-kilted-rclcpp, ros-kilted-rclcpp-components, ros-kilted-sensor-msgs, ros-kilted-ros-workspace
+Description: image_transport should always be used to subscribe to and publish images.
+ It provides transparent support for transporting images in low-bandwidth compressed formats. Examples (provided by separate plugin packages) include JPEG/PNG compression and Theora streaming video.
