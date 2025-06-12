@@ -30,9 +30,7 @@
 #define IMAGE_TRANSPORT__SIMPLE_PUBLISHER_PLUGIN_HPP_
 
 #include <memory>
-#include <stdexcept>
 #include <string>
-#include <utility>
 
 #include "rclcpp/node.hpp"
 #include "rclcpp/logger.hpp"
@@ -67,7 +65,7 @@ class SimplePublisherPlugin : public PublisherPlugin
 public:
   virtual ~SimplePublisherPlugin() {}
 
-  size_t getNumSubscribers() const override
+  virtual size_t getNumSubscribers() const
   {
     if (simple_impl_) {
       return simple_impl_->pub_->get_subscription_count();
@@ -75,13 +73,13 @@ public:
     return 0;
   }
 
-  std::string getTopic() const override
+  virtual std::string getTopic() const
   {
     if (simple_impl_) {return simple_impl_->pub_->get_topic_name();}
     return std::string();
   }
 
-  void publish(const sensor_msgs::msg::Image & message) const override
+  virtual void publish(const sensor_msgs::msg::Image & message) const
   {
     if (!simple_impl_ || !simple_impl_->pub_) {
       auto logger = simple_impl_ ? simple_impl_->logger_ : rclcpp::get_logger("image_transport");
@@ -91,90 +89,41 @@ public:
       return;
     }
 
-    publish(message, simple_impl_->pub_);
+    publish(message, bindInternalPublisher(simple_impl_->pub_.get()));
   }
 
-  void publishUniquePtr(sensor_msgs::msg::Image::UniquePtr message) const override
-  {
-    if (!simple_impl_ || !simple_impl_->pub_) {
-      auto logger = simple_impl_ ? simple_impl_->logger_ : rclcpp::get_logger("image_transport");
-      RCLCPP_ERROR(
-        logger,
-        "Call to publish() on an invalid image_transport::SimplePublisherPlugin");
-      return;
-    }
-
-    publish(std::move(message), simple_impl_->pub_);
-  }
-
-  void shutdown() override
+  virtual void shutdown()
   {
     simple_impl_.reset();
   }
 
 protected:
-  void advertiseImpl(
-    rclcpp::Node * node,
-    const std::string & base_topic,
-    rmw_qos_profile_t custom_qos,
-    rclcpp::PublisherOptions options) override
+  virtual void advertiseImpl(
+    rclcpp::Node * node, const std::string & base_topic,
+    rmw_qos_profile_t custom_qos)
   {
     std::string transport_topic = getTopicToAdvertise(base_topic);
     simple_impl_ = std::make_unique<SimplePublisherPluginImpl>(node);
 
     RCLCPP_DEBUG(simple_impl_->logger_, "getTopicToAdvertise: %s", transport_topic.c_str());
     auto qos = rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos), custom_qos);
-    simple_impl_->pub_ = node->create_publisher<M>(transport_topic, qos, options);
+    simple_impl_->pub_ = node->create_publisher<M>(transport_topic, qos);
   }
-
-  typedef typename rclcpp::Publisher<M>::SharedPtr PublisherT;
 
   //! Generic function for publishing the internal message type.
   typedef std::function<void (const M &)> PublishFn;
 
   /**
-   * \brief Publish an image using the specified publish function.
-   *
-   * \deprecated Use publish(const sensor_msgs::msg::Image&, const PublisherT&) instead.
+   * \brief Publish an image using the specified publish function. Must be implemented by
+   * the subclass.
    *
    * The PublishFn publishes the transport-specific message type. This indirection allows
    * SimpleSubscriberPlugin to use this function for both normal broadcast publishing and
    * single subscriber publishing (in subscription callbacks).
    */
   virtual void publish(
-    const sensor_msgs::msg::Image & /*message*/,
-    const PublishFn & /*publish_fn*/) const
-  {
-    throw std::logic_error(
-      "publish(const sensor_msgs::msg::Image&, const PublishFn&) is not implemented.");
-  }
-
-  /**
-   * \brief Publish an image using the specified publisher.
-   */
-  virtual void publish(
     const sensor_msgs::msg::Image & message,
-    const PublisherT & publisher) const
-  {
-    // Fallback to old, deprecated method
-    publish(message, bindInternalPublisher(publisher.get()));
-  }
-
-  /**
-   * \brief Publish an image using the specified publisher.
-   *
-   * This version of the function can be used to optimize cases where the Plugin can
-   * avoid doing copies of the data when having the ownership to the image message.
-   * Plugins that can take advantage of message ownership should overwrite this method
-   * along with supportsUniquePtrPub().
-   */
-  virtual void publish(
-    sensor_msgs::msg::Image::UniquePtr /*message*/,
-    const PublisherT & /*publisher*/) const
-  {
-    throw std::logic_error(
-      "publish(sensor_msgs::msg::Image::UniquePtr, const PublisherT&) is not implemented.");
-  }
+    const PublishFn & publish_fn) const = 0;
 
   /**
    * \brief Return the communication topic name for a given base topic.
@@ -197,7 +146,7 @@ private:
 
     rclcpp::Node * node_;
     rclcpp::Logger logger_;
-    PublisherT pub_;
+    typename rclcpp::Publisher<M>::SharedPtr pub_;
   };
 
   std::unique_ptr<SimplePublisherPluginImpl> simple_impl_;
