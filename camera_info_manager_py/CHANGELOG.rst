@@ -2,28 +2,23 @@
 Changelog for package camera_info_manager_py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-6.1.2 (2025-06-12)
+5.1.7 (2025-06-12)
 ------------------
-* Fix CameraInfo distortion coefficients and logger (`#360 <https://github.com/ros-perception/image_common/issues/360>`_) (`#361 <https://github.com/ros-perception/image_common/issues/361>`_)
+* Fix CameraInfo distortion coefficients and logger (`#360 <https://github.com/ros-perception/image_common/issues/360>`_) (`#362 <https://github.com/ros-perception/image_common/issues/362>`_)
 * Contributors: mergify[bot]
 
-6.1.1 (2025-04-28)
+5.1.6 (2025-04-02)
 ------------------
 
-6.1.0 (2024-12-20)
+5.1.5 (2024-11-26)
 ------------------
-* Cleanup of camera_info_manager_py. (`#340 <https://github.com/ros-perception/image_common/issues/340>`_)
-* Contributors: Chris Lalancette
+* Add `camera_info_manager_py` (`#335 <https://github.com/ros-perception/image_common/issues/335>`_) (`#336 <https://github.com/ros-perception/image_common/issues/336>`_)
+  (cherry picked from commit d09c82cfb5558d253de99317a4d7d5fb61867b03)
+  Co-authored-by: Alejandro Hernández Cordero <ahcorde@gmail.com>
+* Contributors: mergify[bot]
 
-6.0.3 (2024-11-25)
-------------------
-* Add `camera_info_manager_py` (`#335 <https://github.com/ros-perception/image_common/issues/335>`_)
-* Contributors: Alejandro Hernández Cordero
-
-6.0.1 (2024-11-22)
-------------------
-* Bump package version to synchronize with image_common
-* Contributors: Chris Iverach-Brereton
+1.9.0 (2012-09-07 13:03)
+------------------------
 
 1.0.0 (2024-05-16)
 ------------------
