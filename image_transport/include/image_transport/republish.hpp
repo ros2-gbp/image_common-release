@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Martin Idel
+// Copyright (c) 2023 Open Source Robotics Foundation, Inc.
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -26,11 +26,39 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef IMAGE_TRANSPORT__CAMERA_COMMON_H_
-#define IMAGE_TRANSPORT__CAMERA_COMMON_H_
+#ifndef IMAGE_TRANSPORT__REPUBLISH_HPP_
+#define IMAGE_TRANSPORT__REPUBLISH_HPP_
 
-#pragma message ("Warning: This header is deprecated. Use 'camera_common.hpp' instead")
+#include <memory>
+#include <mutex>
 
-#include "camera_common.hpp"
+#include "image_transport/image_transport.hpp"
+#include "image_transport/visibility_control.hpp"
 
-#endif  // IMAGE_TRANSPORT__CAMERA_COMMON_H_
+#include <pluginlib/class_loader.hpp>
+
+#include <rclcpp/rclcpp.hpp>
+
+namespace image_transport
+{
+class Republisher : public rclcpp::Node
+{
+public:
+  /// Constructor
+  IMAGE_TRANSPORT_PUBLIC
+  explicit Republisher(const rclcpp::NodeOptions & options);
+
+private:
+  void initialize();
+
+  rclcpp::TimerBase::SharedPtr timer_;
+  bool initialized_{false};
+  image_transport::Subscriber sub;
+  image_transport::Publisher pub;
+  std::mutex pub_matched_mutex;
+  pluginlib::UniquePtr<image_transport::PublisherPlugin> instance;
+  std::shared_ptr<pluginlib::ClassLoader<image_transport::PublisherPlugin>> loader;
+};
+
+}  // namespace image_transport
+#endif  // IMAGE_TRANSPORT__REPUBLISH_HPP_

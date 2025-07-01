@@ -150,21 +150,8 @@ protected:
     rclcpp::Node * node,
     const std::string & base_topic,
     const Callback & callback,
-    rmw_qos_profile_t custom_qos = rmw_qos_profile_default) = 0;
-
-  virtual void subscribeImpl(
-    rclcpp::Node * node,
-    const std::string & base_topic,
-    const Callback & callback,
     rmw_qos_profile_t custom_qos,
-    rclcpp::SubscriptionOptions options)
-  {
-    (void) options;
-    RCLCPP_ERROR(
-      node->get_logger(),
-      "SubscriberPlugin::subscribeImpl with five arguments has not been overridden");
-    this->subscribeImpl(node, base_topic, callback, custom_qos);
-  }
+    rclcpp::SubscriptionOptions options) = 0;
 };
 
 }  // namespace image_transport
