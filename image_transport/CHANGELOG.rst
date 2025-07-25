@@ -2,6 +2,14 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.3.0 (2025-07-25)
+------------------
+* fixed build (`#369 <https://github.com/ros-perception/image_common/issues/369>`_)
+* Deprecated rmw_qos_profile_t in favour of rclcpp::QoS (`#364 <https://github.com/ros-perception/image_common/issues/364>`_)
+* Removed deprecated code (`#356 <https://github.com/ros-perception/image_common/issues/356>`_)
+* Fix cmake deprecation (`#367 <https://github.com/ros-perception/image_common/issues/367>`_)
+* Contributors: Alejandro Hernández Cordero, mosfet80
+
 6.2.2 (2025-07-01)
 ------------------
 * Fix topic resolution for plugins (`#365 <https://github.com/ros-perception/image_common/issues/365>`_)
