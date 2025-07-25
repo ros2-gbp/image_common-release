@@ -2,6 +2,12 @@
 Changelog for package camera_info_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.3.0 (2025-07-25)
+------------------
+* Deprecated rmw_qos_profile_t in favour of rclcpp::QoS (`#364 <https://github.com/ros-perception/image_common/issues/364>`_)
+* Fix cmake deprecation (`#367 <https://github.com/ros-perception/image_common/issues/367>`_)
+* Contributors: Alejandro Hernández Cordero, mosfet80
+
 6.2.2 (2025-07-01)
 ------------------
 
