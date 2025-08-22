@@ -117,7 +117,7 @@ void Republisher::initialize()
           this->sub.shutdown();
         } else if (!this->sub) {
           this->sub = image_transport::create_subscription(
-            this, "in",
+            *this, "in",
             std::bind(pub_mem_fn, &this->pub, std::placeholders::_1),
             in_transport,
             rclcpp::SystemDefaultsQoS(),
@@ -126,7 +126,7 @@ void Republisher::initialize()
       };
 
     this->pub = image_transport::create_publisher(
-      this, "out",
+      *this, "out",
       rclcpp::SystemDefaultsQoS(), pub_options);
   } else {
     // Use one specific transport for output
@@ -150,7 +150,7 @@ void Republisher::initialize()
           this->sub.shutdown();
         } else if (!this->sub) {
           this->sub = image_transport::create_subscription(
-            this, "in",
+            *this, "in",
             std::bind(
               pub_mem_fn,
               this->instance.get(), std::placeholders::_1), in_transport,
@@ -159,7 +159,7 @@ void Republisher::initialize()
         }
       };
 
-    this->instance->advertise(this, "out", rclcpp::SystemDefaultsQoS(), pub_options);
+    this->instance->advertise(*this, "out", rclcpp::SystemDefaultsQoS(), pub_options);
   }
 }
 
