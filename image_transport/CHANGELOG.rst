@@ -2,6 +2,13 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.4.0 (2025-08-22)
+------------------
+* Fix compilation error with clang (`#372 <https://github.com/ros-perception/image_common/issues/372>`_)
+* Support lifecycle node - NodeInterfaces (`#352 <https://github.com/ros-perception/image_common/issues/352>`_)
+* Fixed clang build (`#371 <https://github.com/ros-perception/image_common/issues/371>`_)
+* Contributors: Alejandro Hernández Cordero
+
 6.3.0 (2025-07-25)
 ------------------
 * fixed build (`#369 <https://github.com/ros-perception/image_common/issues/369>`_)
