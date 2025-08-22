@@ -38,6 +38,7 @@
 #include "sensor_msgs/msg/image.hpp"
 #include "sensor_msgs/msg/camera_info.hpp"
 
+#include "image_transport/node_interfaces.hpp"
 #include "image_transport/single_subscriber_publisher.hpp"
 #include "image_transport/visibility_control.hpp"
 
@@ -67,7 +68,8 @@ public:
   IMAGE_TRANSPORT_PUBLIC
   CameraPublisher() = default;
 
-  [[deprecated("Use CameraPublisher(..., rclcpp::QoS, ...) instead")]]
+  [[deprecated("Use CameraPublisher(RequiredInterfaces node_interfaces, ..., rclcpp::QoS) "
+    "instead.")]]
   IMAGE_TRANSPORT_PUBLIC
   CameraPublisher(
     rclcpp::Node * node,
@@ -77,7 +79,7 @@ public:
 
   IMAGE_TRANSPORT_PUBLIC
   CameraPublisher(
-    rclcpp::Node * node,
+    RequiredInterfaces node_interfaces,
     const std::string & base_topic,
     rclcpp::QoS custom_qos,
     rclcpp::PublisherOptions = rclcpp::PublisherOptions());
