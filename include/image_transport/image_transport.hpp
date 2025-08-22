@@ -38,6 +38,7 @@
 
 #include "image_transport/camera_publisher.hpp"
 #include "image_transport/camera_subscriber.hpp"
+#include "image_transport/node_interfaces.hpp"
 #include "image_transport/publisher.hpp"
 #include "image_transport/subscriber.hpp"
 #include "image_transport/transport_hints.hpp"
@@ -49,7 +50,8 @@ namespace image_transport
 /*!
  * \brief Advertise an image topic, free function version.
  */
-[[deprecated("Use create_publisher(..., rclcpp::QoS, ...) instead")]]
+[[deprecated("Use create_publisher(RequiredInterfaces node_interfaces, ..., rclcpp::QoS) "
+  "instead.")]]
 IMAGE_TRANSPORT_PUBLIC
 Publisher create_publisher(
   rclcpp::Node * node,
@@ -57,12 +59,9 @@ Publisher create_publisher(
   rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
   rclcpp::PublisherOptions options = rclcpp::PublisherOptions());
 
-/*!
- * \brief Advertise an image topic, free function version.
- */
 IMAGE_TRANSPORT_PUBLIC
 Publisher create_publisher(
-  rclcpp::Node * node,
+  RequiredInterfaces node_interfaces,
   const std::string & base_topic,
   rclcpp::QoS custom_qos,
   rclcpp::PublisherOptions options = rclcpp::PublisherOptions());
@@ -70,7 +69,8 @@ Publisher create_publisher(
 /**
  * \brief Subscribe to an image topic, free function version.
  */
-[[deprecated("Use create_subscription(..., rclcpp::QoS, ...) instead")]]
+[[deprecated("Use create_subscription(RequiredInterfaces node_interfaces, ..., rclcpp::QoS, ...) "
+  "instead")]]
 IMAGE_TRANSPORT_PUBLIC
 Subscriber create_subscription(
   rclcpp::Node * node,
@@ -85,7 +85,7 @@ Subscriber create_subscription(
  */
 IMAGE_TRANSPORT_PUBLIC
 Subscriber create_subscription(
-  rclcpp::Node * node,
+  RequiredInterfaces node_interfaces,
   const std::string & base_topic,
   const Subscriber::Callback & callback,
   const std::string & transport,
@@ -95,7 +95,8 @@ Subscriber create_subscription(
 /*!
  * \brief Advertise a camera, free function version.
  */
-[[deprecated("Use create_camera_publisher(..., rclcpp::QoS, ...) instead")]]
+[[deprecated("Use create_camera_publisher(RequiredInterfaces node_interfaces, ..., "
+  "rclcpp::QoS, ...) instead")]]
 IMAGE_TRANSPORT_PUBLIC
 CameraPublisher create_camera_publisher(
   rclcpp::Node * node,
@@ -108,7 +109,7 @@ CameraPublisher create_camera_publisher(
  */
 IMAGE_TRANSPORT_PUBLIC
 CameraPublisher create_camera_publisher(
-  rclcpp::Node * node,
+  RequiredInterfaces node_interfaces,
   const std::string & base_topic,
   rclcpp::QoS custom_qos,
   rclcpp::PublisherOptions pub_options = rclcpp::PublisherOptions());
@@ -116,7 +117,8 @@ CameraPublisher create_camera_publisher(
 /*!
  * \brief Subscribe to a camera, free function version.
  */
-[[deprecated("Use create_camera_subscription(..., rclcpp::QoS, ...) instead")]]
+[[deprecated("Use create_camera_subscription(RequiredInterfaces node_interfaces, ..., "
+  "rclcpp::QoS, ...) instead")]]
 IMAGE_TRANSPORT_PUBLIC
 CameraSubscriber create_camera_subscription(
   rclcpp::Node * node,
@@ -130,7 +132,7 @@ CameraSubscriber create_camera_subscription(
  */
 IMAGE_TRANSPORT_PUBLIC
 CameraSubscriber create_camera_subscription(
-  rclcpp::Node * node,
+  RequiredInterfaces node_interfaces,
   const std::string & base_topic,
   const CameraSubscriber::Callback & callback,
   const std::string & transport,
@@ -156,8 +158,12 @@ public:
   using ImageConstPtr = sensor_msgs::msg::Image::ConstSharedPtr;
   using CameraInfoConstPtr = sensor_msgs::msg::CameraInfo::ConstSharedPtr;
 
+  [[deprecated("Use ImageTransport(RequiredInterfaces node_interfaces, ...) instead.")]]
   IMAGE_TRANSPORT_PUBLIC
   explicit ImageTransport(rclcpp::Node::SharedPtr node);
+
+  IMAGE_TRANSPORT_PUBLIC
+  explicit ImageTransport(RequiredInterfaces node_interfaces);
 
   IMAGE_TRANSPORT_PUBLIC
   ImageTransport(const ImageTransport & other);
@@ -262,8 +268,8 @@ public:
   /**
    * \brief Subscribe to an image topic, version for arbitrary std::function object and QoS.
    */
-  IMAGE_TRANSPORT_PUBLIC
   [[deprecated("Use subscribe(..., rclcpp::QoS, ...) instead")]]
+  IMAGE_TRANSPORT_PUBLIC
   Subscriber subscribe(
     const std::string & base_topic, rmw_qos_profile_t custom_qos,
     const Subscriber::Callback & callback,
@@ -493,7 +499,7 @@ private:
 
 struct ImageTransport::Impl
 {
-  rclcpp::Node::SharedPtr node_;
+  RequiredInterfaces required_interfaces_;
 };
 
 }  // namespace image_transport
