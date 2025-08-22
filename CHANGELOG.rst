@@ -2,6 +2,9 @@
 Changelog for package image_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.4.0 (2025-08-22)
+------------------
+
 6.3.0 (2025-07-25)
 ------------------
 * Fix cmake deprecation (`#367 <https://github.com/ros-perception/image_common/issues/367>`_)
