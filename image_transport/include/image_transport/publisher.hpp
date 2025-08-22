@@ -39,6 +39,7 @@
 
 #include "image_transport/exception.hpp"
 #include "image_transport/loader_fwds.hpp"
+#include "image_transport/node_interfaces.hpp"
 #include "image_transport/single_subscriber_publisher.hpp"
 #include "image_transport/visibility_control.hpp"
 
@@ -68,10 +69,11 @@ public:
   IMAGE_TRANSPORT_PUBLIC
   Publisher() = default;
 
-  [[deprecated("Use Publisher(..., rclcpp::QoS, ...) instead")]]
+  [[deprecated("Use Publisher(RequiredInterfaces node_interfaces, ..., rclcpp::QoS, ...) "
+    "instead.")]]
   IMAGE_TRANSPORT_PUBLIC
   Publisher(
-    rclcpp::Node * nh,
+    rclcpp::Node * node,
     const std::string & base_topic,
     PubLoaderPtr loader,
     rmw_qos_profile_t custom_qos,
@@ -79,7 +81,7 @@ public:
 
   IMAGE_TRANSPORT_PUBLIC
   Publisher(
-    rclcpp::Node * nh,
+    RequiredInterfaces node_interfaces,
     const std::string & base_topic,
     PubLoaderPtr loader,
     rclcpp::QoS custom_qos,
