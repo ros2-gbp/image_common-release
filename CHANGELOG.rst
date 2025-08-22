@@ -2,6 +2,9 @@
 Changelog for package camera_info_manager_py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.4.0 (2025-08-22)
+------------------
+
 6.3.0 (2025-07-25)
 ------------------
 * fix setuptools deprecation (`#366 <https://github.com/ros-perception/image_common/issues/366>`_)
