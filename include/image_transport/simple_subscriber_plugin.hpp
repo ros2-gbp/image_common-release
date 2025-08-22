@@ -108,7 +108,8 @@ protected:
     return base_topic + "/" + getTransportName();
   }
 
-  [[deprecated("Use subscribeImpl(..., rclcpp::QoS, ...) instead")]]
+  [[deprecated("Use subscribeImpl(RequiredInterfaces node_interfaces, ..., rclcpp::QoS, ...) "
+    "instead")]]
   void subscribeImpl(
     rclcpp::Node * node,
     const std::string & base_topic,
@@ -116,12 +117,12 @@ protected:
     rmw_qos_profile_t custom_qos,
     rclcpp::SubscriptionOptions options) override
   {
-    subscribeImpl(node, base_topic, callback,
+    subscribeImpl(*node, base_topic, callback,
         rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos), custom_qos), options);
   }
 
   void subscribeImpl(
-    rclcpp::Node * node,
+    RequiredInterfaces node_interfaces,
     const std::string & base_topic,
     const Callback & callback,
     rclcpp::QoS custom_qos,
@@ -131,7 +132,11 @@ protected:
     // Push each group of transport-specific parameters into a separate sub-namespace
     // ros::NodeHandle param_nh(transport_hints.getParameterNH(), getTransportName());
     //
-    impl_->sub_ = node->create_subscription<M>(
+    auto parameters_interface = node_interfaces.get_node_parameters_interface();
+    auto topics_interface = node_interfaces.get_node_topics_interface();
+    impl_->sub_ = rclcpp::create_subscription<M>(
+      parameters_interface,
+      topics_interface,
       getTopicToSubscribe(base_topic), custom_qos,
       [this, callback](const typename std::shared_ptr<const M> msg) {
         internalCallback(msg, callback);
