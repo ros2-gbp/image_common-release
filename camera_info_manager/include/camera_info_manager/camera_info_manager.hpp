@@ -181,6 +181,8 @@ using SetCameraInfo = sensor_msgs::srv::SetCameraInfo;
 class CameraInfoManager
 {
 public:
+  [[deprecated("Use CameraInfoManager(rclcpp::node_interfaces::NodeBaseInterface::SharedPtr, ...)"
+    " instead.")]]
   CAMERA_INFO_MANAGER_PUBLIC
   CameraInfoManager(
     rclcpp::Node * node,
@@ -188,6 +190,8 @@ public:
     const std::string & url = "",
     const std::string & ns = "~");
 
+  [[deprecated("Use CameraInfoManager(rclcpp::node_interfaces::NodeBaseInterface::SharedPtr, ...)"
+    " instead.")]]
   CAMERA_INFO_MANAGER_PUBLIC
   CameraInfoManager(
     rclcpp_lifecycle::LifecycleNode * node,
