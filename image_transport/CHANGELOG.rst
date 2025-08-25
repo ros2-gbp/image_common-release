@@ -2,6 +2,11 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.4.1 (2025-08-25)
+------------------
+* Fix rclcpp_lifecycle dependency (`#373 <https://github.com/ros-perception/image_common/issues/373>`_)
+* Contributors: Alejandro Hernández Cordero
+
 6.4.0 (2025-08-22)
 ------------------
 * Fix compilation error with clang (`#372 <https://github.com/ros-perception/image_common/issues/372>`_)
