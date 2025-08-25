@@ -2,6 +2,9 @@
 Changelog for package camera_info_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.4.1 (2025-08-25)
+------------------
+
 6.4.0 (2025-08-22)
 ------------------
 * Fix compilation error with clang (`#372 <https://github.com/ros-perception/image_common/issues/372>`_)
