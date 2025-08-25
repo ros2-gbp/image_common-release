@@ -2,6 +2,9 @@
 Changelog for package image_transport_py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.4.1 (2025-08-25)
+------------------
+
 6.4.0 (2025-08-22)
 ------------------
 * Support lifecycle node - NodeInterfaces (`#352 <https://github.com/ros-perception/image_common/issues/352>`_)
