@@ -181,8 +181,6 @@ using SetCameraInfo = sensor_msgs::srv::SetCameraInfo;
 class CameraInfoManager
 {
 public:
-  [[deprecated("Use CameraInfoManager(rclcpp::node_interfaces::NodeBaseInterface::SharedPtr, ...)"
-    " instead.")]]
   CAMERA_INFO_MANAGER_PUBLIC
   CameraInfoManager(
     rclcpp::Node * node,
@@ -190,8 +188,6 @@ public:
     const std::string & url = "",
     const std::string & ns = "~");
 
-  [[deprecated("Use CameraInfoManager(rclcpp::node_interfaces::NodeBaseInterface::SharedPtr, ...)"
-    " instead.")]]
   CAMERA_INFO_MANAGER_PUBLIC
   CameraInfoManager(
     rclcpp_lifecycle::LifecycleNode * node,
@@ -199,7 +195,6 @@ public:
     const std::string & url = "",
     const std::string & ns = "~");
 
-  [[deprecated("Use CameraInfoManager(..., rclcpp::QoS, ...) instead")]]
   CAMERA_INFO_MANAGER_PUBLIC
   CameraInfoManager(
     rclcpp::node_interfaces::NodeBaseInterface::SharedPtr node_base_interface,
@@ -207,15 +202,6 @@ public:
     rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr node_logger_interface,
     const std::string & cname = "camera", const std::string & url = "",
     rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
-    const std::string & ns = "~");
-
-  CAMERA_INFO_MANAGER_PUBLIC
-  CameraInfoManager(
-    rclcpp::node_interfaces::NodeBaseInterface::SharedPtr node_base_interface,
-    rclcpp::node_interfaces::NodeServicesInterface::SharedPtr node_services_interface,
-    rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr node_logger_interface,
-    const std::string & cname = "camera", const std::string & url = "",
-    rclcpp::QoS custom_qos = rclcpp::SystemDefaultsQoS(),
     const std::string & ns = "~");
 
   CAMERA_INFO_MANAGER_PUBLIC

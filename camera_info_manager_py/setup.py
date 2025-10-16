@@ -5,7 +5,7 @@ package_name = 'camera_info_manager_py'
 
 setup(
     name=package_name,
-    version='6.4.2',
+    version='6.1.3',
     packages=find_packages(exclude=['test']),
     data_files=[
         # Install marker file in the package index
@@ -22,6 +22,7 @@ setup(
     keywords=['ROS'],
     classifiers=[
         'Intended Audience :: Developers',
+        'License :: OSI Approved :: BSD License',
         'Programming Language :: Python',
         'Topic :: Software Development',
     ],
@@ -30,9 +31,5 @@ setup(
                      'This ROS package provides a CameraInfo interface for Python camera\n'
                      'drivers similar to the C++ camera_info_manager package.',
     license='BSD',
-    extras_require={
-        'test': [
-            'pytest'
-        ]
-    },
+    tests_require=['pytest'],
 )
