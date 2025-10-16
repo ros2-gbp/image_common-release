@@ -2,6 +2,11 @@
 Changelog for package image_transport_py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.4.2 (2025-10-16)
+------------------
+* Use pybind11 from deb or pixi (`#374 <https://github.com/ros-perception/image_common/issues/374>`_)
+* Contributors: Alejandro Hernández Cordero
+
 6.4.1 (2025-08-25)
 ------------------
 
