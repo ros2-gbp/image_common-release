@@ -1,3 +1,32 @@
+## image_common (kilted) - 6.1.3-1
+
+The packages in the `image_common` repository were released into the `kilted` distro by running `/usr/bin/bloom-release --rosdistro kilted --track kilted image_common` on `Thu, 16 Oct 2025 09:54:35 -0000`
+
+These packages were released:
+- `camera_calibration_parsers`
+- `camera_info_manager`
+- `camera_info_manager_py`
+- `image_common`
+- `image_transport`
+- `image_transport_py`
+
+Version of package(s) in repository `image_common`:
+
+- upstream repository: https://github.com/ros-perception/image_common
+- release repository: https://github.com/ros2-gbp/image_common-release.git
+- rosdistro version: `6.1.2-1`
+- old version: `6.1.2-1`
+- new version: `6.1.3-1`
+
+Versions of tools used:
+
+- bloom version: `0.13.0`
+- catkin_pkg version: `1.1.0`
+- rosdep version: `0.26.0`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## image_common (rolling) - 6.4.2-1
 
 The packages in the `image_common` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --rosdistro rolling --track rolling image_common` on `Thu, 16 Oct 2025 09:46:04 -0000`
