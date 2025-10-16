@@ -2,6 +2,11 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.4.2 (2025-10-16)
+------------------
+* Fix QoS override tests (`#376 <https://github.com/ros-perception/image_common/issues/376>`_)
+* Contributors: Alejandro Hernández Cordero
+
 6.4.1 (2025-08-25)
 ------------------
 * Fix rclcpp_lifecycle dependency (`#373 <https://github.com/ros-perception/image_common/issues/373>`_)
