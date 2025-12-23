@@ -2,6 +2,11 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.4.4 (2025-12-23)
+------------------
+* properly shut down rclcpp after all tests complete. (`#384 <https://github.com/ros-perception/image_common/issues/384>`_)
+* Contributors: Tomoya Fujita
+
 6.4.3 (2025-11-24)
 ------------------
 
