@@ -2,6 +2,11 @@
 Changelog for package camera_info_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.4.4 (2025-12-23)
+------------------
+* Updated deprecated ament_index_cpp API (`#388 <https://github.com/ros-perception/image_common/issues/388>`_)
+* Contributors: Alejandro Hernández Cordero
+
 6.4.3 (2025-11-24)
 ------------------
 
