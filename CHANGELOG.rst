@@ -2,6 +2,9 @@
 Changelog for package camera_info_manager_py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.4.4 (2025-12-23)
+------------------
+
 6.4.3 (2025-11-24)
 ------------------
 * Cleanup mislabeled BSD license (`#382 <https://github.com/ros-perception/image_common/issues/382>`_)
