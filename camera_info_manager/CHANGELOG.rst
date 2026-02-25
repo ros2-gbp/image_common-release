@@ -2,6 +2,13 @@
 Changelog for package camera_info_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.4.5 (2026-02-25)
+------------------
+* Use get_package_share_path (`#391 <https://github.com/ros-perception/image_common/issues/391>`_)
+* Update BSD licenses to SPDX identifier (`#389 <https://github.com/ros-perception/image_common/issues/389>`_)
+  Co-authored-by: Alejandro Hernandez Cordero <ahcorde@gmail.com>
+* Contributors: Alejandro Hernández Cordero, Garrett Brown
+
 6.4.4 (2025-12-23)
 ------------------
 * Updated deprecated ament_index_cpp API (`#388 <https://github.com/ros-perception/image_common/issues/388>`_)
