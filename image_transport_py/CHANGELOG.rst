@@ -2,6 +2,12 @@
 Changelog for package image_transport_py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.4.5 (2026-02-25)
+------------------
+* Update BSD licenses to SPDX identifier (`#389 <https://github.com/ros-perception/image_common/issues/389>`_)
+  Co-authored-by: Alejandro Hernandez Cordero <ahcorde@gmail.com>
+* Contributors: Garrett Brown
+
 6.4.4 (2025-12-23)
 ------------------
 
