@@ -38,7 +38,7 @@
 
 #include "rcpputils/env.hpp"
 #include "camera_calibration_parsers/parse.hpp"
-#include "ament_index_cpp/get_package_share_directory.hpp"
+#include "ament_index_cpp/get_package_share_path.hpp"
 
 
 /** @file
@@ -179,8 +179,7 @@ std::filesystem::path CameraInfoManager::getPackageFileName(const std::string & 
   std::string package(url.substr(prefix_len, rest - prefix_len));
 
   // Look up the ROS package path name.
-  std::filesystem::path pkgPath;
-  ament_index_cpp::get_package_share_directory(package, pkgPath);
+  std::filesystem::path pkgPath = ament_index_cpp::get_package_share_path(package);
   if (pkgPath.empty()) {                // package not found?
     RCLCPP_WARN(logger_, "unknown package: %s (ignored)", package.c_str());
     return pkgPath;
