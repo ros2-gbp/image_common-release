@@ -2,6 +2,9 @@
 Changelog for package camera_info_manager_py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.4.6 (2026-03-24)
+------------------
+
 6.4.5 (2026-02-25)
 ------------------
 * Update BSD licenses to SPDX identifier (`#389 <https://github.com/ros-perception/image_common/issues/389>`_)
