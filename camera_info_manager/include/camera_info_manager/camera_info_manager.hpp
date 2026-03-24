@@ -189,7 +189,7 @@ public:
     rclcpp::Node * node,
     const std::string & cname = "camera",
     const std::string & url = "",
-    const std::string & ns = "~");
+    const std::string & ns = "");
 
   [[deprecated("Use CameraInfoManager(rclcpp::node_interfaces::NodeBaseInterface::SharedPtr, ...)"
     " instead.")]]
@@ -198,7 +198,7 @@ public:
     rclcpp_lifecycle::LifecycleNode * node,
     const std::string & cname = "camera",
     const std::string & url = "",
-    const std::string & ns = "~");
+    const std::string & ns = "");
 
   [[deprecated("Use CameraInfoManager(..., rclcpp::QoS, ...) instead")]]
   CAMERA_INFO_MANAGER_PUBLIC
@@ -208,7 +208,7 @@ public:
     rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr node_logger_interface,
     const std::string & cname = "camera", const std::string & url = "",
     rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
-    const std::string & ns = "~");
+    const std::string & ns = "");
 
   CAMERA_INFO_MANAGER_PUBLIC
   CameraInfoManager(
@@ -217,7 +217,7 @@ public:
     rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr node_logger_interface,
     const std::string & cname = "camera", const std::string & url = "",
     rclcpp::QoS custom_qos = rclcpp::SystemDefaultsQoS(),
-    const std::string & ns = "~");
+    const std::string & ns = "");
 
   CAMERA_INFO_MANAGER_PUBLIC
   CameraInfo getCameraInfo(void);
