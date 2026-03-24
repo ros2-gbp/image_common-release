@@ -2,6 +2,12 @@
 Changelog for package camera_info_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.4.6 (2026-03-24)
+------------------
+* Use new ROSIDL aggregate CMake target (`#396 <https://github.com/ros-perception/image_common/issues/396>`_)
+* Added camera info manager unit test (`#358 <https://github.com/ros-perception/image_common/issues/358>`_)
+* Contributors: Alejandro Hernández Cordero, Emerson Knapp
+
 6.4.5 (2026-02-25)
 ------------------
 * Use get_package_share_path (`#391 <https://github.com/ros-perception/image_common/issues/391>`_)

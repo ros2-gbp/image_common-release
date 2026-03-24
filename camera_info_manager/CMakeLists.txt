@@ -35,7 +35,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE "CAMERA_INFO_MANAGER_BUILDING
 target_link_libraries(${PROJECT_NAME} PUBLIC
   rclcpp::rclcpp
   rclcpp_lifecycle::rclcpp_lifecycle
-  ${sensor_msgs_TARGETS})
+  sensor_msgs::sensor_msgs)
 target_link_libraries(${PROJECT_NAME} PRIVATE
   ament_index_cpp::ament_index_cpp
   camera_calibration_parsers::camera_calibration_parsers
@@ -58,10 +58,19 @@ if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   ament_lint_auto_find_test_dependencies()
 
-  #TODO(mjcarroll) Enable unit test with rostest
-  #add_executable(unit_test tests/unit_test.cpp)
-  #target_link_libraries(unit_test ${PROJECT_NAME})
-  #add_rostest(tests/unit_test.test DEPENDENCIES unit_test)
+  ament_add_gtest(${PROJECT_NAME}-unit_test
+    tests/unit_test.cpp
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+  )
+  target_link_libraries(${PROJECT_NAME}-unit_test
+    ${PROJECT_NAME}
+    sensor_msgs::sensor_msgs
+    ament_index_cpp::ament_index_cpp
+    rclcpp::rclcpp
+  )
+
+  # copy the file in the installation folder to test with package://
+  install(FILES tests/test_calibration.yaml DESTINATION share/${PROJECT_NAME}/tests)
 endif()
 
 ament_package()
