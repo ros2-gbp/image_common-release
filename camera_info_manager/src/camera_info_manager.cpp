@@ -185,7 +185,8 @@ std::filesystem::path CameraInfoManager::getPackageFileName(const std::string & 
     return pkgPath;
   } else {
     // Construct file name from package location and remainder of URL.
-    return std::filesystem::path(pkgPath.string() + url.substr(rest));
+    // url.substr(rest) starts with '/', use relative() to compose safely.
+    return pkgPath / std::filesystem::path(url.substr(rest + 1));
   }
 }
 
@@ -254,7 +255,8 @@ bool CameraInfoManager::loadCalibration(
       }
     case URL_file:
       {
-        success = loadCalibrationFile(resURL.substr(7), cname);
+        success = loadCalibrationFile(
+          std::filesystem::path(resURL.substr(7)), cname);
         break;
       }
     case URL_flash:
@@ -384,14 +386,19 @@ std::string CameraInfoManager::resolveURL(
       // substitute $ROS_HOME
       std::string ros_home;
       std::string ros_home_env = rcpputils::get_env_var("ROS_HOME");
-      std::string home_env = rcpputils::get_env_var("HOME");
       if (!ros_home_env.empty()) {
-        // use environment variable
-        ros_home = ros_home_env;
-      } else if (!home_env.empty()) {
-        // use "$HOME/.ros"
-        ros_home = home_env;
-        ros_home += "/.ros";
+        // use environment variable (already a path, forward-slashes preferred)
+        ros_home = std::filesystem::path(ros_home_env).generic_string();
+      } else {
+        // use "$HOME/.ros" on Linux/macOS, "%USERPROFILE%/.ros" on Windows
+#ifdef _WIN32
+        std::string home_env = rcpputils::get_env_var("USERPROFILE");
+#else
+        std::string home_env = rcpputils::get_env_var("HOME");
+#endif
+        if (!home_env.empty()) {
+          ros_home = (std::filesystem::path(home_env) / ".ros").generic_string();
+        }
       }
       resolved += ros_home;
       dollar += 10;
@@ -433,7 +440,11 @@ CameraInfoManager::url_type_t CameraInfoManager::parseURL(const std::string & ur
     };
 
 
-  if (iequals(url.substr(0, 8), "file:///")) {
+  // Accept both "file:///" (Unix absolute path) and "file://X:/" (Windows
+  // drive letter), but reject bare "file://" with nothing after it.
+  if (iequals(url.substr(0, 7), "file://") && url.length() > 7 &&
+    (url[7] == '/' || (url.length() > 9 && std::isalpha(url[7]) && url[8] == ':')))
+  {
     return URL_file;
   }
   if (iequals(url.substr(0, 9), "flash:///")) {
@@ -479,7 +490,8 @@ CameraInfoManager::saveCalibration(
       }
     case URL_file:
       {
-        success = saveCalibrationFile(new_info, resURL.substr(7), cname);
+        success = saveCalibrationFile(
+          new_info, std::filesystem::path(resURL.substr(7)), cname);
         break;
       }
     case URL_package:
@@ -530,7 +542,6 @@ CameraInfoManager::saveCalibrationFile(
 
   // Directory exists. Permissions might still be bad.
   // Currently, writeCalibration() always returns true no matter what
-  // (ros-pkg ticket #5010).
   return writeCalibration(filename.string(), cname, new_info);
 }
 
