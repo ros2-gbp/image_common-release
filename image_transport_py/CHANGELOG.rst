@@ -2,6 +2,9 @@
 Changelog for package image_transport_py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+6.4.7 (2026-04-01)
+------------------
+
 6.4.6 (2026-03-24)
 ------------------
 * Use new ROSIDL aggregate CMake target (`#396 <https://github.com/ros-perception/image_common/issues/396>`_)

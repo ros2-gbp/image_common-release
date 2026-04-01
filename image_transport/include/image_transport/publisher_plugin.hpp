@@ -29,6 +29,7 @@
 #ifndef IMAGE_TRANSPORT__PUBLISHER_PLUGIN_HPP_
 #define IMAGE_TRANSPORT__PUBLISHER_PLUGIN_HPP_
 
+#include <optional>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -36,6 +37,7 @@
 #include "rclcpp/node.hpp"
 #include "sensor_msgs/msg/image.hpp"
 
+#include "image_transport/camera_common.hpp"
 #include "image_transport/node_interfaces.hpp"
 #include "image_transport/single_subscriber_publisher.hpp"
 #include "image_transport/visibility_control.hpp"
@@ -58,8 +60,31 @@ public:
   /**
    * \brief Get a string identifier for the transport provided by
    * this plugin.
+   *
+   * The default implementation auto-discovers the name from the pluginlib
+   * manifest XML (without instantiating any plugin) by matching the demangled
+   * C++ type name of \c *this against the \c type attribute of each
+   * \c <class> element.  The result is cached after the first call.
+   *
+   * Plugins that override getTransportName() continue to work unchanged —
+   * user-supplied overrides always take precedence over the base implementation.
+   * Returning a different value than what is in the manifest is considered problematic.
    */
-  virtual std::string getTransportName() const = 0;
+  IMAGE_TRANSPORT_PUBLIC
+  virtual std::string getTransportName() const;
+
+  /**
+   * \brief Get the primary message type used by this plugin.
+   *
+   * Returns the value of the \c <message_type> element from the plugin
+   * manifest XML (e.g. \c "sensor_msgs/msg/Image").  The result is cached
+   * after the first call.  Override this method if you need a different
+   * value at runtime.
+   *
+   * Returning a different value than what is in the manifest is considered problematic.
+   */
+  IMAGE_TRANSPORT_PUBLIC
+  virtual std::string getMessageType() const;
 
   /**
    * \brief Check whether this plugin supports publishing using UniquePtr.
@@ -193,6 +218,11 @@ protected:
     const std::string & base_topic,
     rclcpp::QoS custom_qos,
     rclcpp::PublisherOptions options) = 0;
+
+private:
+  // Cache for manifest-discovered data (populated lazily by the base-class
+  // implementation of getTransportName() / getMessageType()).
+  mutable std::optional<PluginManifestData> manifest_data_;
 };
 
 }  // namespace image_transport
