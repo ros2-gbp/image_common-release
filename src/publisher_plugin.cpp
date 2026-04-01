@@ -1,4 +1,4 @@
-// Copyright (c) 2009, Willow Garage, Inc.
+// Copyright (c) 2026, Open Source Robotics Foundation, Inc.
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -10,7 +10,7 @@
 //      notice, this list of conditions and the following disclaimer in the
 //      documentation and/or other materials provided with the distribution.
 //
-//    * Neither the name of the Willow Garage nor the names of its
+//    * Neither the name of the Open Source Robotics Foundation nor the names of its
 //      contributors may be used to endorse or promote products derived from
 //      this software without specific prior written permission.
 //
@@ -26,45 +26,41 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef IMAGE_TRANSPORT__RAW_SUBSCRIBER_HPP_
-#define IMAGE_TRANSPORT__RAW_SUBSCRIBER_HPP_
+#include "image_transport/publisher_plugin.hpp"
 
+#include <optional>
 #include <string>
-#include <memory>
+#include <typeinfo>
 
-#include "sensor_msgs/msg/image.hpp"
-
-#include "image_transport/simple_subscriber_plugin.hpp"
-#include "image_transport/visibility_control.hpp"
+#include "image_transport/camera_common.hpp"
 
 namespace image_transport
 {
 
-/**
- * \brief The default SubscriberPlugin.
- *
- * RawSubscriber is a simple wrapper for ros::Subscriber which listens for Image messages
- * and passes them through to the callback.
- */
-class RawSubscriber : public SimpleSubscriberPlugin<sensor_msgs::msg::Image>
+// ---------------------------------------------------------------------------
+// Helpers shared by both getTransportName() and getMessageType().
+// ---------------------------------------------------------------------------
+
+/// Populate the manifest cache on first call and return a reference to it.
+static const PluginManifestData & ensure_manifest_data(
+  std::optional<PluginManifestData> & cache,
+  const char * mangled_this_type)
 {
-public:
-  virtual ~RawSubscriber() {}
-
-protected:
-  void internalCallback(
-    const std::shared_ptr<const sensor_msgs::msg::Image> & message,
-    const Callback & user_cb) override
-  {
-    user_cb(message);
+  if (!cache) {
+    const std::string demangled = demangle_cpp_type_name(mangled_this_type);
+    cache.emplace(get_pub_manifest_data_from_class_type(demangled));
   }
+  return *cache;
+}
 
-  std::string getTopicToSubscribe(const std::string & base_topic) const override
-  {
-    return base_topic;
-  }
-};
+std::string PublisherPlugin::getTransportName() const
+{
+  return ensure_manifest_data(manifest_data_, typeid(*this).name()).transport_name;
+}
+
+std::string PublisherPlugin::getMessageType() const
+{
+  return ensure_manifest_data(manifest_data_, typeid(*this).name()).message_type;
+}
 
 }  // namespace image_transport
-
-#endif  // IMAGE_TRANSPORT__RAW_SUBSCRIBER_HPP_

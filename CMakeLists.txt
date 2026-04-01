@@ -19,12 +19,15 @@ find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(tinyxml2 REQUIRED)
 
 # Build image_transport library
 add_library(${PROJECT_NAME}
   src/camera_common.cpp
   src/publisher.cpp
+  src/publisher_plugin.cpp
   src/subscriber.cpp
+  src/subscriber_plugin.cpp
   src/single_subscriber_publisher.cpp
   src/camera_publisher.cpp
   src/camera_subscriber.cpp
@@ -39,7 +42,8 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
   rclcpp::rclcpp
   sensor_msgs::sensor_msgs)
 target_link_libraries(${PROJECT_NAME} PRIVATE
-  pluginlib::pluginlib)
+  pluginlib::pluginlib
+  tinyxml2::tinyxml2)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE "IMAGE_TRANSPORT_BUILDING_DLL")
 
@@ -123,6 +127,9 @@ if(BUILD_TESTING)
   ament_add_gtest(test_${PROJECT_NAME}-camera_common test/test_camera_common.cpp)
   if(TARGET test_${PROJECT_NAME}-camera_common)
     target_link_libraries(test_${PROJECT_NAME}-camera_common ${PROJECT_NAME})
+    target_compile_definitions(test_${PROJECT_NAME}-camera_common PRIVATE
+      DEFAULT_PLUGINS_XML="${CMAKE_CURRENT_SOURCE_DIR}/default_plugins.xml"
+      TEST_PLUGIN_MANIFEST_XML="${CMAKE_CURRENT_SOURCE_DIR}/test/test_plugin_manifest.xml")
   endif()
 
   ament_add_gtest(test_${PROJECT_NAME}-publisher test/test_publisher.cpp)
