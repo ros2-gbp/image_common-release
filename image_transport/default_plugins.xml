@@ -1,4 +1,6 @@
 <library path="image_transport_plugins">
+  <transport_name>raw</transport_name>
+  <message_type>sensor_msgs/msg/Image</message_type>
   <class
     name="image_transport/raw_pub"
     type="image_transport::RawPublisher"
