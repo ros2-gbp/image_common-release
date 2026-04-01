@@ -38,6 +38,7 @@
 
 #include "pluginlib/class_loader.hpp"
 
+#include "image_transport/camera_common.hpp"
 #include "image_transport/subscriber_plugin.hpp"
 
 namespace image_transport

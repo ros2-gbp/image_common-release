@@ -52,11 +52,6 @@ class RawPublisher : public SimplePublisherPlugin<sensor_msgs::msg::Image>
 public:
   virtual ~RawPublisher() {}
 
-  virtual std::string getTransportName() const
-  {
-    return "raw";
-  }
-
   virtual bool supportsUniquePtrPub() const
   {
     return true;
