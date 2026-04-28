@@ -1,0 +1,111 @@
+ros-rolling-image-transport-py (6.4.7-2trixie) trixie; urgency=high
+
+
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Wed, 01 Apr 2026 05:00:00 -0000
+
+ros-rolling-image-transport-py (6.4.6-2trixie) trixie; urgency=high
+
+  * Use new ROSIDL aggregate CMake target (#396 <https://github.com/ros-perception/image_common/issues/396>)
+  * Contributors: Emerson Knapp
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Tue, 24 Mar 2026 05:00:00 -0000
+
+ros-rolling-image-transport-py (6.4.5-2trixie) trixie; urgency=high
+
+  * Update BSD licenses to SPDX identifier (#389 <https://github.com/ros-perception/image_common/issues/389>)
+    Co-authored-by: Alejandro Hernandez Cordero <mailto:ahcorde@gmail.com>
+  * Contributors: Garrett Brown
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Wed, 25 Feb 2026 06:00:00 -0000
+
+ros-rolling-image-transport-py (6.4.4-2trixie) trixie; urgency=high
+
+
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Tue, 23 Dec 2025 06:00:00 -0000
+
+ros-rolling-image-transport-py (6.4.3-2trixie) trixie; urgency=high
+
+
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Mon, 24 Nov 2025 06:00:00 -0000
+
+ros-rolling-image-transport-py (6.4.2-2trixie) trixie; urgency=high
+
+  * Use pybind11 from deb or pixi (#374 <https://github.com/ros-perception/image_common/issues/374>)
+  * Contributors: Alejandro Hernández Cordero
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Thu, 16 Oct 2025 05:00:00 -0000
+
+ros-rolling-image-transport-py (6.4.1-2trixie) trixie; urgency=high
+
+
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Mon, 25 Aug 2025 05:00:00 -0000
+
+ros-rolling-image-transport-py (6.4.0-2trixie) trixie; urgency=high
+
+  * Support lifecycle node - NodeInterfaces (#352 <https://github.com/ros-perception/image_common/issues/352>)
+  * Contributors: Alejandro Hernández Cordero
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Fri, 22 Aug 2025 05:00:00 -0000
+
+ros-rolling-image-transport-py (6.3.0-2trixie) trixie; urgency=high
+
+
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Fri, 25 Jul 2025 05:00:00 -0000
+
+ros-rolling-image-transport-py (6.2.2-2trixie) trixie; urgency=high
+
+
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Tue, 01 Jul 2025 05:00:00 -0000
+
+ros-rolling-image-transport-py (6.2.1-2trixie) trixie; urgency=high
+
+
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Thu, 12 Jun 2025 05:00:00 -0000
+
+ros-rolling-image-transport-py (6.2.0-2trixie) trixie; urgency=high
+
+
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Mon, 28 Apr 2025 05:00:00 -0000
+
+ros-rolling-image-transport-py (6.1.1-2trixie) trixie; urgency=high
+
+
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Mon, 28 Apr 2025 05:00:00 -0000
+
+ros-rolling-image-transport-py (6.1.0-2trixie) trixie; urgency=high
+
+
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Fri, 20 Dec 2024 06:00:00 -0000
+
+ros-rolling-image-transport-py (6.0.3-2trixie) trixie; urgency=high
+
+
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Mon, 25 Nov 2024 06:00:00 -0000
+
+ros-rolling-image-transport-py (6.0.2-2trixie) trixie; urgency=high
+
+  * Add in python3-dev build dependency (#334 <https://github.com/ros-perception/image_common/issues/334>)
+  * Contributors: Chris Lalancette
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Mon, 25 Nov 2024 06:00:00 -0000
+
+ros-rolling-image-transport-py (6.0.1-2trixie) trixie; urgency=high
+
+  * feat: python bindings for image_transport and publish (#323 <https://github.com/ros-perception/image_common/issues/323>)
+    Co-authored-by: Alejandro Hernández Cordero <mailto:ahcorde@gmail.com>
+  * Contributors: Földi Tamás
+
+ -- Alejandro Hernández <alejandro@openrobotics.org>  Thu, 10 Oct 2024 05:00:00 -0000
+
+
