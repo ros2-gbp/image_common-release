@@ -1,0 +1,178 @@
+ros-rolling-camera-info-manager-py (6.4.7-2trixie) trixie; urgency=high
+
+
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Wed, 01 Apr 2026 05:00:00 -0000
+
+ros-rolling-camera-info-manager-py (6.4.6-2trixie) trixie; urgency=high
+
+
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Tue, 24 Mar 2026 05:00:00 -0000
+
+ros-rolling-camera-info-manager-py (6.4.5-2trixie) trixie; urgency=high
+
+  * Update BSD licenses to SPDX identifier (#389 <https://github.com/ros-perception/image_common/issues/389>)
+    Co-authored-by: Alejandro Hernandez Cordero <mailto:ahcorde@gmail.com>
+  * Contributors: Garrett Brown
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Wed, 25 Feb 2026 06:00:00 -0000
+
+ros-rolling-camera-info-manager-py (6.4.4-2trixie) trixie; urgency=high
+
+
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Tue, 23 Dec 2025 06:00:00 -0000
+
+ros-rolling-camera-info-manager-py (6.4.3-2trixie) trixie; urgency=high
+
+  * Cleanup mislabeled BSD license (#382 <https://github.com/ros-perception/image_common/issues/382>)
+  * Contributors: Alejandro Hernández Cordero
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Mon, 24 Nov 2025 06:00:00 -0000
+
+ros-rolling-camera-info-manager-py (6.4.2-2trixie) trixie; urgency=high
+
+
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Thu, 16 Oct 2025 05:00:00 -0000
+
+ros-rolling-camera-info-manager-py (6.4.1-2trixie) trixie; urgency=high
+
+
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Mon, 25 Aug 2025 05:00:00 -0000
+
+ros-rolling-camera-info-manager-py (6.4.0-2trixie) trixie; urgency=high
+
+
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Fri, 22 Aug 2025 05:00:00 -0000
+
+ros-rolling-camera-info-manager-py (6.3.0-2trixie) trixie; urgency=high
+
+  * fix setuptools deprecation (#366 <https://github.com/ros-perception/image_common/issues/366>)
+  * Contributors: mosfet80
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Fri, 25 Jul 2025 05:00:00 -0000
+
+ros-rolling-camera-info-manager-py (6.2.2-2trixie) trixie; urgency=high
+
+
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Tue, 01 Jul 2025 05:00:00 -0000
+
+ros-rolling-camera-info-manager-py (6.2.1-2trixie) trixie; urgency=high
+
+  * Fix CameraInfo distortion coefficients and logger (#360 <https://github.com/ros-perception/image_common/issues/360>)
+  * Contributors: Rick-v-E
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Thu, 12 Jun 2025 05:00:00 -0000
+
+ros-rolling-camera-info-manager-py (6.2.0-2trixie) trixie; urgency=high
+
+
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Mon, 28 Apr 2025 05:00:00 -0000
+
+ros-rolling-camera-info-manager-py (6.1.1-2trixie) trixie; urgency=high
+
+
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Mon, 28 Apr 2025 05:00:00 -0000
+
+ros-rolling-camera-info-manager-py (6.1.0-2trixie) trixie; urgency=high
+
+  * Cleanup of camera_info_manager_py. (#340 <https://github.com/ros-perception/image_common/issues/340>)
+  * Contributors: Chris Lalancette
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Fri, 20 Dec 2024 06:00:00 -0000
+
+ros-rolling-camera-info-manager-py (6.0.3-2trixie) trixie; urgency=high
+
+  * Add camera_info_manager_py (#335 <https://github.com/ros-perception/image_common/issues/335>)
+  * Contributors: Alejandro Hernández Cordero
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Mon, 25 Nov 2024 06:00:00 -0000
+
+ros-rolling-camera-info-manager-py (6.0.1-2trixie) trixie; urgency=high
+
+  * Bump package version to synchronize with image_common
+  * Contributors: Chris Iverach-Brereton
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Fri, 22 Nov 2024 06:00:00 -0000
+
+ros-rolling-camera-info-manager-py (1.0.0-2trixie) trixie; urgency=high
+
+  * Ros2 (#2 <https://github.com/clearpathrobotics/camera_info_manager_py/issues/2>)
+    * Run magic converter
+    * Ament_python package
+    * Fix some imports
+    * Remove references to cpp camera info manager.
+    Disable tests
+    * Linting
+    * Fully Remove old tests
+    * Add lint tests
+    * Final tests
+    * Remove pep257 from depends
+  * Contributors: Michael Hosmar
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Thu, 16 May 2024 05:00:00 -0000
+
+ros-rolling-camera-info-manager-py (0.3.1-2trixie) trixie; urgency=high
+
+  * changelog
+  * Contributors: José Mastrangelo
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Thu, 18 Nov 2021 06:00:00 -0000
+
+ros-rolling-camera-info-manager-py (0.3.0-2trixie) trixie; urgency=high
+
+  * added CPR maintainer
+  * Release to Melodic and Noetic
+  * Contributors: Jack O'Quin, José Mastrangelo, Lucas Walter, Martin Pecka
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Thu, 18 Nov 2021 06:00:00 -0000
+
+ros-rolling-camera-info-manager-py (0.2.3-2trixie) trixie; urgency=high
+
+  * Only use rostest when testing enabled, thanks to Lukas Bulwahn.
+  * Move repository to ros-perception.
+  * Contributors: Jack O'Quin, Lukas Bulwahn
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Tue, 13 May 2014 05:00:00 -0000
+
+ros-rolling-camera-info-manager-py (0.2.2-2trixie) trixie; urgency=high
+
+  * Add namespace parameter to constructor, so a driver can handle multiple cameras. Enhancement thanks to Martin Llofriu.
+  * Make unit tests conditional on ``CATKIN_ENABLE_TESTING``.
+  * Release to Groovy and Hydro.
+  * Contributors: Jack O'Quin, mllofriu
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Thu, 25 Jul 2013 05:00:00 -0000
+
+ros-rolling-camera-info-manager-py (0.2.1-2trixie) trixie; urgency=high
+
+  * Set null calibration even when URL invalid (#7).
+  * Release to Groovy and Hydro.
+  * Contributors: Jack O'Quin
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Sun, 14 Apr 2013 05:00:00 -0000
+
+ros-rolling-camera-info-manager-py (0.2.0-2trixie) trixie; urgency=high
+
+  * Convert to catkin.
+  * Remove roslib dependency.
+  * Release to Groovy and Hydro.
+  * Contributors: Jack O'Quin
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Thu, 28 Mar 2013 05:00:00 -0000
+
+ros-rolling-camera-info-manager-py (0.1.0-2trixie) trixie; urgency=high
+
+  * Initial Python camera_info_manager release to Fuerte.
+  * Contributors: Jack O'Quin
+
+ -- Jose Mastrangelo <jmastrangelo@clearpathrobotics.com>  Wed, 05 Dec 2012 06:00:00 -0000
+
+
