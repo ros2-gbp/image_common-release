@@ -2,8 +2,10 @@
 Changelog for package camera_info_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-6.4.8 (2026-04-30)
+7.0.0 (2026-05-06)
 ------------------
+* Fix camera_info_manager flakiness and Windows crashes (`#405 <https://github.com/ros-perception/image_common/issues/405>`_)
+* Contributors: Michael Carroll
 
 6.4.7 (2026-04-01)
 ------------------
