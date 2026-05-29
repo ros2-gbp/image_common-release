@@ -80,7 +80,6 @@ protected:
     }
   }
 
-  // Helper to construct CameraInfoManager without deprecated rclcpp::Node* API
   camera_info_manager::CameraInfoManager make_cinfo(
     const std::string & cname = "camera",
     const std::string & url = "",
