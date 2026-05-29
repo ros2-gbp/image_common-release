@@ -2,57 +2,24 @@
 Changelog for package camera_calibration_parsers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-6.1.4 (2026-05-29)
+5.1.8 (2026-05-29)
 ------------------
-* Added version.h (`#415 <https://github.com/ros-perception/image_common/issues/415>`_) (`#417 <https://github.com/ros-perception/image_common/issues/417>`_)
-  (cherry picked from commit 2301484c02081398b70ba5b35c1f0d57669ca14f)
-  Co-authored-by: Martin Pecka <peci1@seznam.cz>
-  Co-authored-by: Alejandro Hernandez Cordero <ahcorde@gmail.com>
+* Added version.h (`#415 <https://github.com/ros-perception/image_common/issues/415>`_) (`#418 <https://github.com/ros-perception/image_common/issues/418>`_)
 * Contributors: mergify[bot]
 
-6.1.3 (2025-10-16)
-------------------
-* Fix cmake deprecation (`#367 <https://github.com/ros-perception/image_common/issues/367>`_) (`#368 <https://github.com/ros-perception/image_common/issues/368>`_)
-* Contributors: mergify[bot]
-
-6.1.2 (2025-06-12)
+5.1.7 (2025-06-12)
 ------------------
 
-6.1.1 (2025-04-28)
-------------------
-* Use target_link_libraries instead of ament_target_dependencies (`#345 <https://github.com/ros-perception/image_common/issues/345>`_)
-* Contributors: Shane Loretz
-
-6.1.0 (2024-12-20)
+5.1.6 (2025-04-02)
 ------------------
 
-6.0.3 (2024-11-25)
+5.1.5 (2024-11-26)
 ------------------
 
-6.0.2 (2024-11-25)
+5.1.4 (2024-06-27)
 ------------------
 
-6.0.1 (2024-10-10)
-------------------
-
-6.0.0 (2024-10-03)
-------------------
-
-5.3.2 (2024-07-29)
-------------------
-* Added common linters to camera_calibration_parsers (`#317 <https://github.com/ros-perception/image_common/issues/317>`_)
-* Contributors: Alejandro Hernández Cordero
-
-5.3.1 (2024-07-19)
-------------------
-
-5.3.0 (2024-06-17)
-------------------
-
-5.2.1 (2024-05-24)
-------------------
-
-5.2.0 (2024-04-26)
+5.1.3 (2024-05-24)
 ------------------
 
 5.1.2 (2024-04-16)

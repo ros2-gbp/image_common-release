@@ -113,12 +113,6 @@ public:
   explicit ImageTransport(rclcpp::Node::SharedPtr node);
 
   IMAGE_TRANSPORT_PUBLIC
-  ImageTransport(const ImageTransport & other);
-
-  IMAGE_TRANSPORT_PUBLIC
-  ImageTransport & operator=(const ImageTransport & other);
-
-  IMAGE_TRANSPORT_PUBLIC
   ~ImageTransport();
 
   /*!
@@ -368,11 +362,6 @@ private:
 
   struct Impl;
   std::unique_ptr<Impl> impl_;
-};
-
-struct ImageTransport::Impl
-{
-  rclcpp::Node::SharedPtr node_;
 };
 
 }  // namespace image_transport
