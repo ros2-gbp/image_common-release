@@ -41,6 +41,7 @@ set(Python3_FIND_UNVERSIONED_NAMES FIRST)
 # Find python before pybind11
 find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
 
+find_package(pybind11_vendor REQUIRED)
 find_package(pybind11 REQUIRED)
 
 ament_python_install_package(${PROJECT_NAME})
@@ -56,7 +57,7 @@ target_include_directories(_image_transport PUBLIC
 target_link_libraries(_image_transport PUBLIC
   image_transport::image_transport
   rclcpp::rclcpp
-  sensor_msgs::sensor_msgs
+  ${sensor_msgs_TARGETS}
 )
 
 # Install cython modules as sub-modules of the project

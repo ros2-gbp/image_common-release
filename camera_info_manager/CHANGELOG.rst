@@ -2,64 +2,20 @@
 Changelog for package camera_info_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-6.4.9 (2026-05-29)
+6.1.4 (2026-05-29)
 ------------------
-* Added version.h (`#415 <https://github.com/ros-perception/image_common/issues/415>`_) (`#416 <https://github.com/ros-perception/image_common/issues/416>`_)
-* Fix camera_info_manager flakiness and Windows crashes (`#405 <https://github.com/ros-perception/image_common/issues/405>`_) (`#408 <https://github.com/ros-perception/image_common/issues/408>`_)
+* Added version.h (`#415 <https://github.com/ros-perception/image_common/issues/415>`_) (`#417 <https://github.com/ros-perception/image_common/issues/417>`_)
+  (cherry picked from commit 2301484c02081398b70ba5b35c1f0d57669ca14f)
+  Co-authored-by: Martin Pecka <peci1@seznam.cz>
+  Co-authored-by: Alejandro Hernandez Cordero <ahcorde@gmail.com>
 * Contributors: mergify[bot]
 
-6.4.8 (2026-04-30)
+6.1.3 (2025-10-16)
 ------------------
+* Fix cmake deprecation (`#367 <https://github.com/ros-perception/image_common/issues/367>`_) (`#368 <https://github.com/ros-perception/image_common/issues/368>`_)
+* Contributors: mergify[bot]
 
-6.4.7 (2026-04-01)
-------------------
-
-6.4.6 (2026-03-24)
-------------------
-* Use new ROSIDL aggregate CMake target (`#396 <https://github.com/ros-perception/image_common/issues/396>`_)
-* Added camera info manager unit test (`#358 <https://github.com/ros-perception/image_common/issues/358>`_)
-* Contributors: Alejandro Hernández Cordero, Emerson Knapp
-
-6.4.5 (2026-02-25)
-------------------
-* Use get_package_share_path (`#391 <https://github.com/ros-perception/image_common/issues/391>`_)
-* Update BSD licenses to SPDX identifier (`#389 <https://github.com/ros-perception/image_common/issues/389>`_)
-  Co-authored-by: Alejandro Hernandez Cordero <ahcorde@gmail.com>
-* Contributors: Alejandro Hernández Cordero, Garrett Brown
-
-6.4.4 (2025-12-23)
-------------------
-* Updated deprecated ament_index_cpp API (`#388 <https://github.com/ros-perception/image_common/issues/388>`_)
-* Contributors: Alejandro Hernández Cordero
-
-6.4.3 (2025-11-24)
-------------------
-
-6.4.2 (2025-10-16)
-------------------
-
-6.4.1 (2025-08-25)
-------------------
-
-6.4.0 (2025-08-22)
-------------------
-* Fix compilation error with clang (`#372 <https://github.com/ros-perception/image_common/issues/372>`_)
-* Support lifecycle node - NodeInterfaces (`#352 <https://github.com/ros-perception/image_common/issues/352>`_)
-* Contributors: Alejandro Hernández Cordero
-
-6.3.0 (2025-07-25)
-------------------
-* Deprecated rmw_qos_profile_t in favour of rclcpp::QoS (`#364 <https://github.com/ros-perception/image_common/issues/364>`_)
-* Fix cmake deprecation (`#367 <https://github.com/ros-perception/image_common/issues/367>`_)
-* Contributors: Alejandro Hernández Cordero, mosfet80
-
-6.2.2 (2025-07-01)
-------------------
-
-6.2.1 (2025-06-12)
-------------------
-
-6.2.0 (2025-04-28)
+6.1.2 (2025-06-12)
 ------------------
 
 6.1.1 (2025-04-28)

@@ -38,7 +38,6 @@
 
 #include "image_transport/exception.hpp"
 #include "image_transport/loader_fwds.hpp"
-#include "image_transport/node_interfaces.hpp"
 #include "image_transport/visibility_control.hpp"
 
 namespace image_transport
@@ -67,7 +66,6 @@ public:
   IMAGE_TRANSPORT_PUBLIC
   Subscriber() = default;
 
-  [[deprecated("Use Subscriber(RequiredInterfaces node_interfaces, ..., rclcpp::QoS) instead.")]]
   IMAGE_TRANSPORT_PUBLIC
   Subscriber(
     rclcpp::Node * node,
@@ -76,16 +74,6 @@ public:
     SubLoaderPtr loader,
     const std::string & transport,
     rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
-    rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions());
-
-  IMAGE_TRANSPORT_PUBLIC
-  Subscriber(
-    RequiredInterfaces node_interfaces,
-    const std::string & base_topic,
-    const Callback & callback,
-    SubLoaderPtr loader,
-    const std::string & transport,
-    rclcpp::QoS custom_qos,
     rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions());
 
   /**

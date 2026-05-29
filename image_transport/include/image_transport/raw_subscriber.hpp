@@ -51,6 +51,11 @@ class RawSubscriber : public SimpleSubscriberPlugin<sensor_msgs::msg::Image>
 public:
   virtual ~RawSubscriber() {}
 
+  std::string getTransportName() const override
+  {
+    return "raw";
+  }
+
 protected:
   void internalCallback(
     const std::shared_ptr<const sensor_msgs::msg::Image> & message,

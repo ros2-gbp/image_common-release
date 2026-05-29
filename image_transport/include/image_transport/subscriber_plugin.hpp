@@ -30,15 +30,12 @@
 #define IMAGE_TRANSPORT__SUBSCRIBER_PLUGIN_HPP_
 
 #include <memory>
-#include <optional>
 #include <string>
 
 #include "rclcpp/macros.hpp"
 #include "rclcpp/node.hpp"
 #include "sensor_msgs/msg/image.hpp"
 
-#include "image_transport/camera_common.hpp"
-#include "image_transport/node_interfaces.hpp"
 #include "image_transport/visibility_control.hpp"
 
 namespace image_transport
@@ -61,88 +58,32 @@ public:
   /**
    * \brief Get a string identifier for the transport provided by
    * this plugin.
-   *
-   * The default implementation auto-discovers the name from the pluginlib
-   * manifest XML (without instantiating any plugin) by matching the demangled
-   * C++ type name of \c *this against the \c type attribute of each
-   * \c <class> element.  The result is cached after the first call.
-   *
-   * Plugins that override getTransportName() continue to work unchanged —
-   * user-supplied overrides always take precedence over the base implementation.
-   * Returning a different value than what is in the manifest is considered problematic.
    */
-  virtual std::string getTransportName() const;
-
-  /**
-   * \brief Get the primary message type used by this plugin.
-   *
-   * Returns the value of the \c <message_type> element from the plugin
-   * manifest XML (e.g. \c "sensor_msgs/msg/Image").  The result is cached
-   * after the first call.  Override this method if you need a different
-   * value at runtime.
-   * Returning a different value than what is in the manifest is considered problematic.
-   */
-  virtual std::string getMessageType() const;
-
-  /**
-   * \brief Subscribe to an image topic, version for arbitrary std::function object.
-   */
-  [[deprecated("Use subscribe(RequiredInterfaces node_interfaces, .., rclcpp::QoS, ...) instead")]]
-  void subscribe(
-    rclcpp::Node * node,
-    const std::string & base_topic,
-    const Callback & callback,
-    rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
-    rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions())
-  {
-    return subscribeImpl(*node, base_topic, callback,
-        rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos), custom_qos), options);
-  }
+  virtual std::string getTransportName() const = 0;
 
   /**
    * \brief Subscribe to an image topic, version for arbitrary std::function object.
    */
   void subscribe(
-    RequiredInterfaces node_interfaces,
-    const std::string & base_topic,
+    rclcpp::Node * node, const std::string & base_topic,
     const Callback & callback,
-    rclcpp::QoS custom_qos,
-    rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions())
-  {
-    return subscribeImpl(node_interfaces, base_topic, callback, custom_qos, options);
-  }
-
-  /**
-   * \brief Subscribe to an image topic, version for bare function.
-   */
-  [[deprecated("Use subscribe(RequiredInterfaces node_interfaces, ...) instead.")]]
-  void subscribe(
-    rclcpp::Node * node,
-    const std::string & base_topic,
-    void (* fp)(const sensor_msgs::msg::Image::ConstSharedPtr &),
     rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
     rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions())
   {
-    return subscribe(
-      *node,
-      base_topic,
-      std::function<void(const sensor_msgs::msg::Image::ConstSharedPtr &)>(fp),
-      rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos), custom_qos),
-      options);
+    return subscribeImpl(node, base_topic, callback, custom_qos, options);
   }
 
   /**
    * \brief Subscribe to an image topic, version for bare function.
    */
   void subscribe(
-    RequiredInterfaces node_interfaces,
-    const std::string & base_topic,
+    rclcpp::Node * node, const std::string & base_topic,
     void (* fp)(const sensor_msgs::msg::Image::ConstSharedPtr &),
-    rclcpp::QoS custom_qos,
+    rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
     rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions())
   {
     return subscribe(
-      node_interfaces, base_topic,
+      node, base_topic,
       std::function<void(const sensor_msgs::msg::Image::ConstSharedPtr &)>(fp),
       custom_qos, options);
   }
@@ -151,34 +92,14 @@ public:
    * \brief Subscribe to an image topic, version for class member function with bare pointer.
    */
   template<class T>
-  [[deprecated("Use subscribe(RequiredInterfaces node_interfaces, .., rclcpp::QoS, ...) instead")]]
   void subscribe(
-    rclcpp::Node * node,
-    const std::string & base_topic,
+    rclcpp::Node * node, const std::string & base_topic,
     void (T::* fp)(const sensor_msgs::msg::Image::ConstSharedPtr &), T * obj,
     rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
     rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions())
   {
     return subscribe(
-      *node, base_topic,
-      std::bind(fp, obj, std::placeholders::_1),
-      rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos), custom_qos),
-      options);
-  }
-
-  /**
-   * \brief Subscribe to an image topic, version for class member function with bare pointer.
-   */
-  template<class T>
-  void subscribe(
-    RequiredInterfaces node_interfaces,
-    const std::string & base_topic,
-    void (T::* fp)(const sensor_msgs::msg::Image::ConstSharedPtr &), T * obj,
-    rclcpp::QoS custom_qos,
-    rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions())
-  {
-    return subscribe(
-      node_interfaces, base_topic,
+      node, base_topic,
       std::bind(fp, obj, std::placeholders::_1), custom_qos, options);
   }
 
@@ -186,33 +107,14 @@ public:
    * \brief Subscribe to an image topic, version for class member function with shared_ptr.
    */
   template<class T>
-  [[deprecated("Use subscribe(RequiredInterfaces node_interfaces, .., rclcpp::QoS, ...) instead")]]
   void subscribe(
-    rclcpp::Node * node,
-    const std::string & base_topic,
+    rclcpp::Node * node, const std::string & base_topic,
     void (T::* fp)(const sensor_msgs::msg::Image::ConstSharedPtr &),
     std::shared_ptr<T> & obj,
     rmw_qos_profile_t custom_qos = rmw_qos_profile_default)
   {
     return subscribe(
-      *node, base_topic,
-      std::bind(fp, obj, std::placeholders::_1),
-      rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos), custom_qos));
-  }
-
-  /**
-   * \brief Subscribe to an image topic, version for class member function with shared_ptr.
-   */
-  template<class T>
-  void subscribe(
-    RequiredInterfaces node_interfaces,
-    const std::string & base_topic,
-    void (T::* fp)(const sensor_msgs::msg::Image::ConstSharedPtr &),
-    std::shared_ptr<T> & obj,
-    rclcpp::QoS custom_qos)
-  {
-    return subscribe(
-      node_interfaces, base_topic,
+      node, base_topic,
       std::bind(fp, obj, std::placeholders::_1), custom_qos);
   }
 
@@ -241,33 +143,15 @@ public:
   }
 
 protected:
-  /*
+  /**
    * \brief Subscribe to an image transport topic. Must be implemented by the subclass.
    */
-  [[deprecated("Use subscribeImpl(RequiredInterfaces node_interfaces, .., rclcpp::QoS, ...) "
-    "instead")]]
   virtual void subscribeImpl(
     rclcpp::Node * node,
     const std::string & base_topic,
     const Callback & callback,
     rmw_qos_profile_t custom_qos,
-    rclcpp::SubscriptionOptions options)
-  {
-    subscribeImpl(*node, base_topic, callback,
-      rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos), custom_qos), options);
-  }
-
-  virtual void subscribeImpl(
-    RequiredInterfaces node_interfaces,
-    const std::string & base_topic,
-    const Callback & callback,
-    rclcpp::QoS custom_qos,
     rclcpp::SubscriptionOptions options) = 0;
-
-private:
-  // Cache for manifest-discovered data (populated lazily by the base-class
-  // implementation of getTransportName() / getMessageType()).
-  mutable std::optional<PluginManifestData> manifest_data_;
 };
 
 }  // namespace image_transport
