@@ -2,13 +2,12 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-7.0.1 (2026-05-29)
+6.4.9 (2026-05-29)
 ------------------
-* Removed deprecated API (`#413 <https://github.com/ros-perception/image_common/issues/413>`_)
-* Added version.h (`#415 <https://github.com/ros-perception/image_common/issues/415>`_)
-* Contributors: Alejandro Hernández Cordero, Martin Pecka
+* Added version.h (`#415 <https://github.com/ros-perception/image_common/issues/415>`_) (`#416 <https://github.com/ros-perception/image_common/issues/416>`_)
+* Contributors: mergify[bot]
 
-7.0.0 (2026-05-06)
+6.4.8 (2026-04-30)
 ------------------
 * Removed clang warning (`#399 <https://github.com/ros-perception/image_common/issues/399>`_)
 * Contributors: Alejandro Hernández Cordero
