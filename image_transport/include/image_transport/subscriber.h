@@ -1,4 +1,4 @@
-// Copyright (c) 2009, Willow Garage, Inc.
+// Copyright (c) 2020 Martin Idel
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -26,62 +26,11 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef IMAGE_TRANSPORT__RAW_SUBSCRIBER_HPP_
-#define IMAGE_TRANSPORT__RAW_SUBSCRIBER_HPP_
+#ifndef IMAGE_TRANSPORT__SUBSCRIBER_H_
+#define IMAGE_TRANSPORT__SUBSCRIBER_H_
 
-#include <string>
-#include <memory>
+#pragma message ("Warning: This header is deprecated. Use 'subscriber.hpp' instead")
 
-#include "sensor_msgs/msg/image.hpp"
+#include "subscriber.hpp"
 
-#include "image_transport/simple_subscriber_plugin.hpp"
-#include "image_transport/visibility_control.hpp"
-
-namespace image_transport
-{
-
-/**
- * \brief The default SubscriberPlugin.
- *
- * RawSubscriber is a simple wrapper for ros::Subscriber which listens for Image messages
- * and passes them through to the callback.
- */
-class RawSubscriber : public SimpleSubscriberPlugin<sensor_msgs::msg::Image>
-{
-public:
-  virtual ~RawSubscriber() {}
-
-  std::string getTransportName() const override
-  {
-    return "raw";
-  }
-
-protected:
-  void internalCallback(
-    const std::shared_ptr<const sensor_msgs::msg::Image> & message,
-    const Callback & user_cb) override
-  {
-    user_cb(message);
-  }
-
-  std::string getTopicToSubscribe(const std::string & base_topic) const override
-  {
-    return base_topic;
-  }
-
-  using SubscriberPlugin::subscribeImpl;
-
-  void subscribeImpl(
-    rclcpp::Node * node,
-    const std::string & base_topic,
-    const Callback & callback,
-    rmw_qos_profile_t custom_qos,
-    rclcpp::SubscriptionOptions options) override
-  {
-    this->subscribeImplWithOptions(node, base_topic, callback, custom_qos, options);
-  }
-};
-
-}  // namespace image_transport
-
-#endif  // IMAGE_TRANSPORT__RAW_SUBSCRIBER_HPP_
+#endif  // IMAGE_TRANSPORT__SUBSCRIBER_H_
