@@ -66,14 +66,13 @@ class SubscriberFilter : public message_filters::SimpleFilter<sensor_msgs::msg::
 {
 public:
   /**
-   * \brief Constructor
+   * \brief Constructor (deprecated).
    *
-   * See the ros::NodeHandle::subscribe() variants for more information on the parameters
+   * \deprecated Use SubscriberFilter(RequiredInterfaces, ...) instead.
    *
-   * \param nh The ros::NodeHandle to use to subscribe.
+   * \param node The rclcpp::Node to use to subscribe.
    * \param base_topic The topic to subscribe to.
-   * \param queue_size The subscription queue size
-   * \param transport The transport hint to pass along
+   * \param transport The transport hint to pass along.
    */
   IMAGE_TRANSPORT_PUBLIC
   SubscriberFilter(
@@ -99,12 +98,17 @@ public:
   }
 
   /**
-   * \brief Subscribe to a topic.
+   * \brief Subscribe to a topic (deprecated).
    *
    * If this Subscriber is already subscribed to a topic, this function will first unsubscribe.
    *
-   * \param nh The ros::NodeHandle to use to subscribe.
+   * \deprecated Use subscribe(RequiredInterfaces, ..., rclcpp::QoS, ...) instead.
+   *
+   * \param node The rclcpp::Node to use to subscribe.
    * \param base_topic The topic to subscribe to.
+   * \param transport The transport hint to use.
+   * \param custom_qos QoS profile to use (rmw_qos_profile_t form).
+   * \param options Additional subscription options.
    */
   IMAGE_TRANSPORT_PUBLIC
   void subscribe(
@@ -131,6 +135,7 @@ public:
     sub_.shutdown();
   }
 
+  /// \brief Returns the base image topic this filter is subscribed to.
   IMAGE_TRANSPORT_PUBLIC
   std::string getTopic() const
   {
