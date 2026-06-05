@@ -69,6 +69,16 @@ public:
   IMAGE_TRANSPORT_PUBLIC
   Publisher() = default;
 
+  [[deprecated("Use Publisher(RequiredInterfaces node_interfaces, ..., rclcpp::QoS, ...) "
+    "instead.")]]
+  IMAGE_TRANSPORT_PUBLIC
+  Publisher(
+    rclcpp::Node * node,
+    const std::string & base_topic,
+    PubLoaderPtr loader,
+    rmw_qos_profile_t custom_qos,
+    rclcpp::PublisherOptions options = rclcpp::PublisherOptions());
+
   IMAGE_TRANSPORT_PUBLIC
   Publisher(
     RequiredInterfaces node_interfaces,
@@ -116,19 +126,15 @@ public:
   IMAGE_TRANSPORT_PUBLIC
   void shutdown();
 
-  /// \brief Returns non-null if this Publisher is valid (i.e. advertised).
   IMAGE_TRANSPORT_PUBLIC
   operator void *() const;
 
-  /// \brief Less-than comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator<(const Publisher & rhs) const {return impl_ < rhs.impl_;}
 
-  /// \brief Inequality comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator!=(const Publisher & rhs) const {return impl_ != rhs.impl_;}
 
-  /// \brief Equality comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator==(const Publisher & rhs) const {return impl_ == rhs.impl_;}
 

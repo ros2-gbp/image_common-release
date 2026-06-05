@@ -30,6 +30,8 @@
 #include "camera_calibration_parsers/parse_yml.hpp"
 
 #include <cassert>
+#include <cstring>
+#include <ctime>
 
 #include <filesystem>
 #include <fstream>
@@ -129,6 +131,15 @@ bool writeCalibrationYml(
 {
   YAML::Emitter emitter;
   emitter << YAML::BeginMap;
+
+#if 0
+  // Calibration time
+  /// @todo Emitting the time breaks yaml-cpp on reading for some reason
+  time_t raw_time;
+  time(&raw_time);
+  emitter << YAML::Key << "calibration_time";
+  emitter << YAML::Value << asctime_r(localtime_r(&raw_time));
+#endif
 
   // Image dimensions
   emitter << YAML::Key << WIDTH_YML_NAME << YAML::Value << static_cast<int>(cam_info.width);

@@ -45,6 +45,8 @@
 namespace image_transport
 {
 
+class ImageTransport;
+
 /**
  * \brief Manages advertisements for publishing camera images.
  *
@@ -65,6 +67,15 @@ class CameraPublisher
 public:
   IMAGE_TRANSPORT_PUBLIC
   CameraPublisher() = default;
+
+  [[deprecated("Use CameraPublisher(RequiredInterfaces node_interfaces, ..., rclcpp::QoS) "
+    "instead.")]]
+  IMAGE_TRANSPORT_PUBLIC
+  CameraPublisher(
+    rclcpp::Node * node,
+    const std::string & base_topic,
+    rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
+    rclcpp::PublisherOptions = rclcpp::PublisherOptions());
 
   IMAGE_TRANSPORT_PUBLIC
   CameraPublisher(
@@ -149,19 +160,15 @@ public:
   IMAGE_TRANSPORT_PUBLIC
   void shutdown();
 
-  /// \brief Returns non-null if this CameraPublisher is valid (i.e. advertised).
   IMAGE_TRANSPORT_PUBLIC
   operator void *() const;
 
-  /// \brief Less-than comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator<(const CameraPublisher & rhs) const {return impl_ < rhs.impl_;}
 
-  /// \brief Inequality comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator!=(const CameraPublisher & rhs) const {return impl_ != rhs.impl_;}
 
-  /// \brief Equality comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator==(const CameraPublisher & rhs) const {return impl_ == rhs.impl_;}
 

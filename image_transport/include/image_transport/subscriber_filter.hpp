@@ -66,14 +66,25 @@ class SubscriberFilter : public message_filters::SimpleFilter<sensor_msgs::msg::
 {
 public:
   /**
-   * \brief Constructor (deprecated).
+   * \brief Constructor
    *
-   * \deprecated Use SubscriberFilter(RequiredInterfaces, ...) instead.
+   * See the ros::NodeHandle::subscribe() variants for more information on the parameters
    *
-   * \param node The rclcpp::Node to use to subscribe.
+   * \param nh The ros::NodeHandle to use to subscribe.
    * \param base_topic The topic to subscribe to.
-   * \param transport The transport hint to pass along.
+   * \param queue_size The subscription queue size
+   * \param transport The transport hint to pass along
    */
+  [[deprecated("Use SubscriberFilter(RequiredInterfaces node_interfaces, ...) instead.")]]
+  IMAGE_TRANSPORT_PUBLIC
+  SubscriberFilter(
+    rclcpp::Node * node,
+    const std::string & base_topic,
+    const std::string & transport)
+  : SubscriberFilter(*node, base_topic, transport)
+  {
+  }
+
   IMAGE_TRANSPORT_PUBLIC
   SubscriberFilter(
     RequiredInterfaces required_interfaces,
@@ -98,17 +109,34 @@ public:
   }
 
   /**
-   * \brief Subscribe to a topic (deprecated).
+   * \brief Subscribe to a topic.
    *
    * If this Subscriber is already subscribed to a topic, this function will first unsubscribe.
    *
-   * \deprecated Use subscribe(RequiredInterfaces, ..., rclcpp::QoS, ...) instead.
-   *
-   * \param node The rclcpp::Node to use to subscribe.
+   * \param nh The ros::NodeHandle to use to subscribe.
    * \param base_topic The topic to subscribe to.
-   * \param transport The transport hint to use.
-   * \param custom_qos QoS profile to use (rmw_qos_profile_t form).
-   * \param options Additional subscription options.
+   */
+  [[deprecated("Use subscribe(RequiredInterfaces node_interfaces, ..., rclcpp::QoS, ...) "
+    "instead.")]]
+  IMAGE_TRANSPORT_PUBLIC
+  void subscribe(
+    rclcpp::Node * node,
+    const std::string & base_topic,
+    const std::string & transport,
+    rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
+    rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions())
+  {
+    subscribe(*node, base_topic, transport,
+      rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos), custom_qos), options);
+  }
+
+  /**
+   * \brief Subscribe to a topic.
+   *
+   * If this Subscriber is already subscribed to a topic, this function will first unsubscribe.
+   *
+   * \param nh The ros::NodeHandle to use to subscribe.
+   * \param base_topic The topic to subscribe to.
    */
   IMAGE_TRANSPORT_PUBLIC
   void subscribe(
@@ -135,7 +163,6 @@ public:
     sub_.shutdown();
   }
 
-  /// \brief Returns the base image topic this filter is subscribed to.
   IMAGE_TRANSPORT_PUBLIC
   std::string getTopic() const
   {

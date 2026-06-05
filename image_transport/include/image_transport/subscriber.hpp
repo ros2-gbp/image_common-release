@@ -62,11 +62,21 @@ namespace image_transport
 class Subscriber
 {
 public:
-  /// Callback signature: receives a const-shared Image pointer.
   typedef std::function<void (const sensor_msgs::msg::Image::ConstSharedPtr &)> Callback;
 
   IMAGE_TRANSPORT_PUBLIC
   Subscriber() = default;
+
+  [[deprecated("Use Subscriber(RequiredInterfaces node_interfaces, ..., rclcpp::QoS) instead.")]]
+  IMAGE_TRANSPORT_PUBLIC
+  Subscriber(
+    rclcpp::Node * node,
+    const std::string & base_topic,
+    const Callback & callback,
+    SubLoaderPtr loader,
+    const std::string & transport,
+    rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
+    rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions());
 
   IMAGE_TRANSPORT_PUBLIC
   Subscriber(
@@ -105,16 +115,12 @@ public:
   IMAGE_TRANSPORT_PUBLIC
   void shutdown();
 
-  /// \brief Returns non-null if this Subscriber is valid (i.e. subscribed).
   IMAGE_TRANSPORT_PUBLIC
   operator void *() const;
-  /// \brief Less-than comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator<(const Subscriber & rhs) const {return impl_ < rhs.impl_;}
-  /// \brief Inequality comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator!=(const Subscriber & rhs) const {return impl_ != rhs.impl_;}
-  /// \brief Equality comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator==(const Subscriber & rhs) const {return impl_ == rhs.impl_;}
 

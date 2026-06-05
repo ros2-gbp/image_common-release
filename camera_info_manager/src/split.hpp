@@ -1,4 +1,5 @@
-// Copyright (c) 2009, Willow Garage, Inc.
+// Copyright (c) 2018, Open Source Robotics Foundation, Inc.
+// All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -10,7 +11,7 @@
 //      notice, this list of conditions and the following disclaimer in the
 //      documentation and/or other materials provided with the distribution.
 //
-//    * Neither the name of the Willow Garage nor the names of its
+//    * Neither the name of the copyright holder nor the names of its
 //      contributors may be used to endorse or promote products derived from
 //      this software without specific prior written permission.
 //
@@ -26,45 +27,30 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef IMAGE_TRANSPORT__RAW_SUBSCRIBER_HPP_
-#define IMAGE_TRANSPORT__RAW_SUBSCRIBER_HPP_
+#ifndef SPLIT_HPP_
+#define SPLIT_HPP_
 
+#include <regex>
 #include <string>
-#include <memory>
+#include <vector>
 
-#include "sensor_msgs/msg/image.hpp"
-
-#include "image_transport/simple_subscriber_plugin.hpp"
-#include "image_transport/visibility_control.hpp"
-
-namespace image_transport
+namespace camera_info_manager
+{
+namespace impl
 {
 
-/**
- * \brief The default SubscriberPlugin.
- *
- * RawSubscriber is a simple wrapper for ros::Subscriber which listens for Image messages
- * and passes them through to the callback.
- */
-class RawSubscriber : public SimpleSubscriberPlugin<sensor_msgs::msg::Image>
+inline std::vector<std::string>
+split(const std::string & input, const std::string & regex)
 {
-public:
-  virtual ~RawSubscriber() {}
+  std::regex re(regex);
+  // the -1 will cause this to return the stuff between the matches, see the submatch argument:
+  //   http://en.cppreference.com/w/cpp/regex/regex_token_iterator/regex_token_iterator
+  std::sregex_token_iterator first(input.begin(), input.end(), re, -1);
+  std::sregex_token_iterator last;
+  return {first, last};  // vector will copy from first to last
+}
 
-protected:
-  void internalCallback(
-    const std::shared_ptr<const sensor_msgs::msg::Image> & message,
-    const Callback & user_cb) override
-  {
-    user_cb(message);
-  }
+}  // namespace impl
+}  // namespace camera_info_manager
 
-  std::string getTopicToSubscribe(const std::string & base_topic) const override
-  {
-    return base_topic;
-  }
-};
-
-}  // namespace image_transport
-
-#endif  // IMAGE_TRANSPORT__RAW_SUBSCRIBER_HPP_
+#endif  // SPLIT_HPP_
