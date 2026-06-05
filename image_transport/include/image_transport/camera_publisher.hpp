@@ -45,8 +45,6 @@
 namespace image_transport
 {
 
-class ImageTransport;
-
 /**
  * \brief Manages advertisements for publishing camera images.
  *
@@ -151,15 +149,19 @@ public:
   IMAGE_TRANSPORT_PUBLIC
   void shutdown();
 
+  /// \brief Returns non-null if this CameraPublisher is valid (i.e. advertised).
   IMAGE_TRANSPORT_PUBLIC
   operator void *() const;
 
+  /// \brief Less-than comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator<(const CameraPublisher & rhs) const {return impl_ < rhs.impl_;}
 
+  /// \brief Inequality comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator!=(const CameraPublisher & rhs) const {return impl_ != rhs.impl_;}
 
+  /// \brief Equality comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator==(const CameraPublisher & rhs) const {return impl_ == rhs.impl_;}
 
