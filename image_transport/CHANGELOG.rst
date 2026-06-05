@@ -2,6 +2,12 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+7.0.2 (2026-06-05)
+------------------
+* Added rosdoc2 documentation to image_transport (`#401 <https://github.com/ros-perception/image_common/issues/401>`_)
+* Cleanups and removed unused files (`#406 <https://github.com/ros-perception/image_common/issues/406>`_)
+* Contributors: Alejandro Hernández Cordero
+
 7.0.1 (2026-05-29)
 ------------------
 * Removed deprecated API (`#413 <https://github.com/ros-perception/image_common/issues/413>`_)
