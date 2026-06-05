@@ -67,6 +67,7 @@ class SimplePublisherPlugin : public PublisherPlugin
 public:
   virtual ~SimplePublisherPlugin() {}
 
+  /// \brief Returns the number of subscribers on the transport-specific topic.
   size_t getNumSubscribers() const override
   {
     if (simple_impl_) {
@@ -75,12 +76,14 @@ public:
     return 0;
   }
 
+  /// \brief Returns the transport-specific topic name being advertised.
   std::string getTopic() const override
   {
     if (simple_impl_) {return simple_impl_->pub_->get_topic_name();}
     return std::string();
   }
 
+  /// \brief Encode and publish \p message via the internal transport publisher.
   void publish(const sensor_msgs::msg::Image & message) const override
   {
     if (!simple_impl_ || !simple_impl_->pub_) {
@@ -94,6 +97,7 @@ public:
     publish(message, simple_impl_->pub_);
   }
 
+  /// \brief Encode and publish \p message via the internal transport publisher (UniquePtr variant).
   void publishUniquePtr(sensor_msgs::msg::Image::UniquePtr message) const override
   {
     if (!simple_impl_ || !simple_impl_->pub_) {
@@ -107,6 +111,7 @@ public:
     publish(std::move(message), simple_impl_->pub_);
   }
 
+  /// \brief Destroy the internal publisher and release resources.
   void shutdown() override
   {
     simple_impl_.reset();
@@ -131,6 +136,7 @@ protected:
       transport_topic, custom_qos, options);
   }
 
+  /// Shared pointer to the internal rclcpp publisher for transport message type M.
   typedef typename rclcpp::Publisher<M>::SharedPtr PublisherT;
 
   //! Generic function for publishing the internal message type.
@@ -184,23 +190,6 @@ private:
   };
 
   std::unique_ptr<SimplePublisherPluginImpl> simple_impl_;
-
-  typedef std::function<void (const sensor_msgs::msg::Image &)> ImagePublishFn;
-
-  /**
-   * Returns a function object for publishing the transport-specific message type
-   * through some ROS publisher type.
-   *
-   * @param pub An object with method void publish(const M&)
-   */
-  template<class PubT>
-  PublishFn bindInternalPublisher(PubT * pub) const
-  {
-    // Bind PubT::publish(const Message&) as PublishFn
-    typedef void (PubT::* InternalPublishMemFn)(const M &);
-    InternalPublishMemFn internal_pub_mem_fn = &PubT::publish;
-    return std::bind(internal_pub_mem_fn, pub, std::placeholders::_1);
-  }
 };
 
 }  // namespace image_transport
