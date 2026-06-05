@@ -2,6 +2,11 @@
 Changelog for package camera_info_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+7.0.2 (2026-06-05)
+------------------
+* Cleanups and removed unused files (`#406 <https://github.com/ros-perception/image_common/issues/406>`_)
+* Contributors: Alejandro Hernández Cordero
+
 7.0.1 (2026-05-29)
 ------------------
 * Removed deprecated API (`#413 <https://github.com/ros-perception/image_common/issues/413>`_)
