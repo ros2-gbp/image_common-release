@@ -1,51 +1,43 @@
-/* $Id$ */
-
-/*********************************************************************
-* Software License Agreement (BSD License)
-*
-*  Copyright (c) 2010-2012 Jack O'Quin
-*  All rights reserved.
-*
-*  Redistribution and use in source and binary forms, with or without
-*  modification, are permitted provided that the following conditions
-*  are met:
-*
-*   * Redistributions of source code must retain the above copyright
-*     notice, this list of conditions and the following disclaimer.
-*   * Redistributions in binary form must reproduce the above
-*     copyright notice, this list of conditions and the following
-*     disclaimer in the documentation and/or other materials provided
-*     with the distribution.
-*   * Neither the name of the author nor other contributors may be
-*     used to endorse or promote products derived from this software
-*     without specific prior written permission.
-*
-*  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-*  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-*  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-*  FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-*  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-*  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-*  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-*  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-*  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-*  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-*  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-*  POSSIBILITY OF SUCH DAMAGE.
-*********************************************************************/
+// Copyright (c) 2010-2012 Jack O'Quin
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are met:
+//
+//    * Redistributions of source code must retain the above copyright
+//      notice, this list of conditions and the following disclaimer.
+//
+//    * Redistributions in binary form must reproduce the above copyright
+//      notice, this list of conditions and the following disclaimer in the
+//      documentation and/or other materials provided with the distribution.
+//
+//    * Neither the name of the copyright holder nor the names of its
+//      contributors may be used to endorse or promote products derived from
+//      this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
 
 #include "camera_info_manager/camera_info_manager.hpp"
 
 #include <algorithm>
-#include <cstdlib>
-#include <locale>
+#include <filesystem>
 #include <memory>
 #include <string>
 
-#include "rcpputils/filesystem_helper.hpp"
 #include "rcpputils/env.hpp"
 #include "camera_calibration_parsers/parse.hpp"
-#include "ament_index_cpp/get_package_share_directory.hpp"
+#include "ament_index_cpp/get_package_prefix.hpp"
+#include "ament_index_cpp/get_package_share_path.hpp"
 
 
 /** @file
@@ -68,30 +60,24 @@ using camera_calibration_parsers::writeCalibration;
 const std::string
   default_camera_info_url = "file://${ROS_HOME}/camera_info/${NAME}.yaml";
 
-/** Constructor
- *
- * @param node node, normally for the driver's streaming name
- *           space ("camera").  The service name is relative to this
- *           handle.  Nodes supporting multiple cameras may use
- *           subordinate names, like "left/camera" and "right/camera".
- * @param cname default camera name
- * @param url default Uniform Resource Locator for loading and saving data.
- */
 CameraInfoManager::CameraInfoManager(
-  rclcpp::Node * node,
-  const std::string & cname,
-  const std::string & url)
-: logger_(node->get_logger()),
+  rclcpp::node_interfaces::NodeBaseInterface::SharedPtr node_base_interface,
+  rclcpp::node_interfaces::NodeServicesInterface::SharedPtr node_services_interface,
+  rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr node_logger_interface,
+  const std::string & cname, const std::string & url,
+  rclcpp::QoS custom_qos, const std::string & ns)
+: logger_(node_logger_interface->get_logger()),
   camera_name_(cname),
   url_(url),
+  namespace_(ns),
   loaded_cam_info_(false)
 {
+  using namespace std::placeholders;
+
   // register callback for camera calibration service request
-  info_service_ = node->create_service<SetCameraInfo>(
-    "set_camera_info",
-    std::bind(
-      &CameraInfoManager::setCameraInfoService, this, std::placeholders::_1,
-      std::placeholders::_2));
+  info_service_ = rclcpp::create_service<SetCameraInfo>(
+    node_base_interface, node_services_interface, namespace_ + "/set_camera_info",
+    std::bind(&CameraInfoManager::setCameraInfoService, this, _1, _2), custom_qos, nullptr);
 }
 
 /** Get the current CameraInfo data.
@@ -140,7 +126,7 @@ CameraInfo CameraInfoManager::getCameraInfo(void)
  * @param url a copy of the Uniform Resource Locator
  * @return file name if package found, "" otherwise
  */
-std::string CameraInfoManager::getPackageFileName(const std::string & url)
+std::filesystem::path CameraInfoManager::getPackageFileName(const std::string & url)
 {
   RCLCPP_DEBUG(logger_, "camera calibration url: %s", url.c_str());
 
@@ -151,13 +137,21 @@ std::string CameraInfoManager::getPackageFileName(const std::string & url)
   std::string package(url.substr(prefix_len, rest - prefix_len));
 
   // Look up the ROS package path name.
-  std::string pkgPath = ament_index_cpp::get_package_share_directory(package);
+  std::filesystem::path pkgPath;
+  try {
+    pkgPath = ament_index_cpp::get_package_share_path(package);
+  } catch (const ament_index_cpp::PackageNotFoundError & e) {
+    RCLCPP_WARN(logger_, "unknown package: %s (ignored)", package.c_str());
+    throw std::logic_error("unknown package: " + package);
+  }
+
   if (pkgPath.empty()) {                // package not found?
     RCLCPP_WARN(logger_, "unknown package: %s (ignored)", package.c_str());
-    return pkgPath;
+    throw std::logic_error("unknown package: " + package);
   } else {
     // Construct file name from package location and remainder of URL.
-    return pkgPath + url.substr(rest);
+    // url.substr(rest) starts with '/', use relative() to compose safely.
+    return pkgPath / std::filesystem::path(url.substr(rest + 1));
   }
 }
 
@@ -226,7 +220,8 @@ bool CameraInfoManager::loadCalibration(
       }
     case URL_file:
       {
-        success = loadCalibrationFile(resURL.substr(7), cname);
+        success = loadCalibrationFile(
+          std::filesystem::path(resURL.substr(7)), cname);
         break;
       }
     case URL_flash:
@@ -236,7 +231,7 @@ bool CameraInfoManager::loadCalibration(
       }
     case URL_package:
       {
-        std::string filename(getPackageFileName(resURL));
+        std::filesystem::path filename(getPackageFileName(resURL));
         if (!filename.empty()) {
           success = loadCalibrationFile(filename, cname);
         }
@@ -263,21 +258,21 @@ bool CameraInfoManager::loadCalibration(
  * Sets cam_info_, if successful
  */
 bool CameraInfoManager::loadCalibrationFile(
-  const std::string & filename,
+  const std::filesystem::path & filename,
   const std::string & cname)
 {
   bool success = false;
 
-  RCLCPP_DEBUG(logger_, "reading camera calibration from %s", filename.c_str());
+  RCLCPP_DEBUG(logger_, "reading camera calibration from %s", filename.string().c_str());
   std::string cam_name;
   CameraInfo cam_info;
 
-  if (readCalibration(filename, cam_name, cam_info)) {
+  if (readCalibration(filename.string(), cam_name, cam_info)) {
     if (cname != cam_name) {
       RCLCPP_WARN(
         logger_,
         "[%s] does not match %s in file %s",
-        cname.c_str(), cam_name.c_str(), filename.c_str());
+        cname.c_str(), cam_name.c_str(), filename.string().c_str());
     }
     success = true;
     {
@@ -286,7 +281,7 @@ bool CameraInfoManager::loadCalibrationFile(
       cam_info_ = cam_info;
     }
   } else {
-    RCLCPP_WARN(logger_, "Camera calibration file %s not found", filename.c_str());
+    RCLCPP_WARN(logger_, "Camera calibration file %s not found", filename.string().c_str());
   }
 
   return success;
@@ -356,14 +351,19 @@ std::string CameraInfoManager::resolveURL(
       // substitute $ROS_HOME
       std::string ros_home;
       std::string ros_home_env = rcpputils::get_env_var("ROS_HOME");
-      std::string home_env = rcpputils::get_env_var("HOME");
       if (!ros_home_env.empty()) {
-        // use environment variable
-        ros_home = ros_home_env;
-      } else if (!home_env.empty()) {
-        // use "$HOME/.ros"
-        ros_home = home_env;
-        ros_home += "/.ros";
+        // use environment variable (already a path, forward-slashes preferred)
+        ros_home = std::filesystem::path(ros_home_env).generic_string();
+      } else {
+        // use "$HOME/.ros" on Linux/macOS, "%USERPROFILE%/.ros" on Windows
+#ifdef _WIN32
+        std::string home_env = rcpputils::get_env_var("USERPROFILE");
+#else
+        std::string home_env = rcpputils::get_env_var("HOME");
+#endif
+        if (!home_env.empty()) {
+          ros_home = (std::filesystem::path(home_env) / ".ros").generic_string();
+        }
       }
       resolved += ros_home;
       dollar += 10;
@@ -405,7 +405,11 @@ CameraInfoManager::url_type_t CameraInfoManager::parseURL(const std::string & ur
     };
 
 
-  if (iequals(url.substr(0, 8), "file:///")) {
+  // Accept both "file:///" (Unix absolute path) and "file://X:/" (Windows
+  // drive letter), but reject bare "file://" with nothing after it.
+  if (iequals(url.substr(0, 7), "file://") && url.length() > 7 &&
+    (url[7] == '/' || (url.length() > 9 && std::isalpha(url[7]) && url[8] == ':')))
+  {
     return URL_file;
   }
   if (iequals(url.substr(0, 9), "flash:///")) {
@@ -451,12 +455,13 @@ CameraInfoManager::saveCalibration(
       }
     case URL_file:
       {
-        success = saveCalibrationFile(new_info, resURL.substr(7), cname);
+        success = saveCalibrationFile(
+          new_info, std::filesystem::path(resURL.substr(7)), cname);
         break;
       }
     case URL_package:
       {
-        std::string filename(getPackageFileName(resURL));
+        std::filesystem::path filename(getPackageFileName(resURL));
         if (!filename.empty()) {
           success = saveCalibrationFile(new_info, filename, cname);
         }
@@ -486,16 +491,15 @@ CameraInfoManager::saveCalibration(
 bool
 CameraInfoManager::saveCalibrationFile(
   const CameraInfo & new_info,
-  const std::string & filename,
+  const std::filesystem::path & filename,
   const std::string & cname)
 {
-  RCLCPP_INFO(logger_, "writing calibration data to %s", filename.c_str());
+  RCLCPP_INFO(logger_, "writing calibration data to %s", filename.string().c_str());
 
-  rcpputils::fs::path filepath(filename);
-  rcpputils::fs::path parent = filepath.parent_path();
+  std::filesystem::path parent = filename.parent_path();
 
-  if (!rcpputils::fs::exists(parent)) {
-    if (!rcpputils::fs::create_directories(parent)) {
+  if (!std::filesystem::exists(parent)) {
+    if (!std::filesystem::create_directories(parent)) {
       RCLCPP_ERROR(logger_, "unable to create path directory [%s]", parent.string().c_str());
       return false;
     }
@@ -503,8 +507,7 @@ CameraInfoManager::saveCalibrationFile(
 
   // Directory exists. Permissions might still be bad.
   // Currently, writeCalibration() always returns true no matter what
-  // (ros-pkg ticket #5010).
-  return writeCalibration(filename, cname, new_info);
+  return writeCalibration(filename.string(), cname, new_info);
 }
 
 /** Callback for SetCameraInfo request.

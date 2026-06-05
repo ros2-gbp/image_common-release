@@ -77,17 +77,22 @@ TEST_F(MessagePassingTesting, one_message_passing)
 
   rclcpp::executors::SingleThreadedExecutor executor;
 
-  auto pub = image_transport::create_publisher(node_.get(), "camera/image");
+  auto pub = image_transport::create_publisher(*node_, "camera/image",
+    rclcpp::SystemDefaultsQoS());
   auto sub =
-    image_transport::create_subscription(node_.get(), "camera/image", imageCallback, "raw");
+    image_transport::create_subscription(*node_, "camera/image", imageCallback, "raw",
+    rclcpp::SystemDefaultsQoS());
 
-  test_rclcpp::wait_for_subscriber(node_, sub.getTopic());
+  auto graph_interface = node_->get_node_graph_interface();
+  auto base_node_interface = node_->get_node_base_interface();
+
+  test_rclcpp::wait_for_subscriber(*node_, sub.getTopic());
 
   ASSERT_EQ(0, total_images_received);
   ASSERT_EQ(1u, pub.getNumSubscribers());
   ASSERT_EQ(1u, sub.getNumPublishers());
 
-  executor.spin_node_some(node_);
+  executor.spin_node_some(base_node_interface);
   ASSERT_EQ(0, total_images_received);
 
   size_t retry = 0;
@@ -95,11 +100,11 @@ TEST_F(MessagePassingTesting, one_message_passing)
     // generate random image and publish it
     pub.publish(generate_random_image());
 
-    executor.spin_node_some(node_);
+    executor.spin_node_some(base_node_interface);
     size_t loop = 0;
     while ((total_images_received != 1) && (loop++ < max_loops)) {
       std::this_thread::sleep_for(sleep_per_loop);
-      executor.spin_node_some(node_);
+      executor.spin_node_some(base_node_interface);
     }
   }
 
@@ -114,22 +119,24 @@ TEST_F(MessagePassingTesting, one_camera_message_passing)
 
   rclcpp::executors::SingleThreadedExecutor executor;
 
-  auto pub = image_transport::create_camera_publisher(node_.get(), "camera/image");
+  auto pub = image_transport::create_camera_publisher(*node_, "camera/image",
+    rclcpp::SystemDefaultsQoS());
   auto sub = image_transport::create_camera_subscription(
-    node_.get(), "camera/image",
+    *node_, "camera/image",
     [](const sensor_msgs::msg::Image::ConstSharedPtr & image,
     const sensor_msgs::msg::CameraInfo::ConstSharedPtr & info) {
       (void) image;
       (void) info;
       total_images_received++;
     },
-    "raw"
+    "raw",
+    rclcpp::SystemDefaultsQoS()
   );
 
-  test_rclcpp::wait_for_subscriber(node_, sub.getTopic());
+  test_rclcpp::wait_for_subscriber(*node_, sub.getTopic());
 
   ASSERT_EQ(0, total_images_received);
-  executor.spin_node_some(node_);
+  executor.spin_node_some(node_->get_node_base_interface());
   ASSERT_EQ(0, total_images_received);
 
   size_t retry = 0;
@@ -137,41 +144,16 @@ TEST_F(MessagePassingTesting, one_camera_message_passing)
     // generate random image and publish it
     pub.publish(*generate_random_image().get(), sensor_msgs::msg::CameraInfo());
 
-    executor.spin_node_some(node_);
+    executor.spin_node_some(node_->get_node_base_interface());
     size_t loop = 0;
     while ((total_images_received != 1) && (loop++ < max_loops)) {
       std::this_thread::sleep_for(sleep_per_loop);
-      executor.spin_node_some(node_);
+      executor.spin_node_some(node_->get_node_base_interface());
     }
   }
 
   ASSERT_EQ(1, total_images_received);
 }
-
-/*
-TEST_F(MessagePassingTesting, stress_message_passing)
-{
-  rclcpp::executors::SingleThreadedExecutor executor;
-  executor.add_node(node_);
-
-  int images_to_stress = 1000;
-
-  image_transport::Publisher pub = it().advertise("camera/image");
-  image_transport::Subscriber sub = it().subscribe("camera/image", imageCallback);
-
-  std::this_thread::sleep_for(std::chrono::milliseconds(100));
-
-  // generate random image and publish it
-  int image_pubs = 0;
-  while (image_pubs < images_to_stress) {
-    pub.publish(generate_random_image());
-    executor.spin_some();
-    image_pubs++;
-  }
-
-  ASSERT_EQ(images_to_stress, total_images_received);
-}
-*/
 
 int main(int argc, char ** argv)
 {

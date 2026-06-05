@@ -1,10 +1,11 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.20)
 
 project(image_transport)
 
-# Default to C++14
+# Default to C++17
 if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 14)
+  set(CMAKE_CXX_STANDARD 17)
+  set(CMAKE_CXX_STANDARD_REQUIRED ON)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -16,13 +17,17 @@ find_package(ament_cmake_ros REQUIRED)
 find_package(message_filters REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(rclcpp_components REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(tinyxml2 REQUIRED)
 
 # Build image_transport library
 add_library(${PROJECT_NAME}
   src/camera_common.cpp
   src/publisher.cpp
+  src/publisher_plugin.cpp
   src/subscriber.cpp
+  src/subscriber_plugin.cpp
   src/single_subscriber_publisher.cpp
   src/camera_publisher.cpp
   src/camera_subscriber.cpp
@@ -35,9 +40,10 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 target_link_libraries(${PROJECT_NAME} PUBLIC
   message_filters::message_filters
   rclcpp::rclcpp
-  ${sensor_msgs_TARGETS})
+  sensor_msgs::sensor_msgs)
 target_link_libraries(${PROJECT_NAME} PRIVATE
-  pluginlib::pluginlib)
+  pluginlib::pluginlib
+  tinyxml2::tinyxml2)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE "IMAGE_TRANSPORT_BUILDING_DLL")
 
@@ -57,11 +63,22 @@ target_link_libraries(list_transports
   ${PROJECT_NAME}
   pluginlib::pluginlib)
 
-# Build republish
-add_executable(republish src/republish.cpp)
-target_link_libraries(republish
+# # Build republish
+add_library(republish_node SHARED
+  src/republish.cpp
+)
+target_link_libraries(republish_node
   ${PROJECT_NAME}
-  pluginlib::pluginlib)
+  pluginlib::pluginlib
+  rclcpp_components::component
+  rclcpp::rclcpp
+)
+rclcpp_components_register_node(republish_node
+  PLUGIN "image_transport::Republisher"
+  EXECUTABLE republish
+)
+
+target_compile_definitions(republish_node PRIVATE "IMAGE_TRANSPORT_BUILDING_DLL")
 
 # Install plugin descriptions
 pluginlib_export_plugin_description_file(image_transport default_plugins.xml)
@@ -77,9 +94,15 @@ install(TARGETS ${PROJECT_NAME} EXPORT export_${PROJECT_NAME})
 
 # Install executables
 install(
-  TARGETS list_transports republish
+  TARGETS list_transports
   RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
+
+install(TARGETS
+  republish_node
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin)
 
 # Install include directories
 install(DIRECTORY include/ DESTINATION include/${PROJECT_NAME})
@@ -99,35 +122,74 @@ if(BUILD_TESTING)
   ament_cppcheck(LANGUAGE "c++")
 
   find_package(ament_cmake_gtest)
+  find_package(rclcpp_lifecycle REQUIRED)
 
-  ament_add_gtest(${PROJECT_NAME}-camera_common test/test_camera_common.cpp)
-  if(TARGET ${PROJECT_NAME}-camera_common)
-    target_link_libraries(${PROJECT_NAME}-camera_common ${PROJECT_NAME})
+  ament_add_gtest(test_${PROJECT_NAME}-camera_common test/test_camera_common.cpp)
+  if(TARGET test_${PROJECT_NAME}-camera_common)
+    target_link_libraries(test_${PROJECT_NAME}-camera_common ${PROJECT_NAME})
+    target_compile_definitions(test_${PROJECT_NAME}-camera_common PRIVATE
+      DEFAULT_PLUGINS_XML="${CMAKE_CURRENT_SOURCE_DIR}/default_plugins.xml"
+      TEST_PLUGIN_MANIFEST_XML="${CMAKE_CURRENT_SOURCE_DIR}/test/test_plugin_manifest.xml")
   endif()
 
-  ament_add_gtest(${PROJECT_NAME}-publisher test/test_publisher.cpp)
-  if(TARGET ${PROJECT_NAME}-publisher)
-    target_link_libraries(${PROJECT_NAME}-publisher ${PROJECT_NAME})
+  ament_add_gtest(test_${PROJECT_NAME}-publisher test/test_publisher.cpp)
+  if(TARGET test_${PROJECT_NAME}-publisher)
+    target_link_libraries(test_${PROJECT_NAME}-publisher ${PROJECT_NAME})
   endif()
 
-  ament_add_gtest(${PROJECT_NAME}-subscriber test/test_subscriber.cpp)
-  if(TARGET ${PROJECT_NAME}-subscriber)
-    target_link_libraries(${PROJECT_NAME}-subscriber ${PROJECT_NAME})
+  ament_add_gtest(test_${PROJECT_NAME}-publisher_lifecycle test/test_publisher_lifecycle.cpp)
+  if(TARGET test_${PROJECT_NAME}-publisher_lifecycle)
+    target_link_libraries(test_${PROJECT_NAME}-publisher_lifecycle ${PROJECT_NAME} rclcpp_lifecycle::rclcpp_lifecycle)
   endif()
 
-  ament_add_gtest(${PROJECT_NAME}-message_passing test/test_message_passing.cpp)
-  if(TARGET ${PROJECT_NAME}-message_passing)
-    target_link_libraries(${PROJECT_NAME}-message_passing ${PROJECT_NAME})
+  ament_add_gtest(test_${PROJECT_NAME}-subscriber test/test_subscriber.cpp)
+  if(TARGET test_${PROJECT_NAME}-subscriber)
+    target_link_libraries(test_${PROJECT_NAME}-subscriber ${PROJECT_NAME})
   endif()
 
-  ament_add_gtest(${PROJECT_NAME}-remapping test/test_remapping.cpp)
-  if(TARGET ${PROJECT_NAME}-remapping)
-    target_link_libraries(${PROJECT_NAME}-remapping ${PROJECT_NAME})
+  ament_add_gtest(test_${PROJECT_NAME}-subscriber_lifecycle test/test_subscriber_lifecycle.cpp)
+  if(TARGET test_${PROJECT_NAME}-subscriber_lifecycle)
+    target_link_libraries(test_${PROJECT_NAME}-subscriber_lifecycle ${PROJECT_NAME} rclcpp_lifecycle::rclcpp_lifecycle)
   endif()
 
-  ament_add_gtest(${PROJECT_NAME}-single_subscriber_publisher test/test_single_subscriber_publisher.cpp)
-  if(TARGET ${PROJECT_NAME}-single_subscriber_publisher)
-    target_link_libraries(${PROJECT_NAME}-single_subscriber_publisher ${PROJECT_NAME})
+  ament_add_gtest(test_${PROJECT_NAME}-message_passing test/test_message_passing.cpp)
+  if(TARGET test_${PROJECT_NAME}-message_passing)
+    target_link_libraries(test_${PROJECT_NAME}-message_passing ${PROJECT_NAME})
+  endif()
+
+  ament_add_gtest(test_${PROJECT_NAME}-message_passing_lifecycle test/test_message_passing_lifecycle.cpp)
+  if(TARGET test_${PROJECT_NAME}-message_passing_lifecycle)
+    target_link_libraries(test_${PROJECT_NAME}-message_passing_lifecycle ${PROJECT_NAME} rclcpp_lifecycle::rclcpp_lifecycle)
+  endif()
+
+  ament_add_gtest(test_${PROJECT_NAME}-remapping test/test_remapping.cpp)
+  if(TARGET test_${PROJECT_NAME}-remapping)
+    target_link_libraries(test_${PROJECT_NAME}-remapping ${PROJECT_NAME})
+  endif()
+
+  ament_add_gtest(test_${PROJECT_NAME}-remapping_lifecycle test/test_remapping_lifecycle.cpp)
+  if(TARGET test_${PROJECT_NAME}-remapping_lifecycle)
+    target_link_libraries(test_${PROJECT_NAME}-remapping_lifecycle ${PROJECT_NAME} rclcpp_lifecycle::rclcpp_lifecycle)
+  endif()
+
+  ament_add_gtest(test_${PROJECT_NAME}-qos_override test/test_qos_override.cpp)
+  if(TARGET test_${PROJECT_NAME}-qos_override)
+    target_link_libraries(test_${PROJECT_NAME}-qos_override ${PROJECT_NAME})
+  endif()
+
+  ament_add_gtest(test_${PROJECT_NAME}-qos_override_lifecycle test/test_qos_override_lifecycle.cpp)
+  if(TARGET test_${PROJECT_NAME}-qos_override_lifecycle)
+    target_link_libraries(test_${PROJECT_NAME}-qos_override_lifecycle ${PROJECT_NAME} rclcpp_lifecycle::rclcpp_lifecycle)
+  endif()
+
+  ament_add_gtest(test_${PROJECT_NAME}-single_subscriber_publisher test/test_single_subscriber_publisher.cpp)
+  if(TARGET test_${PROJECT_NAME}-single_subscriber_publisher)
+    target_link_libraries(test_${PROJECT_NAME}-single_subscriber_publisher ${PROJECT_NAME})
+  endif()
+
+  ament_add_gtest(test_${PROJECT_NAME}-single_subscriber_publisher_lifecycle test/test_single_subscriber_publisher_lifecycle.cpp)
+  if(TARGET test_${PROJECT_NAME}-single_subscriber_publisher_lifecycle)
+    target_link_libraries(test_${PROJECT_NAME}-single_subscriber_publisher_lifecycle ${PROJECT_NAME} rclcpp_lifecycle::rclcpp_lifecycle)
   endif()
 endif()
 

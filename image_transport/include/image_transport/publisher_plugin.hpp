@@ -29,12 +29,16 @@
 #ifndef IMAGE_TRANSPORT__PUBLISHER_PLUGIN_HPP_
 #define IMAGE_TRANSPORT__PUBLISHER_PLUGIN_HPP_
 
+#include <optional>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
 #include "rclcpp/node.hpp"
 #include "sensor_msgs/msg/image.hpp"
 
+#include "image_transport/camera_common.hpp"
+#include "image_transport/node_interfaces.hpp"
 #include "image_transport/single_subscriber_publisher.hpp"
 #include "image_transport/visibility_control.hpp"
 
@@ -56,18 +60,52 @@ public:
   /**
    * \brief Get a string identifier for the transport provided by
    * this plugin.
+   *
+   * The default implementation auto-discovers the name from the pluginlib
+   * manifest XML (without instantiating any plugin) by matching the demangled
+   * C++ type name of \c *this against the \c type attribute of each
+   * \c &lt;class&gt; element.  The result is cached after the first call.
+   *
+   * Plugins that override getTransportName() continue to work unchanged —
+   * user-supplied overrides always take precedence over the base implementation.
+   * Returning a different value than what is in the manifest is considered problematic.
    */
-  virtual std::string getTransportName() const = 0;
+  IMAGE_TRANSPORT_PUBLIC
+  virtual std::string getTransportName() const;
+
+  /**
+   * \brief Get the primary message type used by this plugin.
+   *
+   * Returns the value of the \c &lt;message_type&gt; element from the plugin
+   * manifest XML (e.g. \c "sensor_msgs/msg/Image").  The result is cached
+   * after the first call.  Override this method if you need a different
+   * value at runtime.
+   *
+   * Returning a different value than what is in the manifest is considered problematic.
+   */
+  IMAGE_TRANSPORT_PUBLIC
+  virtual std::string getMessageType() const;
+
+  /**
+   * \brief Check whether this plugin supports publishing using UniquePtr.
+   */
+  virtual bool supportsUniquePtrPub() const
+  {
+    return false;
+  }
 
   /**
    * \brief Advertise a topic, simple version.
    */
   void advertise(
-    rclcpp::Node * nh,
+    RequiredInterfaces node_interfaces,
     const std::string & base_topic,
-    rmw_qos_profile_t custom_qos = rmw_qos_profile_default)
+    rclcpp::QoS custom_qos,
+    rclcpp::PublisherOptions options = rclcpp::PublisherOptions())
   {
-    advertiseImpl(nh, base_topic, custom_qos);
+    std::string image_topic =
+      node_interfaces.get_node_topics_interface()->resolve_topic_name(base_topic);
+    advertiseImpl(node_interfaces, image_topic, custom_qos, options);
   }
 
   /**
@@ -92,6 +130,18 @@ public:
   virtual void publishPtr(const sensor_msgs::msg::Image::ConstSharedPtr & message) const
   {
     publish(*message);
+  }
+
+  /**
+   * \brief Publish an image using the transport associated with this PublisherPlugin.
+   * This version of the function can be used to optimize cases where the Plugin can
+   * avoid doing copies of the data when having the ownership to the image message.
+   * Plugins that can take advantage of message ownership should overwrite this method
+   * along with supportsUniquePtrPub().
+   */
+  virtual void publishUniquePtr(sensor_msgs::msg::Image::UniquePtr /*message*/) const
+  {
+    throw std::logic_error("publishUniquePtr() is not implemented.");
   }
 
   /**
@@ -134,8 +184,15 @@ protected:
    * \brief Advertise a topic. Must be implemented by the subclass.
    */
   virtual void advertiseImpl(
-    rclcpp::Node * nh, const std::string & base_topic,
-    rmw_qos_profile_t custom_qos) = 0;
+    RequiredInterfaces node_interfaces,
+    const std::string & base_topic,
+    rclcpp::QoS custom_qos,
+    rclcpp::PublisherOptions options) = 0;
+
+private:
+  // Cache for manifest-discovered data (populated lazily by the base-class
+  // implementation of getTransportName() / getMessageType()).
+  mutable std::optional<PluginManifestData> manifest_data_;
 };
 
 }  // namespace image_transport

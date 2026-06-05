@@ -39,6 +39,7 @@
 
 #include "image_transport/exception.hpp"
 #include "image_transport/loader_fwds.hpp"
+#include "image_transport/node_interfaces.hpp"
 #include "image_transport/single_subscriber_publisher.hpp"
 #include "image_transport/visibility_control.hpp"
 
@@ -70,10 +71,11 @@ public:
 
   IMAGE_TRANSPORT_PUBLIC
   Publisher(
-    rclcpp::Node * nh,
+    RequiredInterfaces node_interfaces,
     const std::string & base_topic,
     PubLoaderPtr loader,
-    rmw_qos_profile_t custom_qos);
+    rclcpp::QoS custom_qos,
+    rclcpp::PublisherOptions options = rclcpp::PublisherOptions());
 
   /*!
    * \brief Returns the number of subscribers that are currently connected to
@@ -103,20 +105,30 @@ public:
   void publish(const sensor_msgs::msg::Image::ConstSharedPtr & message) const;
 
   /*!
+   * \brief Publish an image on the topics associated with this Publisher.
+   */
+  IMAGE_TRANSPORT_PUBLIC
+  void publish(sensor_msgs::msg::Image::UniquePtr message) const;
+
+  /*!
    * \brief Shutdown the advertisements associated with this Publisher.
    */
   IMAGE_TRANSPORT_PUBLIC
   void shutdown();
 
+  /// \brief Returns non-null if this Publisher is valid (i.e. advertised).
   IMAGE_TRANSPORT_PUBLIC
   operator void *() const;
 
+  /// \brief Less-than comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator<(const Publisher & rhs) const {return impl_ < rhs.impl_;}
 
+  /// \brief Inequality comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator!=(const Publisher & rhs) const {return impl_ != rhs.impl_;}
 
+  /// \brief Equality comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator==(const Publisher & rhs) const {return impl_ == rhs.impl_;}
 

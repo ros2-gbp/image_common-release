@@ -1,6 +1,6 @@
 <package format="2">
   <name>camera_calibration_parsers</name>
-  <version>3.1.13</version>
+  <version>7.0.2</version>
   <description>
      camera_calibration_parsers contains routines for reading and writing camera calibration parameters.
   </description>
@@ -11,7 +11,7 @@
   <maintainer email="alejandro@openrobotics.org">Alejandro Hernandez Cordero</maintainer>
   <maintainer email="geoff@openrobotics.org">Geoffrey Biggs</maintainer>
 
-  <license>BSD</license>
+  <license>BSD-3-Clause</license>
 
   <url type="website">http://ros.org/wiki/camera_calibration_parsers</url>
   <url type="bugtracker">https://github.com/ros-perception/image_common/issues</url>
@@ -22,7 +22,6 @@
 
   <depend>sensor_msgs</depend>
   <depend>rclcpp</depend>
-  <depend>rcpputils</depend>
   <depend>yaml_cpp_vendor</depend>
 
   <test_depend>ament_cmake_gtest</test_depend>

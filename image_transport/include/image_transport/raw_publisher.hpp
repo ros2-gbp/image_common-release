@@ -30,6 +30,7 @@
 #define IMAGE_TRANSPORT__RAW_PUBLISHER_HPP_
 
 #include <string>
+#include <utility>
 
 #include "sensor_msgs/msg/image.hpp"
 
@@ -51,15 +52,22 @@ class RawPublisher : public SimplePublisherPlugin<sensor_msgs::msg::Image>
 public:
   virtual ~RawPublisher() {}
 
-  virtual std::string getTransportName() const
+  virtual bool supportsUniquePtrPub() const
   {
-    return "raw";
+    return true;
   }
 
 protected:
-  virtual void publish(const sensor_msgs::msg::Image & message, const PublishFn & publish_fn) const
+  virtual void publish(const sensor_msgs::msg::Image & message, const PublisherT & publisher) const
   {
-    publish_fn(message);
+    publisher->publish(message);
+  }
+
+  virtual void publish(
+    sensor_msgs::msg::Image::UniquePtr message,
+    const PublisherT & publisher) const
+  {
+    publisher->publish(std::move(message));
   }
 
   virtual std::string getTopicToAdvertise(const std::string & base_topic) const

@@ -2,36 +2,158 @@
 Changelog for package camera_info_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.1.13 (2026-05-29)
--------------------
-* Added version.h (`#415 <https://github.com/ros-perception/image_common/issues/415>`_) (`#419 <https://github.com/ros-perception/image_common/issues/419>`_)
-* Contributors: mergify[bot]
+7.0.2 (2026-06-05)
+------------------
+* Cleanups and removed unused files (`#406 <https://github.com/ros-perception/image_common/issues/406>`_)
+* Contributors: Alejandro Hernández Cordero
 
-3.1.12 (2025-06-12)
--------------------
+7.0.1 (2026-05-29)
+------------------
+* Removed deprecated API (`#413 <https://github.com/ros-perception/image_common/issues/413>`_)
+* Added version.h (`#415 <https://github.com/ros-perception/image_common/issues/415>`_)
+* Contributors: Alejandro Hernández Cordero, Martin Pecka
 
-3.1.11 (2025-02-12)
--------------------
+7.0.0 (2026-05-06)
+------------------
+* Fix camera_info_manager flakiness and Windows crashes (`#405 <https://github.com/ros-perception/image_common/issues/405>`_)
+* Contributors: Michael Carroll
 
-3.1.10 (2024-11-26)
--------------------
-
-3.1.9 (2024-03-26)
+6.4.7 (2026-04-01)
 ------------------
 
-3.1.8 (2024-01-24)
+6.4.6 (2026-03-24)
+------------------
+* Use new ROSIDL aggregate CMake target (`#396 <https://github.com/ros-perception/image_common/issues/396>`_)
+* Added camera info manager unit test (`#358 <https://github.com/ros-perception/image_common/issues/358>`_)
+* Contributors: Alejandro Hernández Cordero, Emerson Knapp
+
+6.4.5 (2026-02-25)
+------------------
+* Use get_package_share_path (`#391 <https://github.com/ros-perception/image_common/issues/391>`_)
+* Update BSD licenses to SPDX identifier (`#389 <https://github.com/ros-perception/image_common/issues/389>`_)
+  Co-authored-by: Alejandro Hernandez Cordero <ahcorde@gmail.com>
+* Contributors: Alejandro Hernández Cordero, Garrett Brown
+
+6.4.4 (2025-12-23)
+------------------
+* Updated deprecated ament_index_cpp API (`#388 <https://github.com/ros-perception/image_common/issues/388>`_)
+* Contributors: Alejandro Hernández Cordero
+
+6.4.3 (2025-11-24)
 ------------------
 
-3.1.7 (2023-08-14)
+6.4.2 (2025-10-16)
 ------------------
 
-3.1.6 (2023-07-27)
+6.4.1 (2025-08-25)
 ------------------
 
-3.1.5 (2022-11-16)
+6.4.0 (2025-08-22)
 ------------------
-* Add alias library targets for all libraries (`#260 <https://github.com/ros-perception/image_common/issues/260>`_)
-* Contributors: Geoffrey Biggs
+* Fix compilation error with clang (`#372 <https://github.com/ros-perception/image_common/issues/372>`_)
+* Support lifecycle node - NodeInterfaces (`#352 <https://github.com/ros-perception/image_common/issues/352>`_)
+* Contributors: Alejandro Hernández Cordero
+
+6.3.0 (2025-07-25)
+------------------
+* Deprecated rmw_qos_profile_t in favour of rclcpp::QoS (`#364 <https://github.com/ros-perception/image_common/issues/364>`_)
+* Fix cmake deprecation (`#367 <https://github.com/ros-perception/image_common/issues/367>`_)
+* Contributors: Alejandro Hernández Cordero, mosfet80
+
+6.2.2 (2025-07-01)
+------------------
+
+6.2.1 (2025-06-12)
+------------------
+
+6.2.0 (2025-04-28)
+------------------
+
+6.1.1 (2025-04-28)
+------------------
+
+6.1.0 (2024-12-20)
+------------------
+
+6.0.3 (2024-11-25)
+------------------
+
+6.0.2 (2024-11-25)
+------------------
+
+6.0.1 (2024-10-10)
+------------------
+
+6.0.0 (2024-10-03)
+------------------
+* Add optional namespace to /set_camera_info service in CameraInfoManager (`#324 <https://github.com/ros-perception/image_common/issues/324>`_)
+* Contributors: Jan Hernas
+
+5.3.2 (2024-07-29)
+------------------
+
+5.3.1 (2024-07-19)
+------------------
+* Added common test to camera info manager (`#318 <https://github.com/ros-perception/image_common/issues/318>`_)
+* Contributors: Alejandro Hernández Cordero
+
+5.3.0 (2024-06-17)
+------------------
+
+5.2.1 (2024-05-24)
+------------------
+
+5.2.0 (2024-04-26)
+------------------
+
+5.1.2 (2024-04-16)
+------------------
+
+5.1.1 (2024-03-26)
+------------------
+* Switch from rcpputils::fs to std::filesystem (`#300 <https://github.com/ros-perception/image_common/issues/300>`_)
+* Contributors: Christophe Bedard
+
+5.1.0 (2024-01-24)
+------------------
+
+5.0.0 (2023-11-06)
+------------------
+* Removed C headers: camera_info_manager camera_calibration_parsers (`#290 <https://github.com/ros-perception/image_common/issues/290>`_)
+* Contributors: Alejandro Hernández Cordero
+
+4.5.1 (2023-09-07)
+------------------
+
+4.5.0 (2023-08-21)
+------------------
+
+4.3.0 (2023-04-28)
+------------------
+
+4.2.0 (2023-02-14)
+------------------
+* Update image_common to C++17. (`#267 <https://github.com/ros-perception/image_common/issues/267>`_)
+* Contributors: Chris Lalancette
+
+4.1.1 (2022-11-16)
+------------------
+* Add alias library targets for all libraries (`#259 <https://github.com/ros-perception/image_common/issues/259>`_)
+* Contributors: RFRIEDM-Trimble
+
+4.1.0 (2022-11-02)
+------------------
+* Add lifecycle node compatibility to camera_info_manager (`#190 <https://github.com/ros-perception/image_common/issues/190>`_)
+* Contributors: Ramon Wijnands
+
+4.0.0 (2022-08-11)
+------------------
+
+3.2.1 (2022-07-12)
+------------------
+
+3.2.0 (2022-05-10)
+------------------
 
 3.1.4 (2022-03-25)
 ------------------

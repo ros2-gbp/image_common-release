@@ -38,12 +38,11 @@
 #include "sensor_msgs/msg/camera_info.hpp"
 #include "sensor_msgs/msg/image.hpp"
 
+#include "image_transport/node_interfaces.hpp"
 #include "image_transport/visibility_control.hpp"
 
 namespace image_transport
 {
-
-class ImageTransport;
 
 /**
  * \brief Manages a subscription callback on synchronized Image and CameraInfo topics.
@@ -63,6 +62,7 @@ void callback(const sensor_msgs::msg::Image::ConstSharedPtr&, const sensor_msgs:
 class CameraSubscriber
 {
 public:
+  /// Callback signature: receives synchronized Image and CameraInfo pointers.
   typedef std::function<void (const sensor_msgs::msg::Image::ConstSharedPtr &,
       const sensor_msgs::msg::CameraInfo::ConstSharedPtr &)> Callback;
 
@@ -71,11 +71,11 @@ public:
 
   IMAGE_TRANSPORT_PUBLIC
   CameraSubscriber(
-    rclcpp::Node * node,
+    RequiredInterfaces node_interfaces,
     const std::string & base_topic,
     const Callback & callback,
     const std::string & transport,
-    rmw_qos_profile_t = rmw_qos_profile_default);
+    rclcpp::QoS custom_qos);
 
   /**
    * \brief Get the base topic (on which the raw image is published).
@@ -107,15 +107,19 @@ public:
   IMAGE_TRANSPORT_PUBLIC
   void shutdown();
 
+  /// \brief Returns non-null if this CameraSubscriber is valid (i.e. subscribed).
   IMAGE_TRANSPORT_PUBLIC
   operator void *() const;
 
+  /// \brief Less-than comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator<(const CameraSubscriber & rhs) const {return impl_ < rhs.impl_;}
 
+  /// \brief Inequality comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator!=(const CameraSubscriber & rhs) const {return impl_ != rhs.impl_;}
 
+  /// \brief Equality comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator==(const CameraSubscriber & rhs) const {return impl_ == rhs.impl_;}
 

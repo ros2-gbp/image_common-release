@@ -38,13 +38,12 @@
 #include "sensor_msgs/msg/image.hpp"
 #include "sensor_msgs/msg/camera_info.hpp"
 
+#include "image_transport/node_interfaces.hpp"
 #include "image_transport/single_subscriber_publisher.hpp"
 #include "image_transport/visibility_control.hpp"
 
 namespace image_transport
 {
-
-class ImageTransport;
 
 /**
  * \brief Manages advertisements for publishing camera images.
@@ -69,11 +68,10 @@ public:
 
   IMAGE_TRANSPORT_PUBLIC
   CameraPublisher(
-    rclcpp::Node * node,
+    RequiredInterfaces node_interfaces,
     const std::string & base_topic,
-    rmw_qos_profile_t custom_qos = rmw_qos_profile_default);
-
-  // TODO(ros2) Restore support for SubscriberStatusCallbacks when available.
+    rclcpp::QoS custom_qos,
+    rclcpp::PublisherOptions = rclcpp::PublisherOptions());
 
   /*!
    * \brief Returns the number of subscribers that are currently connected to
@@ -113,6 +111,14 @@ public:
     const sensor_msgs::msg::CameraInfo::ConstSharedPtr & info) const;
 
   /*!
+   * \brief Publish an (image, info) pair on the topics associated with this CameraPublisher.
+   */
+  IMAGE_TRANSPORT_PUBLIC
+  void publish(
+    sensor_msgs::msg::Image::UniquePtr image,
+    sensor_msgs::msg::CameraInfo::UniquePtr info) const;
+
+  /*!
    * \brief Publish an (image, info) pair with given timestamp on the topics associated with
    * this CameraPublisher.
    *
@@ -125,20 +131,37 @@ public:
     rclcpp::Time stamp) const;
 
   /*!
+   * \brief Publish an (image, info) pair with given timestamp on the topics associated with
+   * this CameraPublisher.
+   *
+   * Convenience version, which sets the timestamps of both image and info to stamp before
+   * publishing.
+   */
+  IMAGE_TRANSPORT_PUBLIC
+  void publish(
+    sensor_msgs::msg::Image::UniquePtr image,
+    sensor_msgs::msg::CameraInfo::UniquePtr info,
+    rclcpp::Time stamp) const;
+
+  /*!
    * \brief Shutdown the advertisements associated with this Publisher.
    */
   IMAGE_TRANSPORT_PUBLIC
   void shutdown();
 
+  /// \brief Returns non-null if this CameraPublisher is valid (i.e. advertised).
   IMAGE_TRANSPORT_PUBLIC
   operator void *() const;
 
+  /// \brief Less-than comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator<(const CameraPublisher & rhs) const {return impl_ < rhs.impl_;}
 
+  /// \brief Inequality comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator!=(const CameraPublisher & rhs) const {return impl_ != rhs.impl_;}
 
+  /// \brief Equality comparison based on internal implementation pointer.
   IMAGE_TRANSPORT_PUBLIC
   bool operator==(const CameraPublisher & rhs) const {return impl_ == rhs.impl_;}
 

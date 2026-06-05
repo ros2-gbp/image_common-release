@@ -1,29 +1,38 @@
-import os
-
+from setuptools import find_packages
 from setuptools import setup
 
 package_name = 'camera_info_manager_py'
 
 setup(
     name=package_name,
-    version='3.1.13',
-    packages=['camera_info_manager'],
+    version='7.0.2',
+    packages=find_packages(exclude=['test']),
     data_files=[
         # Install marker file in the package index
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         # Include our package.xml file
-        (os.path.join('share', package_name), ['package.xml']),
+        ('share/' + package_name, ['package.xml']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='Jose Mastrangelo',
-    maintainer_email='jmastrangelo@clearpathrobotics.com',
     author="Jack O'Quin",
     author_email='jack.oquin@gmail.com',
+    maintainer='Jose Mastrangelo',
+    maintainer_email='jmastrangelo@clearpathrobotics.com',
+    keywords=['ROS'],
+    classifiers=[
+        'Intended Audience :: Developers',
+        'Programming Language :: Python',
+        'Topic :: Software Development',
+    ],
     description='Python interface for camera calibration information.',
     long_description='Python interface for camera calibration information. \n\n'
                      'This ROS package provides a CameraInfo interface for Python camera\n'
                      'drivers similar to the C++ camera_info_manager package.',
     license='BSD',
-    tests_require=['pytest'],
+    extras_require={
+        'test': [
+            'pytest'
+        ]
+    },
 )

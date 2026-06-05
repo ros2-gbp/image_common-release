@@ -30,7 +30,9 @@
 #define IMAGE_TRANSPORT__SIMPLE_PUBLISHER_PLUGIN_HPP_
 
 #include <memory>
+#include <stdexcept>
 #include <string>
+#include <utility>
 
 #include "rclcpp/node.hpp"
 #include "rclcpp/logger.hpp"
@@ -65,7 +67,8 @@ class SimplePublisherPlugin : public PublisherPlugin
 public:
   virtual ~SimplePublisherPlugin() {}
 
-  virtual size_t getNumSubscribers() const
+  /// \brief Returns the number of subscribers on the transport-specific topic.
+  size_t getNumSubscribers() const override
   {
     if (simple_impl_) {
       return simple_impl_->pub_->get_subscription_count();
@@ -73,13 +76,15 @@ public:
     return 0;
   }
 
-  virtual std::string getTopic() const
+  /// \brief Returns the transport-specific topic name being advertised.
+  std::string getTopic() const override
   {
     if (simple_impl_) {return simple_impl_->pub_->get_topic_name();}
     return std::string();
   }
 
-  virtual void publish(const sensor_msgs::msg::Image & message) const
+  /// \brief Encode and publish \p message via the internal transport publisher.
+  void publish(const sensor_msgs::msg::Image & message) const override
   {
     if (!simple_impl_ || !simple_impl_->pub_) {
       auto logger = simple_impl_ ? simple_impl_->logger_ : rclcpp::get_logger("image_transport");
@@ -89,41 +94,76 @@ public:
       return;
     }
 
-    publish(message, bindInternalPublisher(simple_impl_->pub_.get()));
+    publish(message, simple_impl_->pub_);
   }
 
-  virtual void shutdown()
+  /// \brief Encode and publish \p message via the internal transport publisher (UniquePtr variant).
+  void publishUniquePtr(sensor_msgs::msg::Image::UniquePtr message) const override
+  {
+    if (!simple_impl_ || !simple_impl_->pub_) {
+      auto logger = simple_impl_ ? simple_impl_->logger_ : rclcpp::get_logger("image_transport");
+      RCLCPP_ERROR(
+        logger,
+        "Call to publish() on an invalid image_transport::SimplePublisherPlugin");
+      return;
+    }
+
+    publish(std::move(message), simple_impl_->pub_);
+  }
+
+  /// \brief Destroy the internal publisher and release resources.
+  void shutdown() override
   {
     simple_impl_.reset();
   }
 
 protected:
-  virtual void advertiseImpl(
-    rclcpp::Node * node, const std::string & base_topic,
-    rmw_qos_profile_t custom_qos)
+  void advertiseImpl(
+    RequiredInterfaces node_interfaces,
+    const std::string & base_topic,
+    rclcpp::QoS custom_qos,
+    rclcpp::PublisherOptions options) override
   {
     std::string transport_topic = getTopicToAdvertise(base_topic);
-    simple_impl_ = std::make_unique<SimplePublisherPluginImpl>(node);
+    simple_impl_ = std::make_unique<SimplePublisherPluginImpl>(node_interfaces);
 
     RCLCPP_DEBUG(simple_impl_->logger_, "getTopicToAdvertise: %s", transport_topic.c_str());
-    auto qos = rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos), custom_qos);
-    simple_impl_->pub_ = node->create_publisher<M>(transport_topic, qos);
+    auto parameters_interface = node_interfaces.get_node_parameters_interface();
+    auto topics_interface = node_interfaces.get_node_topics_interface();
+    simple_impl_->pub_ = rclcpp::create_publisher<M>(
+      parameters_interface,
+      topics_interface,
+      transport_topic, custom_qos, options);
   }
+
+  /// Shared pointer to the internal rclcpp publisher for transport message type M.
+  typedef typename rclcpp::Publisher<M>::SharedPtr PublisherT;
 
   //! Generic function for publishing the internal message type.
   typedef std::function<void (const M &)> PublishFn;
 
   /**
-   * \brief Publish an image using the specified publish function. Must be implemented by
-   * the subclass.
-   *
-   * The PublishFn publishes the transport-specific message type. This indirection allows
-   * SimpleSubscriberPlugin to use this function for both normal broadcast publishing and
-   * single subscriber publishing (in subscription callbacks).
+   * \brief Publish an image using the specified publisher.
    */
   virtual void publish(
     const sensor_msgs::msg::Image & message,
-    const PublishFn & publish_fn) const = 0;
+    const PublisherT & publisher) const = 0;
+
+  /**
+   * \brief Publish an image using the specified publisher.
+   *
+   * This version of the function can be used to optimize cases where the Plugin can
+   * avoid doing copies of the data when having the ownership to the image message.
+   * Plugins that can take advantage of message ownership should overwrite this method
+   * along with supportsUniquePtrPub().
+   */
+  virtual void publish(
+    sensor_msgs::msg::Image::UniquePtr /*message*/,
+    const PublisherT & /*publisher*/) const
+  {
+    throw std::logic_error(
+      "publish(sensor_msgs::msg::Image::UniquePtr, const PublisherT&) is not implemented.");
+  }
 
   /**
    * \brief Return the communication topic name for a given base topic.
@@ -138,35 +178,18 @@ protected:
 private:
   struct SimplePublisherPluginImpl
   {
-    explicit SimplePublisherPluginImpl(rclcpp::Node * node)
-    : node_(node),
-      logger_(node->get_logger())
+    explicit SimplePublisherPluginImpl(RequiredInterfaces required_interfaces)
+    : required_interfaces_(required_interfaces),
+      logger_(required_interfaces.get_node_logging_interface()->get_logger())
     {
     }
 
-    rclcpp::Node * node_;
+    RequiredInterfaces required_interfaces_;
     rclcpp::Logger logger_;
-    typename rclcpp::Publisher<M>::SharedPtr pub_;
+    PublisherT pub_;
   };
 
   std::unique_ptr<SimplePublisherPluginImpl> simple_impl_;
-
-  typedef std::function<void (const sensor_msgs::msg::Image &)> ImagePublishFn;
-
-  /**
-   * Returns a function object for publishing the transport-specific message type
-   * through some ROS publisher type.
-   *
-   * @param pub An object with method void publish(const M&)
-   */
-  template<class PubT>
-  PublishFn bindInternalPublisher(PubT * pub) const
-  {
-    // Bind PubT::publish(const Message&) as PublishFn
-    typedef void (PubT::* InternalPublishMemFn)(const M &);
-    InternalPublishMemFn internal_pub_mem_fn = &PubT::publish;
-    return std::bind(internal_pub_mem_fn, pub, std::placeholders::_1);
-  }
 };
 
 }  // namespace image_transport

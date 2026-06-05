@@ -30,8 +30,8 @@
 
 #include <memory>
 #include <string>
+#include <utility>
 
-#include "rclcpp/expand_topic_or_service_name.hpp"
 #include "rclcpp/logging.hpp"
 #include "rclcpp/node.hpp"
 
@@ -43,8 +43,11 @@ namespace image_transport
 
 struct CameraPublisher::Impl
 {
-  explicit Impl(rclcpp::Node * node)
-  : logger_(node->get_logger()),
+  using NodeLoggingInterface = rclcpp::node_interfaces::NodeLoggingInterface;
+  using RequiredInterfaces = rclcpp::node_interfaces::NodeInterfaces<NodeLoggingInterface>;
+
+  explicit Impl(RequiredInterfaces required_interfaces)
+  : logger_(required_interfaces.get_node_logging_interface()->get_logger()),
     unadvertised_(false)
   {
   }
@@ -74,23 +77,29 @@ struct CameraPublisher::Impl
   bool unadvertised_;
 };
 
-// TODO(ros2) Add support for SubscriberStatusCallbacks when rcl/rmw support it.
 CameraPublisher::CameraPublisher(
-  rclcpp::Node * node,
+  RequiredInterfaces node_interfaces,
   const std::string & base_topic,
-  rmw_qos_profile_t custom_qos)
-: impl_(std::make_shared<Impl>(node))
+  rclcpp::QoS custom_qos,
+  rclcpp::PublisherOptions pub_options)
+: impl_(std::make_shared<Impl>(node_interfaces))
 {
   // Explicitly resolve name here so we compute the correct CameraInfo topic when the
   // image topic is remapped (#4539).
-  std::string image_topic = rclcpp::expand_topic_or_service_name(
-    base_topic,
-    node->get_name(), node->get_namespace());
+  std::string image_topic =
+    node_interfaces.get_node_topics_interface()->resolve_topic_name(base_topic);
   std::string info_topic = getCameraInfoTopic(image_topic);
 
-  auto qos = rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos), custom_qos);
-  impl_->image_pub_ = image_transport::create_publisher(node, image_topic, custom_qos);
-  impl_->info_pub_ = node->create_publisher<sensor_msgs::msg::CameraInfo>(info_topic, qos);
+  impl_->image_pub_ = image_transport::create_publisher(node_interfaces, image_topic, custom_qos,
+      pub_options);
+
+  auto parameters_interface = node_interfaces.get_node_parameters_interface();
+  auto topics_interface = node_interfaces.get_node_topics_interface();
+  // Create the publisher.
+  impl_->info_pub_ = rclcpp::create_publisher<sensor_msgs::msg::CameraInfo>(
+    parameters_interface,
+    topics_interface,
+    info_topic, custom_qos);
 }
 
 size_t CameraPublisher::getNumSubscribers() const
@@ -124,7 +133,6 @@ void CameraPublisher::publish(
   const sensor_msgs::msg::CameraInfo & info) const
 {
   if (!impl_ || !impl_->isValid()) {
-    // TODO(ros2) Switch to RCUTILS_ASSERT when ros2/rcutils#112 is merged
     auto logger = impl_ ? impl_->logger_ : rclcpp::get_logger("image_transport");
     RCLCPP_FATAL(
       logger,
@@ -141,7 +149,6 @@ void CameraPublisher::publish(
   const sensor_msgs::msg::CameraInfo::ConstSharedPtr & info) const
 {
   if (!impl_ || !impl_->isValid()) {
-    // TODO(ros2) Switch to RCUTILS_ASSERT when ros2/rcutils#112 is merged
     auto logger = impl_ ? impl_->logger_ : rclcpp::get_logger("image_transport");
     RCLCPP_FATAL(
       logger,
@@ -154,11 +161,26 @@ void CameraPublisher::publish(
 }
 
 void CameraPublisher::publish(
+  sensor_msgs::msg::Image::UniquePtr image,
+  sensor_msgs::msg::CameraInfo::UniquePtr info) const
+{
+  if (!impl_ || !impl_->isValid()) {
+    auto logger = impl_ ? impl_->logger_ : rclcpp::get_logger("image_transport");
+    RCLCPP_FATAL(
+      logger,
+      "Call to publish() on an invalid image_transport::CameraPublisher");
+    return;
+  }
+
+  impl_->image_pub_.publish(std::move(image));
+  impl_->info_pub_->publish(std::move(info));
+}
+
+void CameraPublisher::publish(
   sensor_msgs::msg::Image & image, sensor_msgs::msg::CameraInfo & info,
   rclcpp::Time stamp) const
 {
   if (!impl_ || !impl_->isValid()) {
-    // TODO(ros2) Switch to RCUTILS_ASSERT when ros2/rcutils#112 is merged
     auto logger = impl_ ? impl_->logger_ : rclcpp::get_logger("image_transport");
     RCLCPP_FATAL(
       logger,
@@ -170,6 +192,25 @@ void CameraPublisher::publish(
   info.header.stamp = stamp;
   impl_->image_pub_.publish(image);
   impl_->info_pub_->publish(info);
+}
+
+void CameraPublisher::publish(
+  sensor_msgs::msg::Image::UniquePtr image,
+  sensor_msgs::msg::CameraInfo::UniquePtr info,
+  rclcpp::Time stamp) const
+{
+  if (!impl_ || !impl_->isValid()) {
+    auto logger = impl_ ? impl_->logger_ : rclcpp::get_logger("image_transport");
+    RCLCPP_FATAL(
+      logger,
+      "Call to publish() on an invalid image_transport::CameraPublisher");
+    return;
+  }
+
+  image->header.stamp = stamp;
+  info->header.stamp = stamp;
+  impl_->image_pub_.publish(std::move(image));
+  impl_->info_pub_->publish(std::move(info));
 }
 
 void CameraPublisher::shutdown()

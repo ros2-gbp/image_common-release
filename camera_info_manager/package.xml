@@ -1,6 +1,6 @@
 <package format="2">
   <name>camera_info_manager</name>
-  <version>3.1.13</version>
+  <version>7.0.2</version>
   <description>
 
      This package provides a C++ interface for camera calibration
@@ -16,7 +16,7 @@
   <maintainer email="alejandro@openrobotics.org">Alejandro Hernandez Cordero</maintainer>
   <maintainer email="geoff@openrobotics.org">Geoffrey Biggs</maintainer>
 
-  <license>BSD</license>
+  <license>BSD-3-Clause</license>
 
   <url type="website">http://ros.org/wiki/camera_info_manager</url>
   <url type="bugtracker">https://github.com/ros-perception/image_common/issues</url>
@@ -28,6 +28,7 @@
   <depend>ament_index_cpp</depend>
   <depend>camera_calibration_parsers</depend>
   <depend>rclcpp</depend>
+  <depend>rclcpp_lifecycle</depend>
   <depend>rcpputils</depend>
   <depend>sensor_msgs</depend>
 

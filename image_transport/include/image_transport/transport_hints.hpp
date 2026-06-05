@@ -34,6 +34,7 @@
 
 #include "rclcpp/node.hpp"
 
+#include "image_transport/node_interfaces.hpp"
 #include "image_transport/visibility_control.hpp"
 
 namespace image_transport
@@ -53,17 +54,22 @@ public:
    * in the node's local namespace. For consistency across ROS applications, the
    * name of this parameter should not be changed without good reason.
    *
-   * @param node Node to use when looking up the transport parameter.
-   * @param default_transport Preferred transport to use
-   * @param parameter_name The name of the transport parameter
+   * @param node_interfaces Node interfaces used to look up the transport parameter.
+   * @param default_transport Preferred transport to use.
+   * @param parameter_name The name of the transport parameter.
    */
   IMAGE_TRANSPORT_PUBLIC
   TransportHints(
-    const rclcpp::Node * node,
+    RequiredInterfaces node_interfaces,
     const std::string & default_transport = "raw",
     const std::string & parameter_name = "image_transport")
   {
-    node->get_parameter_or<std::string>(parameter_name, transport_, default_transport);
+    if (node_interfaces.get_node_parameters_interface()->has_parameter(parameter_name)) {
+      transport_ =
+        node_interfaces.get_node_parameters_interface()->get_parameter(parameter_name).as_string();
+    } else {
+      transport_ = default_transport;
+    }
   }
 
   IMAGE_TRANSPORT_PUBLIC

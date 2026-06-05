@@ -51,12 +51,12 @@ class RawSubscriber : public SimpleSubscriberPlugin<sensor_msgs::msg::Image>
 public:
   virtual ~RawSubscriber() {}
 
-  std::string getTransportName() const override
-  {
-    return "raw";
-  }
-
 protected:
+  /**
+   * \brief Pass the received raw Image message directly to the user callback.
+   * \param message The received Image message.
+   * \param user_cb The user-supplied subscriber callback.
+   */
   void internalCallback(
     const std::shared_ptr<const sensor_msgs::msg::Image> & message,
     const Callback & user_cb) override
@@ -67,18 +67,6 @@ protected:
   std::string getTopicToSubscribe(const std::string & base_topic) const override
   {
     return base_topic;
-  }
-
-  using SubscriberPlugin::subscribeImpl;
-
-  void subscribeImpl(
-    rclcpp::Node * node,
-    const std::string & base_topic,
-    const Callback & callback,
-    rmw_qos_profile_t custom_qos,
-    rclcpp::SubscriptionOptions options) override
-  {
-    this->subscribeImplWithOptions(node, base_topic, callback, custom_qos, options);
   }
 };
 
