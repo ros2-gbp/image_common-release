@@ -2,6 +2,13 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+7.0.3 (2026-07-17)
+------------------
+* Added rosdoc2 documentation to camera_info_manager_py (`#404 <https://github.com/ros-perception/image_common/issues/404>`_)
+* Compile with cpp20 (`#424 <https://github.com/ros-perception/image_common/issues/424>`_)
+* Added rosdoc2 documentation to camera info manager (`#402 <https://github.com/ros-perception/image_common/issues/402>`_)
+* Contributors: Alejandro Hernández Cordero
+
 7.0.2 (2026-06-05)
 ------------------
 * Added rosdoc2 documentation to image_transport (`#401 <https://github.com/ros-perception/image_common/issues/401>`_)
