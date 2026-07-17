@@ -2,6 +2,11 @@
 Changelog for package image_transport_py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+7.0.3 (2026-07-17)
+------------------
+* Compile with cpp20 (`#424 <https://github.com/ros-perception/image_common/issues/424>`_)
+* Contributors: Alejandro Hernández Cordero
+
 7.0.2 (2026-06-05)
 ------------------
 * Cleanups and removed unused files (`#406 <https://github.com/ros-perception/image_common/issues/406>`_)
