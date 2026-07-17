@@ -2,6 +2,15 @@
 Changelog for package camera_info_manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+7.0.3 (2026-07-17)
+------------------
+* camera_info_manager: Use string_view in URL parsing (`#427 <https://github.com/ros-perception/image_common/issues/427>`_)
+* Added rosdoc2 documentation to camera_info_manager_py (`#404 <https://github.com/ros-perception/image_common/issues/404>`_)
+* Compile with cpp20 (`#424 <https://github.com/ros-perception/image_common/issues/424>`_)
+* Added rosdoc2 documentation to camera info manager (`#402 <https://github.com/ros-perception/image_common/issues/402>`_)
+* Prevent executor race condition (`#421 <https://github.com/ros-perception/image_common/issues/421>`_)
+* Contributors: Alejandro Hernández Cordero, Michael Carroll
+
 7.0.2 (2026-06-05)
 ------------------
 * Cleanups and removed unused files (`#406 <https://github.com/ros-perception/image_common/issues/406>`_)
