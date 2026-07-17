@@ -2,15 +2,26 @@
 Changelog for package image_transport
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-6.4.10 (2026-06-05)
--------------------
-
-6.4.9 (2026-05-29)
+7.0.3 (2026-07-17)
 ------------------
-* Added version.h (`#415 <https://github.com/ros-perception/image_common/issues/415>`_) (`#416 <https://github.com/ros-perception/image_common/issues/416>`_)
-* Contributors: mergify[bot]
+* Added rosdoc2 documentation to camera_info_manager_py (`#404 <https://github.com/ros-perception/image_common/issues/404>`_)
+* Compile with cpp20 (`#424 <https://github.com/ros-perception/image_common/issues/424>`_)
+* Added rosdoc2 documentation to camera info manager (`#402 <https://github.com/ros-perception/image_common/issues/402>`_)
+* Contributors: Alejandro Hernández Cordero
 
-6.4.8 (2026-04-30)
+7.0.2 (2026-06-05)
+------------------
+* Added rosdoc2 documentation to image_transport (`#401 <https://github.com/ros-perception/image_common/issues/401>`_)
+* Cleanups and removed unused files (`#406 <https://github.com/ros-perception/image_common/issues/406>`_)
+* Contributors: Alejandro Hernández Cordero
+
+7.0.1 (2026-05-29)
+------------------
+* Removed deprecated API (`#413 <https://github.com/ros-perception/image_common/issues/413>`_)
+* Added version.h (`#415 <https://github.com/ros-perception/image_common/issues/415>`_)
+* Contributors: Alejandro Hernández Cordero, Martin Pecka
+
+7.0.0 (2026-05-06)
 ------------------
 * Removed clang warning (`#399 <https://github.com/ros-perception/image_common/issues/399>`_)
 * Contributors: Alejandro Hernández Cordero

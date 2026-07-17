@@ -64,7 +64,7 @@ public:
    * The default implementation auto-discovers the name from the pluginlib
    * manifest XML (without instantiating any plugin) by matching the demangled
    * C++ type name of \c *this against the \c type attribute of each
-   * \c <class> element.  The result is cached after the first call.
+   * \c &lt;class&gt; element.  The result is cached after the first call.
    *
    * Plugins that override getTransportName() continue to work unchanged —
    * user-supplied overrides always take precedence over the base implementation.
@@ -76,7 +76,7 @@ public:
   /**
    * \brief Get the primary message type used by this plugin.
    *
-   * Returns the value of the \c <message_type> element from the plugin
+   * Returns the value of the \c &lt;message_type&gt; element from the plugin
    * manifest XML (e.g. \c "sensor_msgs/msg/Image").  The result is cached
    * after the first call.  Override this method if you need a different
    * value at runtime.
@@ -92,21 +92,6 @@ public:
   virtual bool supportsUniquePtrPub() const
   {
     return false;
-  }
-
-  /**
-   * \brief Advertise a topic, simple version.
-   */
-  [[deprecated("Use advertise(RequiredInterfaces node_interfaces, ..., rclcpp::QoS, ...) instead")]]
-  void advertise(
-    rclcpp::Node * node,
-    const std::string & base_topic,
-    rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
-    rclcpp::PublisherOptions options = rclcpp::PublisherOptions())
-  {
-    std::string image_topic = node->get_node_topics_interface()->resolve_topic_name(base_topic);
-    advertiseImpl(*node, image_topic,
-        rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos), custom_qos), options);
   }
 
   /**
@@ -195,21 +180,6 @@ public:
   }
 
 protected:
-  /**
-   * \brief Advertise a topic. Must be implemented by the subclass.
-   */
-  [[deprecated("Use advertiseImpl(RequiredInterfaces node_interfaces, ..., rclcpp::QoS, ...) "
-    "instead")]]
-  virtual void advertiseImpl(
-    rclcpp::Node * node,
-    const std::string & base_topic,
-    rmw_qos_profile_t custom_qos,
-    rclcpp::PublisherOptions options)
-  {
-    advertiseImpl(*node, base_topic,
-      rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos), custom_qos), options);
-  }
-
   /**
    * \brief Advertise a topic. Must be implemented by the subclass.
    */

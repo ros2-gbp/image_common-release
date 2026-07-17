@@ -88,7 +88,6 @@ Topics covered include:
 | Iron    | `iron`      |
 | Humble  | `humble`    |
 
-
 ## Contributing
 
 Contributions are welcome. Please open issues and pull requests on [GitHub](https://github.com/ros-perception/image_common).

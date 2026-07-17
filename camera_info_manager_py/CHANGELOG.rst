@@ -2,15 +2,23 @@
 Changelog for package camera_info_manager_py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-6.4.10 (2026-06-05)
--------------------
-* Zoom Camera Info manager properly ported to ROS 2 (backport `#407 <https://github.com/ros-perception/image_common/issues/407>`_) (`#422 <https://github.com/ros-perception/image_common/issues/422>`_)
-* Contributors: mergify[bot]
+7.0.3 (2026-07-17)
+------------------
+* Type annotations for camenra_info_manager_py (`#426 <https://github.com/ros-perception/image_common/issues/426>`_)
+* Python3 modernization (`#425 <https://github.com/ros-perception/image_common/issues/425>`_)
+* Added rosdoc2 documentation to camera_info_manager_py (`#404 <https://github.com/ros-perception/image_common/issues/404>`_)
+* Contributors: Alejandro Hernández Cordero
 
-6.4.9 (2026-05-29)
+7.0.2 (2026-06-05)
+------------------
+* Zoom Camera Info manager properly ported to ROS 2 (`#407 <https://github.com/ros-perception/image_common/issues/407>`_)
+* Cleanups and removed unused files (`#406 <https://github.com/ros-perception/image_common/issues/406>`_)
+* Contributors: Alejandro Hernández Cordero
+
+7.0.1 (2026-05-29)
 ------------------
 
-6.4.8 (2026-04-30)
+7.0.0 (2026-05-06)
 ------------------
 
 6.4.7 (2026-04-01)

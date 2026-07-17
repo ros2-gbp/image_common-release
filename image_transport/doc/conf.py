@@ -1,4 +1,4 @@
-# Copyright 2016
+# Copyright 2026 Open Source Robotics Foundation, Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -27,22 +27,46 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-from camera_calibration_parsers.camera_calibration_parsers_wrapper import __readCalibrationWrapper
-from sensor_msgs.msg import CameraInfo
+import os
+import sys
 
+# Allow Sphinx extensions to find local modules
+sys.path.insert(0, os.path.abspath('.'))
 
-def readCalibration(file_name):
-    """
-    Read .ini or .yaml calibration file and return (camera name and cameraInfo message).
+# -- Project information (overridden by rosdoc2 from package.xml) ----------
+project = 'image_transport'
+copyright = '2026, Open Robotics'  # noqa: A001
+author = 'Alejandro Hernandez Cordero, Geoffrey Biggs'
 
-    @param file_name: camera calibration file name
-    @type file_name: str
-    @return: (camera name, cameraInfo message) or None on Error
-    @rtype: tuple(str, sensor_msgs.msg.CameraInfo | None
-    """
-    ret, cn, ci = __readCalibrationWrapper(file_name)
-    if not ret:
-        return None
-    c = CameraInfo()
-    c.deserialize(ci)
-    return cn, c
+# -- General configuration -------------------------------------------------
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.intersphinx',
+    'breathe',
+    'myst_parser',
+]
+
+# breathe_projects and breathe_default_project are overridden by rosdoc2 at build time.
+breathe_default_project = 'image_transport Doxygen Project'
+breathe_default_members = ('members', 'undoc-members')
+
+# myst_parser — allow .md files in toctrees
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
+
+templates_path = ['_templates']
+# Exclude root-level copies of user docs (rosdoc2 copies them to user_docs/ too,
+# where they are included via the user_docs.rst glob toctree).
+exclude_patterns = [
+    '_build',
+    'camera_api.rst',
+    'filter_api.rst',
+    'overview.rst',
+    'plugin_api.rst',
+    'user_api.rst',
+]
+
+# -- HTML output options ---------------------------------------------------
+html_theme = 'sphinx_rtd_theme'

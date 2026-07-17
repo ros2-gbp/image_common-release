@@ -30,11 +30,11 @@
 #include "camera_info_manager/camera_info_manager.hpp"
 
 #include <algorithm>
-#include <cstdlib>
+#include <cctype>
 #include <filesystem>
-#include <locale>
 #include <memory>
 #include <string>
+#include <string_view>
 
 #include "rcpputils/env.hpp"
 #include "camera_calibration_parsers/parse.hpp"
@@ -62,36 +62,6 @@ using camera_calibration_parsers::writeCalibration;
 const std::string
   default_camera_info_url = "file://${ROS_HOME}/camera_info/${NAME}.yaml";
 
-/** Constructor
- *
- * @param node node, normally for the driver's streaming name
- *           space ("camera").  The service name is relative to this
- *           handle.  Nodes supporting multiple cameras may use
- *           subordinate names, like "left/camera" and "right/camera".
- * @param cname default camera name
- * @param url default Uniform Resource Locator for loading and saving data.
- * @param ns namespace for the set_camera_info service. If not specified,
- *           the service name will be "~/set_camera_info".
- */
-CameraInfoManager::CameraInfoManager(
-  rclcpp::Node * node, const std::string & cname,
-  const std::string & url, const std::string & ns)
-: CameraInfoManager(node->get_node_base_interface(),
-    node->get_node_services_interface(), node->get_node_logging_interface(), cname, url,
-    rclcpp::SystemDefaultsQoS(), ns)
-{
-}
-
-CameraInfoManager::CameraInfoManager(
-  rclcpp_lifecycle::LifecycleNode * node,
-  const std::string & cname, const std::string & url,
-  const std::string & ns)
-: CameraInfoManager(node->get_node_base_interface(),
-    node->get_node_services_interface(), node->get_node_logging_interface(), cname, url,
-    rclcpp::SystemDefaultsQoS(), ns)
-{
-}
-
 CameraInfoManager::CameraInfoManager(
   rclcpp::node_interfaces::NodeBaseInterface::SharedPtr node_base_interface,
   rclcpp::node_interfaces::NodeServicesInterface::SharedPtr node_services_interface,
@@ -110,17 +80,6 @@ CameraInfoManager::CameraInfoManager(
   info_service_ = rclcpp::create_service<SetCameraInfo>(
     node_base_interface, node_services_interface, namespace_ + "/set_camera_info",
     std::bind(&CameraInfoManager::setCameraInfoService, this, _1, _2), custom_qos, nullptr);
-}
-
-CameraInfoManager::CameraInfoManager(
-  rclcpp::node_interfaces::NodeBaseInterface::SharedPtr node_base_interface,
-  rclcpp::node_interfaces::NodeServicesInterface::SharedPtr node_services_interface,
-  rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr node_logger_interface,
-  const std::string & cname, const std::string & url,
-  rmw_qos_profile_t custom_qos, const std::string & ns)
-: CameraInfoManager(node_base_interface, node_services_interface, node_logger_interface, cname, url,
-    rclcpp::QoS(rclcpp::QoSInitialization::from_rmw(custom_qos), custom_qos), ns)
-{
 }
 
 /** Get the current CameraInfo data.
@@ -250,29 +209,29 @@ bool CameraInfoManager::loadCalibration(
   const std::string resURL(resolveURL(url, cname));
   url_type_t url_type = parseURL(resURL);
 
-  if (url_type != URL_empty) {
+  if (url_type != url_type_t::Empty) {
     RCLCPP_INFO(logger_, "camera calibration URL: %s", resURL.c_str());
   }
 
   switch (url_type) {
-    case URL_empty:
+    case url_type_t::Empty:
       {
         RCLCPP_INFO(logger_, "using default calibration URL");
         success = loadCalibration(default_camera_info_url, cname);
         break;
       }
-    case URL_file:
+    case url_type_t::File:
       {
         success = loadCalibrationFile(
           std::filesystem::path(resURL.substr(7)), cname);
         break;
       }
-    case URL_flash:
+    case url_type_t::Flash:
       {
         RCLCPP_WARN(logger_, "reading from flash not implemented yet");
         break;
       }
-    case URL_package:
+    case url_type_t::Package:
       {
         std::filesystem::path filename(getPackageFileName(resURL));
         if (!filename.empty()) {
@@ -383,14 +342,15 @@ std::string CameraInfoManager::resolveURL(
     // copy characters up to the next '$'
     resolved += url.substr(rest, dollar - rest);
 
-    if (url.substr(dollar + 1, 1) != "{") {
+    const std::string_view tail = std::string_view{url}.substr(dollar + 1);
+    if (!tail.starts_with('{')) {
       // no '{' follows, so keep the '$'
       resolved += "$";
-    } else if (url.substr(dollar + 1, 6) == "{NAME}") {
+    } else if (tail.starts_with("{NAME}")) {
       // substitute camera name
       resolved += cname;
       dollar += 6;
-    } else if (url.substr(dollar + 1, 10) == "{ROS_HOME}") {
+    } else if (tail.starts_with("{ROS_HOME}")) {
       // substitute $ROS_HOME
       std::string ros_home;
       std::string ros_home_env = rcpputils::get_env_var("ROS_HOME");
@@ -428,45 +388,50 @@ std::string CameraInfoManager::resolveURL(
  * @param url string to parse
  * @return URL type
  *
- * @note Recognized but unsupported URL types have enum values >= URL_invalid.
+ * @note Recognized but unsupported URL types have enum values >= url_type_t::Invalid.
  */
 CameraInfoManager::url_type_t CameraInfoManager::parseURL(const std::string & url)
 {
   if (url == "") {
-    return URL_empty;
+    return url_type_t::Empty;
   }
 
-  // Easy C++14 replacement for boost::iequals from :
-  // https://stackoverflow.com/a/4119881
-  auto iequals = [](const std::string & a, const std::string & b) {
-      return std::equal(
-        a.begin(), a.end(),
-        b.begin(), b.end(),
-        [](char a, char b) {
-          return tolower(a) == tolower(b);
+  // Case-insensitive prefix test over string views: no per-check allocation
+  // (unlike substr()), and tolower() is fed an unsigned char to avoid the
+  // undefined behaviour it has for bytes with the high bit set (non-ASCII URLs).
+  constexpr auto ci_starts_with = [](std::string_view s, std::string_view prefix) {
+      if (s.size() < prefix.size()) {
+        return false;
+      }
+      return std::ranges::equal(
+        s.substr(0, prefix.size()), prefix,
+        [](unsigned char a, unsigned char b) {
+          return std::tolower(a) == std::tolower(b);
         });
     };
 
+  const std::string_view u{url};
 
   // Accept both "file:///" (Unix absolute path) and "file://X:/" (Windows
   // drive letter), but reject bare "file://" with nothing after it.
-  if (iequals(url.substr(0, 7), "file://") && url.length() > 7 &&
-    (url[7] == '/' || (url.length() > 9 && std::isalpha(url[7]) && url[8] == ':')))
+  if (ci_starts_with(u, "file://") && u.size() > 7 &&
+    (u[7] == '/' ||
+    (u.size() > 9 && std::isalpha(static_cast<unsigned char>(u[7])) && u[8] == ':')))
   {
-    return URL_file;
+    return url_type_t::File;
   }
-  if (iequals(url.substr(0, 9), "flash:///")) {
-    return URL_flash;
+  if (ci_starts_with(u, "flash:///")) {
+    return url_type_t::Flash;
   }
-  if (iequals(url.substr(0, 10), "package://")) {
+  if (ci_starts_with(u, "package://")) {
     // look for a '/' following the package name, make sure it is
     // there, the name is not empty, and something follows it
-    size_t rest = url.find('/', 10);
-    if (rest < url.length() - 1 && rest > 10) {
-      return URL_package;
+    size_t rest = u.find('/', 10);
+    if (rest < u.size() - 1 && rest > 10) {
+      return url_type_t::Package;
     }
   }
-  return URL_invalid;
+  return url_type_t::Invalid;
 }
 
 /** Save CameraInfo calibration data.
@@ -490,19 +455,19 @@ CameraInfoManager::saveCalibration(
   const std::string resURL(resolveURL(url, cname));
 
   switch (parseURL(resURL)) {
-    case URL_empty:
+    case url_type_t::Empty:
       {
         // store using default file name
         success = saveCalibration(new_info, default_camera_info_url, cname);
         break;
       }
-    case URL_file:
+    case url_type_t::File:
       {
         success = saveCalibrationFile(
           new_info, std::filesystem::path(resURL.substr(7)), cname);
         break;
       }
-    case URL_package:
+    case url_type_t::Package:
       {
         std::filesystem::path filename(getPackageFileName(resURL));
         if (!filename.empty()) {
@@ -660,6 +625,6 @@ bool CameraInfoManager::validateURL(const std::string & url)
   }  // release the lock
 
   url_type_t url_type = parseURL(resolveURL(url, cname));
-  return url_type < URL_invalid;
+  return url_type < url_type_t::Invalid;
 }
 }  // namespace camera_info_manager

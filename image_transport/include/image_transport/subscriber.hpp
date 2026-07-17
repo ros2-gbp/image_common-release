@@ -29,6 +29,7 @@
 #ifndef IMAGE_TRANSPORT__SUBSCRIBER_HPP_
 #define IMAGE_TRANSPORT__SUBSCRIBER_HPP_
 
+#include <compare>
 #include <functional>
 #include <memory>
 #include <string>
@@ -62,21 +63,11 @@ namespace image_transport
 class Subscriber
 {
 public:
+  /// Callback signature: receives a const-shared Image pointer.
   typedef std::function<void (const sensor_msgs::msg::Image::ConstSharedPtr &)> Callback;
 
   IMAGE_TRANSPORT_PUBLIC
   Subscriber() = default;
-
-  [[deprecated("Use Subscriber(RequiredInterfaces node_interfaces, ..., rclcpp::QoS) instead.")]]
-  IMAGE_TRANSPORT_PUBLIC
-  Subscriber(
-    rclcpp::Node * node,
-    const std::string & base_topic,
-    const Callback & callback,
-    SubLoaderPtr loader,
-    const std::string & transport,
-    rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
-    rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions());
 
   IMAGE_TRANSPORT_PUBLIC
   Subscriber(
@@ -115,14 +106,14 @@ public:
   IMAGE_TRANSPORT_PUBLIC
   void shutdown();
 
+  /// \brief Returns non-null if this Subscriber is valid (i.e. subscribed).
   IMAGE_TRANSPORT_PUBLIC
   operator void *() const;
+  /// \brief Total ordering and equality based on the internal implementation
+  ///   pointer.  The single defaulted three-way comparison synthesizes all six
+  ///   relational operators (==, !=, <, <=, >, >=).
   IMAGE_TRANSPORT_PUBLIC
-  bool operator<(const Subscriber & rhs) const {return impl_ < rhs.impl_;}
-  IMAGE_TRANSPORT_PUBLIC
-  bool operator!=(const Subscriber & rhs) const {return impl_ != rhs.impl_;}
-  IMAGE_TRANSPORT_PUBLIC
-  bool operator==(const Subscriber & rhs) const {return impl_ == rhs.impl_;}
+  auto operator<=>(const Subscriber & rhs) const = default;
 
 private:
   struct Impl;

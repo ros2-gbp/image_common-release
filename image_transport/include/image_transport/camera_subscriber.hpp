@@ -29,6 +29,7 @@
 #ifndef IMAGE_TRANSPORT__CAMERA_SUBSCRIBER_HPP_
 #define IMAGE_TRANSPORT__CAMERA_SUBSCRIBER_HPP_
 
+#include <compare>
 #include <functional>
 #include <memory>
 #include <string>
@@ -43,8 +44,6 @@
 
 namespace image_transport
 {
-
-class ImageTransport;
 
 /**
  * \brief Manages a subscription callback on synchronized Image and CameraInfo topics.
@@ -64,21 +63,12 @@ void callback(const sensor_msgs::msg::Image::ConstSharedPtr&, const sensor_msgs:
 class CameraSubscriber
 {
 public:
+  /// Callback signature: receives synchronized Image and CameraInfo pointers.
   typedef std::function<void (const sensor_msgs::msg::Image::ConstSharedPtr &,
       const sensor_msgs::msg::CameraInfo::ConstSharedPtr &)> Callback;
 
   IMAGE_TRANSPORT_PUBLIC
   CameraSubscriber() = default;
-
-  [[deprecated("Use CameraSubscriber(RequiredInterfaces node_interfaces, ..., rclcpp::QoS instead) "
-    "instead.")]]
-  IMAGE_TRANSPORT_PUBLIC
-  CameraSubscriber(
-    rclcpp::Node * node,
-    const std::string & base_topic,
-    const Callback & callback,
-    const std::string & transport,
-    rmw_qos_profile_t = rmw_qos_profile_default);
 
   IMAGE_TRANSPORT_PUBLIC
   CameraSubscriber(
@@ -86,7 +76,7 @@ public:
     const std::string & base_topic,
     const Callback & callback,
     const std::string & transport,
-    rclcpp::QoS);
+    rclcpp::QoS custom_qos);
 
   /**
    * \brief Get the base topic (on which the raw image is published).
@@ -118,17 +108,15 @@ public:
   IMAGE_TRANSPORT_PUBLIC
   void shutdown();
 
+  /// \brief Returns non-null if this CameraSubscriber is valid (i.e. subscribed).
   IMAGE_TRANSPORT_PUBLIC
   operator void *() const;
 
+  /// \brief Total ordering and equality based on the internal implementation
+  ///   pointer.  The single defaulted three-way comparison synthesizes all six
+  ///   relational operators (==, !=, <, <=, >, >=).
   IMAGE_TRANSPORT_PUBLIC
-  bool operator<(const CameraSubscriber & rhs) const {return impl_ < rhs.impl_;}
-
-  IMAGE_TRANSPORT_PUBLIC
-  bool operator!=(const CameraSubscriber & rhs) const {return impl_ != rhs.impl_;}
-
-  IMAGE_TRANSPORT_PUBLIC
-  bool operator==(const CameraSubscriber & rhs) const {return impl_ == rhs.impl_;}
+  auto operator<=>(const CameraSubscriber & rhs) const = default;
 
 private:
   struct Impl;
