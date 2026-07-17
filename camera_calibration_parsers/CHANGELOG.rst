@@ -2,6 +2,14 @@
 Changelog for package camera_calibration_parsers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+7.0.3 (2026-07-17)
+------------------
+* camera_calibration_parsers: re-enable parser.py tests (`#428 <https://github.com/ros-perception/image_common/issues/428>`_)
+* Added rosdoc2 documentation to camera_info_manager_py (`#404 <https://github.com/ros-perception/image_common/issues/404>`_)
+* Compile with cpp20 (`#424 <https://github.com/ros-perception/image_common/issues/424>`_)
+* Added rosdoc2 documentation to camera_calibration_parsers (`#403 <https://github.com/ros-perception/image_common/issues/403>`_)
+* Contributors: Alejandro Hernández Cordero
+
 7.0.2 (2026-06-05)
 ------------------
 * Cleanups and removed unused files (`#406 <https://github.com/ros-perception/image_common/issues/406>`_)
