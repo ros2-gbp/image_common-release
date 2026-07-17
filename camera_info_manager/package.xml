@@ -1,6 +1,6 @@
 <package format="2">
   <name>camera_info_manager</name>
-  <version>7.0.2</version>
+  <version>7.0.3</version>
   <description>
 
      This package provides a C++ interface for camera calibration
@@ -23,7 +23,9 @@
   <url type="repository">https://github.com/ros-perception/image_common</url>
 
   <buildtool_depend>ament_cmake_ros</buildtool_depend>
+  <buildtool_depend>ament_cmake_ros_core</buildtool_depend>
   <buildtool_depend>ament_cmake_gen_version_h</buildtool_depend>
+  <buildtool_export_depend>ament_cmake_ros_core</buildtool_export_depend>
 
   <depend>ament_index_cpp</depend>
   <depend>camera_calibration_parsers</depend>
@@ -38,6 +40,7 @@
 
   <export>
     <build_type>ament_cmake</build_type>
+    <rosdoc2>rosdoc2.yaml</rosdoc2>
   </export>
 
 </package>
