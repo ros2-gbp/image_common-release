@@ -1,128 +1,97 @@
-# image_transport_py: Python Bindings for ROS 2 Image Transport
+# image_common
 
-## Introduction
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-6.4.7-green.svg)](CHANGELOG.rst)
 
-`image_transport_py` is a Python package that provides bindings for `image_transport`. It enables efficient publishing and subscribing of images in Python, leveraging various transport plugins (e.g., `raw`, `compressed`). 
-The package allows developers to handle image topics more efficiently and with less overhead than using standard ROS 2 topics.
+A collection of ROS 2 packages providing core infrastructure for working with images and cameras in robotic systems. Part of the [ROS Perception](https://github.com/ros-perception) stack.
 
-## Usage
+## Packages
 
-The detailed tutorial on `image_transport` and `image_transport_py` can be found at: https://github.com/ros-perception/image_transport_tutorials.
+### [image_transport](image_transport/)
 
-## Classes
+The core image transport library. Provides a plugin-based architecture for publishing and subscribing to images in raw or compressed form, transparently switching between transports without changing application code.
 
-### Publisher
+- `Publisher` / `CameraPublisher` — publish images with optional camera info
+- `Subscriber` / `CameraSubscriber` — subscribe to images with transport hints
+- `SubscriberFilter` — integration with `message_filters`
+- `republish` node — re-publish images between transports
+- `list_transports` — list available transport plugins
+- Lifecycle node support and QoS override
 
-A publisher for images.
+### [image_transport_py](image_transport_py/)
 
-#### Methods
+Python bindings (pybind11) for `image_transport`, exposing `ImageTransport`, `Publisher`, `Subscriber`, `CameraPublisher`, and `CameraSubscriber` to Python 3 nodes.
 
-- `get_topic()`
+### [camera_calibration_parsers](camera_calibration_parsers/)
 
-  Returns the base image topic.
+Read and write `sensor_msgs/CameraInfo` calibration data to/from disk.
 
-- `get_num_subscribers()`
+- YAML (`.yaml` / `.yml`) and INI (`.ini`) format support
+- `convert` command-line tool for format conversion
 
-  Returns the number of subscribers this publisher is connected to.
+### [camera_info_manager](camera_info_manager/)
 
-- `shutdown()`
+C++ `CameraInfoManager` class for camera drivers that need to load, save, and serve calibration data.
 
-  Unsubscribe the callback associated with this Publisher.
+- Loads calibration from `file://`, `package://`, and other URL schemes
+- Handles `sensor_msgs/SetCameraInfo` service requests
+- Thread-safe; supports lifecycle nodes
 
-- `publish(img)`
+### [camera_info_manager_py](camera_info_manager_py/)
 
-  Publish an image on the topics associated with this Publisher.
+Pure Python equivalent of `camera_info_manager` for Python-based camera drivers.
 
-### CameraPublisher
+- `CameraInfoManager` and `ZoomCameraInfoManager` classes
+- YAML-based calibration storage
+- Drop-in counterpart to the C++ package
 
-A publisher for images with camera info.
+## Installation
 
-#### Methods
+### From binary packages
 
-- `get_topic()`
+```bash
+sudo apt install ros-$ROS_DISTRO-image-common
+```
 
-  Returns the base (image) topic of this CameraPublisher.
+### From source
 
-- `get_num_subscribers()`
+```bash
+mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws/src
+git clone https://github.com/ros-perception/image_common.git
+cd ~/ros2_ws
+rosdep install --from-paths src --ignore-src -r -y
+colcon build --packages-select image_common
+```
 
-  Returns the number of subscribers this camera publisher is connected to.
+## Tutorials
 
-- `shutdown()`
+Step-by-step tutorials for writing publishers and subscribers with `image_transport` are available in the companion repository:
 
-  Unsubscribe the callback associated with this CameraPublisher.
+**[ros-perception/image_transport_tutorials](https://github.com/ros-perception/image_transport_tutorials/)**
 
-- `publish(img, info)`
+Topics covered include:
 
-  Publish an image and camera info on the topics associated with this Publisher.
+- Publishing and subscribing to images with `image_transport`
+- Using transport hints to select a specific transport
+- Writing a custom transport plugin
+- Python usage via `image_transport_py`
 
-### ImageTransport
+## ROS 2 Distro Support
 
-An object for image transport operations.
+| Distro  | Branch      |
+|---------|-------------|
+| Rolling | `rolling`   |
+| Lyrical | `lyrical`   |
+| Kilted  | `kilted`    |
+| Jazzy   | `jazzy`     |
+| Iron    | `iron`      |
+| Humble  | `humble`    |
 
-#### Constructor
+## Contributing
 
-- `__init__(node_name, image_transport="", launch_params_filepath="")`
+Contributions are welcome. Please open issues and pull requests on [GitHub](https://github.com/ros-perception/image_common).
 
-  Initialize an ImageTransport object with its node name, `image_transport` and launch params file path. If no `image_transport` specified, the default `raw` plugin will be initialized.
+## License
 
-#### Methods
-
-- `advertise(base_topic, queue_size, latch=False)`
-
-  Advertise an image topic.
-
-- `advertise_camera(base_topic, queue_size, latch=False)`
-
-  Advertise an image topic with camera info.
-
-- `subscribe(base_topic, queue_size, callback)`
-
-  Subscribe to an image topic.
-
-- `subscribe_camera(base_topic, queue_size, callback)`
-
-  Subscribe to an image topic with camera info.
-
-### Subscriber
-
-A subscriber for images.
-
-#### Methods
-
-- `get_topic()`
-
-  Returns the base image topic.
-
-- `get_num_publishers()`
-
-  Returns the number of publishers this subscriber is connected to.
-
-- `get_transport()`
-
-  Returns the name of the transport being used.
-
-- `shutdown()`
-
-  Unsubscribe the callback associated with this Subscriber.
-
-### CameraSubscriber
-
-A subscriber for images with camera info.
-
-#### Methods
-
-- `get_topic()`
-
-  Returns the base image topic.
-
-- `get_num_publishers()`
-
-  Returns the number of publishers this subscriber is connected to.
-
-- `get_transport()`
-
-  Returns the name of the transport being used.
-
-- `shutdown()`
-
-  Unsubscribe the callback associated with this CameraSubscriber.
+BSD 3-Clause. See [LICENSE](LICENSE) for details.
